@@ -1,0 +1,24 @@
+:root {
+  // Ширифт
+  --font-family-main: 'Arial', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-s: 14px;
+  --font-size-m: 18px;
+  --font-size-l: 24px;
+  --font-size-xl: 36px;
+
+  // Цвета
+  // background
+  --bg-color: #fff;
+
+  // primary
+  --primary-color: #303131;
+  --primary-color-hover: #181818;
+
+  // secondary
+  --secondary-color: rgb(217 217 217 / 40%);
+  --secondary-color-hover: rgb(217 217 217 / 60%);
+
+  // additional
+  --error-color: #ef0000;
+}

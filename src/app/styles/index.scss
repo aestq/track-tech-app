@@ -1,0 +1,11 @@
+@import "global-vars";
+@import "reset";
+
+body {
+  font-size: var(--font-size-m);
+  font-family: var(--font-family-main);
+}
+
+.app {
+  height: 100vh;
+}

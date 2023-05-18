@@ -1,0 +1,23 @@
+.Logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.square {
+  border-radius: 0;
+}
+
+.m {
+  .square {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.xl {
+  .square {
+    width: 40px;
+    height: 40px;
+  }
+}

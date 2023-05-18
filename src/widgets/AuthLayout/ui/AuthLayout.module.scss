@@ -1,0 +1,28 @@
+.header {
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.waves {
+  width: 500px;
+  border-radius: 10px;
+  transform: rotate(90deg);
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 10px;
+}
+
+.backArrow {
+  width: 20px;
+}

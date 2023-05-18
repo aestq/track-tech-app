@@ -1,0 +1,44 @@
+.Spinner {
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.primary {
+  border: solid var(--primary-color);
+  border-bottom-color: transparent;
+}
+
+.background {
+  border: solid var(--bg-color);
+  border-bottom-color: transparent;
+}
+
+.s {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
+.m {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+}
+
+.l {
+  width: 48px;
+  height: 48px;
+  border-width: 5px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
