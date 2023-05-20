@@ -1,5 +1,6 @@
 import { Page } from 'widgets/Page'
 import { EquipmentSearch } from 'features/EquipmentSearch'
+import { EquipmentTable } from 'entities/Equipment'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './HomePage.module.scss'
 
@@ -10,6 +11,7 @@ export const HomePage = () => {
         title='Оборудование'
       />
       <EquipmentSearch />
+      <EquipmentTable />
     </Page>
   )
 }
