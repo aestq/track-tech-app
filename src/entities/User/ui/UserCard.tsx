@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getUserError } from 'entities/User/model/selectors/getUserError'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { Avatar } from 'shared/ui/Avatar/Avatar'
 import { Button } from 'shared/ui/Button/Button'
-import { Card } from 'shared/ui/Card/Card'
 import { Text } from 'shared/ui/Text/Text'
 import { getUserData } from '../model/selectors/getUserData'
 import { getUserIsLoading } from '../model/selectors/getUserIsLoading'
@@ -20,6 +20,7 @@ interface UserCardProps {
 export const UserCard = (props: UserCardProps) => {
   const { className } = props
   const isLoading = useSelector(getUserIsLoading)
+  const error = useSelector(getUserError)
   const userData = useSelector(getUserData)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -32,25 +33,28 @@ export const UserCard = (props: UserCardProps) => {
   }, [dispatch, navigate])
 
   return (
-    <Card
+    <div
       className={classNames(cls.UserCard, {}, [className])}
-      theme='background'
     >
+      {error && (
+        <Text
+          text='Произошла ошибка'
+          theme='error'
+        />
+      )}
       <div className={cls.info}>
-        <Avatar />
+        <Avatar size={40}/>
         <Text
           text={userData?.name}
-          size='s'
         />
       </div>
       <Button
-        size='s'
-        isLoading={isLoading}
+        disabled={isLoading}
         onClick={onClickLogout}
         max
       >
         Выйти
       </Button>
-    </Card>
+    </div>
   )
 }

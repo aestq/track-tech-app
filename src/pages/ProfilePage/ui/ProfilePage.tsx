@@ -1,16 +1,17 @@
-import { classNames } from 'shared/lib/classNames/classNames'
+import { Page } from 'widgets/Page'
+import { UserCard } from 'entities/User'
+import { Text } from 'shared/ui/Text/Text'
 import cls from './ProfilePage.module.scss'
 
-interface ProfilePageProps {
-  className?: string
-}
-
-export const ProfilePage = (props: ProfilePageProps) => {
-  const { className } = props
-
+export const ProfilePage = () => {
   return (
-    <div className={classNames(cls.ProfilePage, {}, [className])}>
-      ProfilePage
-    </div>
+    <Page>
+      <Text
+        title='Профиль'
+      />
+      <div className={cls.userCard}>
+        <UserCard />
+      </div>
+    </Page>
   )
 }

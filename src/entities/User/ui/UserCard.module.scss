@@ -1,16 +1,8 @@
 .UserCard {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-direction: column;
   width: 220px;
-}
-
-.loading {
-  height: 50px;
-  width: 220px;
-  display: flex;
-  padding: 0 10px;
-  align-items: center;
 }
 
 .info {
