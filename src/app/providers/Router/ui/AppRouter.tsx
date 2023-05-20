@@ -2,12 +2,11 @@ import { Suspense, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, type RouteProps, Routes } from 'react-router-dom'
 import { PageLoader } from 'widgets/PageLoader'
-import { getUserData, getUserInit } from 'entities/User'
-import { privateRoutes } from '../config/privateRoutes'
-import { publicRoutes } from '../config/publicRoutes'
+import { getUserInit } from 'entities/User'
+import { getRoutes } from '../config/routes'
 
 export const AppRouter = () => {
-  const userData = useSelector(getUserData)
+  const routes = useSelector(getRoutes)
   const userInit = useSelector(getUserInit)
 
   const render = useCallback((route: RouteProps) => (
@@ -25,7 +24,7 @@ export const AppRouter = () => {
   return (
     <Suspense fallback={<PageLoader/>}>
       <Routes>
-        {userData ? privateRoutes.map(render) : publicRoutes.map(render)}
+        {routes.map(render)}
       </Routes>
     </Suspense>
   )

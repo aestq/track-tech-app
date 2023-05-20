@@ -1,0 +1,13 @@
+.SidebarItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+  text-decoration: none;
+  padding: 10px;
+}
+
+.icon {
+  width: 20px;
+}

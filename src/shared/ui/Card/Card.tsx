@@ -2,7 +2,7 @@ import { type ReactNode, type HTMLAttributes, memo } from 'react'
 import { type Additional, classNames } from 'shared/lib/classNames/classNames'
 import cls from './Card.module.scss'
 
-type CardTheme = 'background' | 'primary'
+type CardTheme = 'background' | 'primary' | 'secondary'
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string

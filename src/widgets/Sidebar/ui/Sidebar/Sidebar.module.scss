@@ -1,0 +1,16 @@
+.Sidebar {
+  border-right: 2px solid var(--secondary-color);
+  width: 250px;
+  height: 100%;
+  padding: 30px 10px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logo {
+  margin-bottom: 20px;
+}
