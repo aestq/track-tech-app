@@ -1,16 +1,10 @@
-import { classNames } from 'shared/lib/classNames/classNames'
-import cls from './RoomsPage.module.scss'
+import { Page } from 'widgets/Page'
+import { RoomsList } from 'entities/Room'
 
-interface RoomsPageProps {
-  className?: string
-}
-
-export const RoomsPage = (props: RoomsPageProps) => {
-  const { className } = props
-
+export const RoomsPage = () => {
   return (
-    <div className={classNames(cls.RoomsPage, {}, [className])}>
-      RoomsPage
-    </div>
+    <Page title='Кабинеты'>
+      <RoomsList />
+    </Page>
   )
 }

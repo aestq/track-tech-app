@@ -1,19 +1,26 @@
-import { type ReactNode } from 'react'
+import { memo, type ReactNode } from 'react'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './Page.module.scss'
 
 interface PageProps {
   className?: string
+  title?: string
   children: ReactNode
 }
 
-export const Page = (props: PageProps) => {
-  const { className, children } = props
+export const Page = memo((props: PageProps) => {
+  const { className, children, title } = props
 
   return (
-    <div className={classNames(cls.Page, {}, [className])}>
+    <section className={classNames(cls.Page, {}, [className])}>
+      {title && (
+        <Text
+          className={cls.title}
+          title={title}
+        />
+      )}
       {children}
-    </div>
+    </section>
   )
-}
+})

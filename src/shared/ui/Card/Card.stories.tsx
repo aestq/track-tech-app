@@ -16,9 +16,9 @@ export const Primary: Story = {
   }
 }
 
-export const Background: Story = {
+export const Border: Story = {
   args: {
-    theme: 'background',
+    theme: 'border',
     children: 'Children карточки'
   }
 }
