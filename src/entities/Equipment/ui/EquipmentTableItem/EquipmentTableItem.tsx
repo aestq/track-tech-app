@@ -1,29 +1,39 @@
+import { memo, useCallback } from 'react'
 import { EquipmentStatus } from 'entities/Equipment/model/consts/consts'
-import { classNames } from 'shared/lib/classNames/classNames'
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { Button } from 'shared/ui/Button/Button'
 import { Td, Tr } from 'shared/ui/Table'
+import { equipmentActions } from '../../model/slice/EquipmentSlice'
 import { type Equipment } from '../../model/types/equipment'
-import cls from './EquipmentTableItem.module.scss'
 
 interface EquipmentTableItemProps {
   className?: string
   item: Equipment
 }
 
-export const EquipmentTableItem = (props: EquipmentTableItemProps) => {
+export const EquipmentTableItem = memo((props: EquipmentTableItemProps) => {
   const { className, item } = props
+  const { id, name, stockNumber, status, room } = item
+  const dispatch = useAppDispatch()
+
+  const onClickButton = useCallback(() => {
+    dispatch(equipmentActions.setSelectedItem(id))
+  }, [dispatch, id])
 
   return (
-    <Tr className={classNames(cls.EquipmentTableItem, {}, [className])}>
-      <Td>{item.name}</Td>
-      <Td>{item.stockNumber}</Td>
-      <Td>{EquipmentStatus[item.status]}</Td>
+    <Tr className={className}>
+      <Td>{name}</Td>
+      <Td>{stockNumber}</Td>
+      <Td>{EquipmentStatus[status]}</Td>
       <Td>
-        <Button size='s'>
+        <Button
+          size='s'
+          onClick={onClickButton}
+        >
           Посмотреть
         </Button>
       </Td>
-      <Td>{item.room}</Td>
+      <Td>{room}</Td>
     </Tr>
   )
-}
+})
