@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { loginReducer } from 'features/LoginForm'
 import { signupReducer } from 'features/SignupForm'
 import { equipmentReducer } from 'entities/Equipment'
+import { roomReducer } from 'entities/Room'
 import { userReducer } from 'entities/User'
 import { $api } from 'shared/api/api'
 import { type StateSchema } from '../config/StateSchema'
@@ -11,7 +12,8 @@ export function createReduxStore(initialState?: StateSchema) {
     user: userReducer,
     loginForm: loginReducer,
     signupForm: signupReducer,
-    equipment: equipmentReducer
+    equipment: equipmentReducer,
+    room: roomReducer
   })
 
   return configureStore({

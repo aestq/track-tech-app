@@ -1,4 +1,4 @@
-export type { UserSchema, User } from './model/types/UserSchema'
+export type { UserSchema, User, UserData } from './model/types/UserSchema'
 export { getUserData } from './model/selectors/getUserData'
 export { getUserInit } from './model/selectors/getUserInit'
 export { refreshService } from './model/services/refreshService'
