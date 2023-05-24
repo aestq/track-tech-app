@@ -1,10 +1,11 @@
 import { Page } from 'widgets/Page'
-import cls from './RoomDetailsPage.module.scss'
 
-export const RoomDetailsPage = () => {
+const RoomDetailsPage = () => {
   return (
-    <Page>
+    <Page title='Кабинет 310'>
       Room
     </Page>
   )
 }
+
+export default RoomDetailsPage

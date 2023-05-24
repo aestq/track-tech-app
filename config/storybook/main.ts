@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import type { StorybookConfig } from '@storybook/react-webpack5'
-import { DefinePlugin } from 'webpack'
+import webpack, { DefinePlugin } from 'webpack'
 import { buildCssLoader } from '../webpack/loader/buildCssLoader'
 
 const config: StorybookConfig = {
@@ -18,6 +18,9 @@ const config: StorybookConfig = {
     autodocs: 'tag'
   },
   webpackFinal: (config) => {
+    config.optimization = { splitChunks: { chunks: 'async' } }
+    config.output = { ...config.output, chunkFilename: '[chunkhash].chunk.js' }
+    config.plugins!.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }))
     const src = resolve(__dirname, '..', '..', 'src')
     config.resolve!.modules!.push(src)
     config.resolve!.extensions!.push('.ts', '.tsx')

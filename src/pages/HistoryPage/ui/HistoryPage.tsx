@@ -1,16 +1,11 @@
-import { classNames } from 'shared/lib/classNames/classNames'
-import cls from './HistoryPage.module.scss'
+import { Page } from 'widgets/Page'
 
-interface HistoryPageProps {
-  className?: string
-}
-
-export const HistoryPage = (props: HistoryPageProps) => {
-  const { className } = props
-
+const HistoryPage = () => {
   return (
-    <div className={classNames(cls.HistoryPage, {}, [className])}>
-      History
-    </div>
+    <Page title='История'>
+      HistoryPage
+    </Page>
   )
 }
+
+export default HistoryPage

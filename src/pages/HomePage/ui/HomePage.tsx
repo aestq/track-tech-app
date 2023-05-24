@@ -3,7 +3,7 @@ import { EquipmentSearch } from 'features/EquipmentSearch'
 import { EquipmentTable } from 'entities/Equipment'
 import cls from './HomePage.module.scss'
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <Page title='Оборудование'>
       <EquipmentSearch />
@@ -11,3 +11,5 @@ export const HomePage = () => {
     </Page>
   )
 }
+
+export default HomePage

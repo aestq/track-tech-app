@@ -1,16 +1,11 @@
-import { classNames } from 'shared/lib/classNames/classNames'
-import cls from './AdminPage.module.scss'
+import { Page } from 'widgets/Page'
 
-interface AdminPageProps {
-  className?: string
-}
-
-export const AdminPage = (props: AdminPageProps) => {
-  const { className } = props
-
+const AdminPage = () => {
   return (
-    <div className={classNames(cls.AdminPage, {}, [className])}>
-      AdminPage
-    </div>
+    <Page title='Админ'>
+      Admin Page
+    </Page>
   )
 }
+
+export default AdminPage

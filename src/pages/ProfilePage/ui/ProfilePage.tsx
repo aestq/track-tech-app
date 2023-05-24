@@ -2,7 +2,7 @@ import { Page } from 'widgets/Page'
 import { UserCard } from 'entities/User'
 import cls from './ProfilePage.module.scss'
 
-export const ProfilePage = () => {
+const ProfilePage = () => {
   return (
     <Page title='Профиль'>
       <div className={cls.userCard}>
@@ -11,3 +11,5 @@ export const ProfilePage = () => {
     </Page>
   )
 }
+
+export default ProfilePage

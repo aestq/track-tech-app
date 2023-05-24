@@ -2,6 +2,7 @@ import { AdminPage } from 'pages/AdminPage'
 import { HistoryPage } from 'pages/HistoryPage'
 import { HomePage } from 'pages/HomePage'
 import { ProfilePage } from 'pages/ProfilePage'
+import { RoomDetailsPage } from 'pages/RoomDetailsPage'
 import { RoomsPage } from 'pages/RoomsPage'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 
@@ -22,6 +23,10 @@ export const getPrivateRoutes = (isAdmin: boolean) => {
     {
       path: RoutePaths.PROFILE,
       element: <ProfilePage />
+    },
+    {
+      path: RoutePaths.ROOMS + '/:id',
+      element: <RoomDetailsPage />
     }
   ]
 

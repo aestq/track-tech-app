@@ -1,10 +1,12 @@
 import { Page } from 'widgets/Page'
 import { RoomsList } from 'entities/Room'
 
-export const RoomsPage = () => {
+const RoomsPage = () => {
   return (
     <Page title='Кабинеты'>
       <RoomsList />
     </Page>
   )
 }
+
+export default RoomsPage

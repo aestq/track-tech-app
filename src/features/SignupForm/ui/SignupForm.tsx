@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
+import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
 import { AppLink } from 'shared/ui/AppLink/AppLink'
 import { Button } from 'shared/ui/Button/Button'
 import { Input } from 'shared/ui/Input/Input'
@@ -14,14 +15,19 @@ import { getSignupFormName } from '../model/selectors/getSignupFormName'
 import { getSignupFormPassword } from '../model/selectors/getSignupFormPassword'
 import { getSignupIsLoading } from '../model/selectors/getSignupIsLoading'
 import { signupService } from '../model/services/signupService'
-import { signupActions } from '../model/slice/signupSlice'
+import { signupActions, signupReducer } from '../model/slice/signupSlice'
 import cls from './SignupForm.module.scss'
 
 interface SignupFormProps {
   className?: string
 }
 
+const reducersList: ReducersList = {
+  signupForm: signupReducer
+}
+
 export const SignupForm = (props: SignupFormProps) => {
+  useReducersLoader({ reducersList, removeAfterUnmount: true })
   const { className } = props
   const login = useSelector(getSignupFormLogin)
   const name = useSelector(getSignupFormName)

@@ -1,1 +1,1 @@
-export { HistoryPage } from './ui/HistoryPage'
+export { HistoryPageAsync as HistoryPage } from './ui/HistoryPage.async'

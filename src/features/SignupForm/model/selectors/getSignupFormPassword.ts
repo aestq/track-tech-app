@@ -1,3 +1,3 @@
 import { type StateSchema } from 'app/providers/Store'
 
-export const getSignupFormPassword = (state: StateSchema) => state.signupForm.password
+export const getSignupFormPassword = (state: StateSchema) => state.signupForm?.password ?? ''
