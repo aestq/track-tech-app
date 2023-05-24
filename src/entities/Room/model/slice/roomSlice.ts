@@ -1,6 +1,6 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { fetchRoomsService } from 'entities/Room/model/services/fetchRoomsService'
-import { type Room, type RoomSchema } from '../types/roomSchema'
+import { type RoomSchema } from '../types/roomSchema'
 
 const initialState: RoomSchema = {
   isLoading: false
