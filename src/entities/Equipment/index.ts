@@ -1,2 +1,2 @@
 export { EquipmentTable } from './ui/EquipmentTable/EquipmentTable'
-export type { EquipmentSchema } from './model/types/equipmentSchema'
+export type { Equipment } from './model/types/Equipment'

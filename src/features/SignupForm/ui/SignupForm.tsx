@@ -52,7 +52,7 @@ export const SignupForm = (props: SignupFormProps) => {
   const onSignUpClick = useCallback(async () => {
     const result = await dispatch(signupService())
     if(result.meta.requestStatus === 'fulfilled') {
-      navigate(RoutePaths.HOME)
+      navigate(RoutePaths.EQUIPMENTS)
     }
   }, [dispatch, navigate])
 

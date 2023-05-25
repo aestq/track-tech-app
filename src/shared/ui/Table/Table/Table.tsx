@@ -12,7 +12,9 @@ export const Table = memo((props: TableProps) => {
 
   return (
     <table className={classNames(cls.Table, {}, [className])}>
-      {children}
+      <tbody>
+        {children}
+      </tbody>
     </table>
   )
 })

@@ -10,8 +10,8 @@ import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 export const getSidebarItems = createSelector(getUserIsAdmin, (isAdmin) => {
   const items: Item[] = [
     {
-      text: 'Главная',
-      path: RoutePaths.HOME,
+      text: 'Оборудование',
+      path: RoutePaths.EQUIPMENTS,
       icon: HomeIcon
     },
     {

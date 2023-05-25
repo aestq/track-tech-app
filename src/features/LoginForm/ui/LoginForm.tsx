@@ -46,7 +46,7 @@ export const LoginForm = memo((props: LoginFormProps) => {
   const onClickLogin = useCallback(async () => {
     const result = await dispatch(loginService())
     if(result.meta.requestStatus === 'fulfilled') {
-      navigate(RoutePaths.HOME)
+      navigate(RoutePaths.EQUIPMENTS)
     }
   }, [dispatch, navigate])
 

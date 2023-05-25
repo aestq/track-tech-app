@@ -1,23 +1,26 @@
 import { memo, useCallback } from 'react'
-import { items } from 'entities/Equipment/model/items'
-import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
+import { getArrayByLength } from 'shared/lib/helpers/getArrayByLength'
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { Table, Th, Tr } from 'shared/ui/Table'
-import { equipmentReducer } from '../../model/slice/EquipmentSlice'
-import { type Equipment } from '../../model/types/equipment'
+import { Text } from 'shared/ui/Text/Text'
+import { type Equipment } from '../../model/types/Equipment'
 import { EquipmentTableItem } from '../EquipmentTableItem/EquipmentTableItem'
-import { SpecificationsModal } from '../SpecificationsModal/SpecificationsModal'
+import cls from './EquipmentTable.module.scss'
 
 interface EquipmentTableProps {
   className?: string
-}
-
-const reducersList: ReducersList = {
-  equipment: equipmentReducer
+  items?: Equipment[]
+  isLoading?: boolean
+  error?: string
 }
 
 export const EquipmentTable = memo((props: EquipmentTableProps) => {
-  useReducersLoader({ reducersList })
-  const { className } = props
+  const {
+    className,
+    items,
+    isLoading,
+    error
+  } = props
 
   const render = useCallback((item: Equipment) => (
     <EquipmentTableItem
@@ -25,6 +28,30 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
       key={item.id}
     />
   ), [])
+
+  if(isLoading) {
+    return (
+      <div className={cls.skeletons}>
+        {getArrayByLength(10).map((_, index) => (
+          <Skeleton
+            width='100%'
+            height={50}
+            radius={0}
+            key={index}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  if(error) {
+    return (
+      <Text
+        text='Произошла ошибка при подгрузке оборудования'
+        theme='error'
+      />
+    )
+  }
 
   return (
     <Table className={className}>
@@ -35,8 +62,7 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
         <Th>Характеристики</Th>
         <Th>Кабинет</Th>
       </Tr>
-      {items.map(render)}
-      <SpecificationsModal />
+      {items?.map(render)}
     </Table>
   )
 })

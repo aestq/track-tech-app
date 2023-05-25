@@ -1,6 +1,6 @@
 import { AdminPage } from 'pages/AdminPage'
+import { EquipmentsPage } from 'pages/EquipmentsPage'
 import { HistoryPage } from 'pages/HistoryPage'
-import { HomePage } from 'pages/HomePage'
 import { ProfilePage } from 'pages/ProfilePage'
 import { RoomDetailsPage } from 'pages/RoomDetailsPage'
 import { RoomsPage } from 'pages/RoomsPage'
@@ -9,8 +9,8 @@ import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 export const getPrivateRoutes = (isAdmin: boolean) => {
   const privateRoutes = [
     {
-      path: RoutePaths.HOME,
-      element: <HomePage />
+      path: RoutePaths.EQUIPMENTS,
+      element: <EquipmentsPage />
     },
     {
       path: RoutePaths.ROOMS,

@@ -6,9 +6,9 @@ import {
   type EnhancedStore
 } from '@reduxjs/toolkit'
 import { type AxiosInstance } from 'axios'
+import { type EquipmentsSchema } from 'pages/EquipmentsPage'
 import { type LoginSchema } from 'features/LoginForm'
 import { type SignupSchema } from 'features/SignupForm'
-import { type EquipmentSchema } from 'entities/Equipment'
 import { type RoomSchema } from 'entities/Room'
 import { type UserSchema } from 'entities/User'
 
@@ -18,7 +18,7 @@ export interface StateSchema {
   // async reducers
   loginForm?: LoginSchema
   signupForm?: SignupSchema
-  equipment?: EquipmentSchema
+  equipments?: EquipmentsSchema
   room?: RoomSchema
 }
 

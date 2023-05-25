@@ -2,7 +2,7 @@ export enum RoutePaths {
   SING_UP = '/signup',
   LOGIN = '/login',
   ENTRY = '/',
-  HOME = '/',
+  EQUIPMENTS = '/',
   ROOMS = '/rooms',
   HISTORY = '/history',
   PROFILE = '/profile',

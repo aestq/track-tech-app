@@ -1,4 +1,4 @@
-import { memo, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './Page.module.scss'
@@ -9,7 +9,7 @@ interface PageProps {
   children: ReactNode
 }
 
-export const Page = memo((props: PageProps) => {
+export const Page = (props: PageProps) => {
   const { className, children, title } = props
 
   return (
@@ -23,4 +23,4 @@ export const Page = memo((props: PageProps) => {
       {children}
     </section>
   )
-})
+}
