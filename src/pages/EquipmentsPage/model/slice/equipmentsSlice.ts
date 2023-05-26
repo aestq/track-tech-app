@@ -4,7 +4,8 @@ import { type EquipmentsSchema } from '../types/EquipmentsSchema'
 
 const initialState: EquipmentsSchema = {
   isOpen: false,
-  isLoading: false
+  isLoading: false,
+  search: ''
 }
 
 const equipmentsSlice = createSlice({
@@ -17,6 +18,9 @@ const equipmentsSlice = createSlice({
     },
     closeModal: (state) => {
       state.isOpen = false
+    },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload
     }
   },
   extraReducers: (builder) => {

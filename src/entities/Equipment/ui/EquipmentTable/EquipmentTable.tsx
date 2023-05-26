@@ -1,10 +1,9 @@
 import { memo, useCallback } from 'react'
-import { getArrayByLength } from 'shared/lib/helpers/getArrayByLength'
-import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { Table, Th, Tr } from 'shared/ui/Table'
 import { Text } from 'shared/ui/Text/Text'
 import { type Equipment } from '../../model/types/Equipment'
-import { EquipmentTableItem } from '../EquipmentTableItem/EquipmentTableItem'
+import { EquipmentItem } from '../EquipmentTableItem/EquipmentItem'
+import { EquipmentItemSkeleton } from '../EquipmentTableItem/EquipmentItemSkeleton'
 import cls from './EquipmentTable.module.scss'
 
 interface EquipmentTableProps {
@@ -23,7 +22,7 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
   } = props
 
   const render = useCallback((item: Equipment) => (
-    <EquipmentTableItem
+    <EquipmentItem
       item={item}
       key={item.id}
     />
@@ -32,14 +31,11 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
   if(isLoading) {
     return (
       <div className={cls.skeletons}>
-        {getArrayByLength(10).map((_, index) => (
-          <Skeleton
-            width='100%'
-            height={50}
-            radius={0}
-            key={index}
-          />
-        ))}
+        <EquipmentItemSkeleton />
+        <EquipmentItemSkeleton />
+        <EquipmentItemSkeleton />
+        <EquipmentItemSkeleton />
+        <EquipmentItemSkeleton />
       </div>
     )
   }
@@ -49,6 +45,15 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
       <Text
         text='Произошла ошибка при подгрузке оборудования'
         theme='error'
+      />
+    )
+  }
+
+  if(!items?.length) {
+    return (
+      <Text
+        className={cls.notFound}
+        text='Ничего не найдено'
       />
     )
   }

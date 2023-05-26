@@ -4,12 +4,12 @@ import { Td, Tr } from 'shared/ui/Table'
 import { EquipmentStatus } from '../../model/consts/consts'
 import { type Equipment } from '../../model/types/Equipment'
 
-interface EquipmentTableItemProps {
+interface EquipmentItemProps {
   className?: string
   item: Equipment
 }
 
-export const EquipmentTableItem = memo((props: EquipmentTableItemProps) => {
+export const EquipmentItem = memo((props: EquipmentItemProps) => {
   const { className, item } = props
 
   return (

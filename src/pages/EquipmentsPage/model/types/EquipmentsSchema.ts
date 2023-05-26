@@ -4,6 +4,7 @@ export interface EquipmentsSchema {
   selectedItem?: Equipment
   data?: Equipment[]
   isOpen: boolean
+  search: string
   isLoading: boolean
   error?: string
 }

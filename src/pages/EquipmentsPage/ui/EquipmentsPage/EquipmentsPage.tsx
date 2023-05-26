@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import { Page } from 'widgets/Page'
 import { EquipmentTable } from 'entities/Equipment'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
@@ -7,8 +8,9 @@ import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReduce
 import { getEquipmentsData } from '../../model/selectors/getEquipmentsData'
 import { getEquipmentsError } from '../../model/selectors/getEquipmentsError'
 import { getEquipmentsIsLoading } from '../../model/selectors/getEquipmentsIsLoading'
-import { fetchEquipmentsService } from '../../model/services/fetchEquipmentsService'
+import { initEquipmentsService } from '../../model/services/initEquipmentsService'
 import { equipmentsReducer } from '../../model/slice/equipmentsSlice'
+import { EquipmentsFilters } from '../EquipmentsFilters/EquipmentsFilters'
 import cls from './EquipmentsPage.module.scss'
 
 const reducersList: ReducersList = {
@@ -21,13 +23,15 @@ const EquipmentsPage = () => {
   const isLoading = useSelector(getEquipmentsIsLoading)
   const error = useSelector(getEquipmentsError)
   const dispatch = useAppDispatch()
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
-    dispatch(fetchEquipmentsService())
-  }, [dispatch])
+    dispatch(initEquipmentsService(searchParams))
+  }, [])
 
   return (
     <Page title='Оборудование'>
+      <EquipmentsFilters />
       <EquipmentTable
         className={cls.table}
         isLoading={isLoading}
