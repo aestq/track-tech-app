@@ -27,6 +27,7 @@ const EquipmentsPage = () => {
 
   useEffect(() => {
     dispatch(initEquipmentsService(searchParams))
+    // eslint-disable-next-line
   }, [])
 
   return (

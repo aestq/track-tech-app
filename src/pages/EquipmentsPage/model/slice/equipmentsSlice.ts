@@ -1,11 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { SortByStatus } from 'features/EquipmentsSortByStatus'
 import { fetchEquipmentsService } from '../services/fetchEquipmentsService'
 import { type EquipmentsSchema } from '../types/EquipmentsSchema'
 
 const initialState: EquipmentsSchema = {
   isOpen: false,
   isLoading: false,
-  search: ''
+  search: '',
+  status: SortByStatus.ALL
 }
 
 const equipmentsSlice = createSlice({
@@ -21,6 +23,9 @@ const equipmentsSlice = createSlice({
     },
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload
+    },
+    setStatus: (state, action: PayloadAction<SortByStatus>) => {
+      state.status = action.payload
     }
   },
   extraReducers: (builder) => {

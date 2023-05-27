@@ -1,0 +1,19 @@
+.Tabs {
+  display: flex;
+  gap: 5px;
+}
+
+.container {
+  display: flex;
+  gap: 5px;
+}
+
+.tab {
+  cursor: pointer;
+  font-size: var(--font-size-s);
+  border-radius: 5px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
