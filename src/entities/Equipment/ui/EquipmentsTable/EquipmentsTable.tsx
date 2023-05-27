@@ -1,32 +1,43 @@
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
+import { SpecificationsModal } from 'entities/Equipment/ui/SpecificationsModal'
 import { Table, Th, Tr } from 'shared/ui/Table'
 import { Text } from 'shared/ui/Text/Text'
 import { type Equipment } from '../../model/types/Equipment'
-import { EquipmentItem } from '../EquipmentTableItem/EquipmentItem'
-import { EquipmentItemSkeleton } from '../EquipmentTableItem/EquipmentItemSkeleton'
-import cls from './EquipmentTable.module.scss'
+import { EquipmentItem } from '../EquipmentItem/EquipmentItem'
+import { EquipmentItemSkeleton } from '../EquipmentItem/EquipmentItemSkeleton'
+import cls from './EquipmentsTable.module.scss'
 
 interface EquipmentTableProps {
   className?: string
   items?: Equipment[]
   isLoading?: boolean
-  error?: string
 }
 
-export const EquipmentTable = memo((props: EquipmentTableProps) => {
+export const EquipmentsTable = memo((props: EquipmentTableProps) => {
   const {
     className,
     items,
-    isLoading,
-    error
+    isLoading
   } = props
+  const [isOpen, setIsOpen] = useState(false)
+  const [specifications, setSpecifications] = useState('')
+
+  const onClose = useCallback(() => {
+    setIsOpen(false)
+  }, [])
+
+  const onOpen = useCallback((item: Equipment) => {
+    setSpecifications(item.specifications)
+    setIsOpen(true)
+  }, [])
 
   const render = useCallback((item: Equipment) => (
     <EquipmentItem
       item={item}
       key={item.id}
+      onClick={onOpen}
     />
-  ), [])
+  ), [onOpen])
 
   if(isLoading) {
     return (
@@ -40,20 +51,11 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
     )
   }
 
-  if(error) {
-    return (
-      <Text
-        text='Произошла ошибка при подгрузке оборудования'
-        theme='error'
-      />
-    )
-  }
-
   if(!items?.length) {
     return (
       <Text
         className={cls.notFound}
-        text='Ничего не найдено'
+        text='Оборудование не найдено'
       />
     )
   }
@@ -68,6 +70,11 @@ export const EquipmentTable = memo((props: EquipmentTableProps) => {
         <Th>Кабинет</Th>
       </Tr>
       {items?.map(render)}
+      <SpecificationsModal
+        isOpen={isOpen}
+        onClose={onClose}
+        specifications={specifications}
+      />
     </Table>
   )
 })

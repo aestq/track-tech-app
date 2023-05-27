@@ -15,7 +15,7 @@ const equipmentsSlice = createSlice({
   initialState,
   reducers: {
     setSelectedItem: (state, action: PayloadAction<number>) => {
-      state.selectedItem = undefined
+      state.selectedItem = state.data?.find(item => item.id === action.payload)
       state.isOpen = true
     },
     closeModal: (state) => {

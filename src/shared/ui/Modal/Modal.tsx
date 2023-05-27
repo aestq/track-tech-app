@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect } from 'react'
+import { type ReactNode, useEffect, type MouseEvent } from 'react'
 import CloseIcon from 'shared/assets/icons/close-icon.svg'
 import { classNames, type Mods } from 'shared/lib/classNames/classNames'
 import { Button } from 'shared/ui/Button/Button'
@@ -27,6 +27,10 @@ export const Modal = (props: ModalProps) => {
     onClose?.()
   }
 
+  const onClickContent = (event: MouseEvent) => {
+    event.stopPropagation()
+  }
+
   const onKeyDown = (event: KeyboardEvent) => {
     if(event.key === 'Escape') {
       onCloseHandler()
@@ -49,8 +53,8 @@ export const Modal = (props: ModalProps) => {
 
   return (
     <Portal>
-      <div className={classNames(cls.Modal, mods, [className])}>
-        <div className={cls.content}>
+      <div className={classNames(cls.Modal, mods, [className])} onClick={onCloseHandler}>
+        <div className={cls.content} onClick={onClickContent}>
           <header className={cls.header}>
             {title && (
               <Text
