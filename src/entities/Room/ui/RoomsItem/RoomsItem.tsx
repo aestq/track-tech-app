@@ -15,7 +15,10 @@ export const RoomsItem = (props: RoomsItemProps) => {
   const { className, item } = props
 
   return (
-    <AppLink className={cls.link} to={RoutePaths.ROOMS}>
+    <AppLink
+      className={cls.link}
+      to={`${RoutePaths.ROOMS}/${item.id}`}
+    >
       <Card
         className={classNames(cls.RoomsItem, {}, [className])}
         theme='border'

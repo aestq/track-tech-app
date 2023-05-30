@@ -1,12 +1,12 @@
+import { type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { type SortByStatus } from 'features/EquipmentsSortByStatus'
 import { type Equipment } from 'entities/Equipment'
 
 export interface EquipmentsSchema {
-  selectedItem?: Equipment
   data?: Equipment[]
   status: SortByStatus
-  isOpen: boolean
   search: string
+  room: SortByRoom
   isLoading: boolean
   error?: string
 }

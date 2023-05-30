@@ -1,31 +1,28 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { SortByRoom } from 'features/EquipmentsSortByRoom'
 import { SortByStatus } from 'features/EquipmentsSortByStatus'
 import { fetchEquipmentsService } from '../services/fetchEquipmentsService'
 import { type EquipmentsSchema } from '../types/EquipmentsSchema'
 
 const initialState: EquipmentsSchema = {
-  isOpen: false,
   isLoading: false,
   search: '',
-  status: SortByStatus.ALL
+  status: SortByStatus.ALL,
+  room: SortByRoom.ALL
 }
 
 const equipmentsSlice = createSlice({
   name: 'equipments',
   initialState,
   reducers: {
-    setSelectedItem: (state, action: PayloadAction<number>) => {
-      state.selectedItem = state.data?.find(item => item.id === action.payload)
-      state.isOpen = true
-    },
-    closeModal: (state) => {
-      state.isOpen = false
-    },
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload
     },
     setStatus: (state, action: PayloadAction<SortByStatus>) => {
       state.status = action.payload
+    },
+    setRoom: (state, action: PayloadAction<SortByRoom>) => {
+      state.room = action.payload
     }
   },
   extraReducers: (builder) => {

@@ -18,6 +18,8 @@ const EquipmentsPage = () => {
   const dispatch = useAppDispatch()
   const [searchParams] = useSearchParams()
 
+  console.log(searchParams)
+
   useEffect(() => {
     dispatch(initEquipmentsService(searchParams))
     // eslint-disable-next-line

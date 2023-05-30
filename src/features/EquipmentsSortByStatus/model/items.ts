@@ -1,5 +1,5 @@
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
-import { SortByStatus } from './types/sort'
+import { SortByStatus } from './types/SortByStatus'
 
 export const items: TabItem[] = [
   {

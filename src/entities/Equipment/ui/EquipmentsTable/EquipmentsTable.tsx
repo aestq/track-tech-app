@@ -1,5 +1,6 @@
 import { memo, useCallback, useState } from 'react'
 import { SpecificationsModal } from 'entities/Equipment/ui/SpecificationsModal'
+import { classNames } from 'shared/lib/classNames/classNames'
 import { Table, Th, Tr } from 'shared/ui/Table'
 import { Text } from 'shared/ui/Text/Text'
 import { type Equipment } from '../../model/types/Equipment'
@@ -61,7 +62,7 @@ export const EquipmentsTable = memo((props: EquipmentTableProps) => {
   }
 
   return (
-    <Table className={className}>
+    <Table className={classNames(cls.EquipmentsTable, {}, [className])}>
       <Tr>
         <Th>Наименование</Th>
         <Th>Номер</Th>

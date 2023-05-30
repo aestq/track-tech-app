@@ -1,11 +1,13 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { EquipmentsSortByRoom, type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { EquipmentsSortByStatus, type SortByStatus } from 'features/EquipmentsSortByStatus'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useDebounce } from 'shared/lib/hooks/useDebounce'
 import { Input } from 'shared/ui/Input/Input'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
+import { getEquipmentsRoom } from '../../model/selectors/getEquipmentsRoom'
 import { getEquipmentsSearch } from '../../model/selectors/getEquipmentsSearch'
 import { getEquipmentsStatus } from '../../model/selectors/getEquipmentsStatus'
 import { fetchEquipmentsService } from '../../model/services/fetchEquipmentsService'
@@ -20,6 +22,7 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
   const { className } = props
   const search = useSelector(getEquipmentsSearch)
   const status = useSelector(getEquipmentsStatus)
+  const room = useSelector(getEquipmentsRoom)
   const dispatch = useAppDispatch()
 
   const fetchData = useCallback(() => {
@@ -38,12 +41,23 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
     fetchData()
   }, [dispatch, fetchData])
 
+  const onChangeRoom = useCallback((tab: TabItem) => {
+    dispatch(equipmentsActions.setRoom(tab.value as SortByRoom))
+    fetchData()
+  }, [dispatch, fetchData])
+
   return (
     <div className={classNames(cls.EquipmentsFilters, {}, [className])}>
-      <EquipmentsSortByStatus
-        value={status as SortByStatus}
-        onChange={onChangeStatus}
-      />
+      <div className={cls.sorts}>
+        <EquipmentsSortByStatus
+          value={status}
+          onChange={onChangeStatus}
+        />
+        <EquipmentsSortByRoom
+          value={room}
+          onChange={onChangeRoom}
+        />
+      </div>
       <Input
         className={cls.search}
         placeholder='Поиск'
