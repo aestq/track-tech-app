@@ -9,6 +9,7 @@ import { type AxiosInstance } from 'axios'
 import { type EquipmentsSchema } from 'pages/EquipmentsPage'
 import { type LoginSchema } from 'features/LoginForm'
 import { type SignupSchema } from 'features/SignupForm'
+import { type ProfileCardSchema } from 'entities/Profile'
 import { type RoomSchema } from 'entities/Room'
 import { type UserSchema } from 'entities/User'
 
@@ -18,6 +19,7 @@ export interface StateSchema {
   // async reducers
   loginForm?: LoginSchema
   signupForm?: SignupSchema
+  profileCard?: ProfileCardSchema
   equipments?: EquipmentsSchema
   room?: RoomSchema
 }

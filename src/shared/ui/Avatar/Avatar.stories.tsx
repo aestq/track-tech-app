@@ -8,6 +8,10 @@ const meta: Meta<typeof Avatar> = {
 
 type Story = StoryObj<typeof Avatar>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    size: 50
+  }
+}
 
 export default meta

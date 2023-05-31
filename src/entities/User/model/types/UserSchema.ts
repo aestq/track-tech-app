@@ -17,7 +17,5 @@ export interface UserData {
 
 export interface UserSchema {
   userData?: User
-  isLoading: boolean
-  error?: string
   _init: boolean
 }

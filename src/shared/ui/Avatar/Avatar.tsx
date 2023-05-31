@@ -1,4 +1,5 @@
 import { type CSSProperties, memo } from 'react'
+import AvatarIcon from 'shared/assets/icons/avatar-icon.svg'
 import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Avatar.module.scss'
 
@@ -19,6 +20,8 @@ export const Avatar = memo((props: AvatarProps) => {
     <div
       className={classNames(cls.Avatar, {}, [className])}
       style={style}
-    />
+    >
+      <AvatarIcon className={cls.icon} />
+    </div>
   )
 })

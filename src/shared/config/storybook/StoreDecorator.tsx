@@ -3,11 +3,13 @@ import { type StoryFn } from '@storybook/react'
 import { type StateSchema, StoreProvider } from 'app/providers/Store'
 import { loginReducer } from 'features/LoginForm/model/slice/loginSlice'
 import { signupReducer } from 'features/SignupForm/model/slice/signupSlice'
+import { profileCardReducer } from 'entities/Profile/model/slice/ProfileCardSlice'
 import { type ReducersList } from 'shared/lib/hooks/useReducersLoader'
 
 const asyncReducers: ReducersList = {
   loginForm: loginReducer,
-  signupForm: signupReducer
+  signupForm: signupReducer,
+  profileCard: profileCardReducer
 }
 
 export const StoreDecorator = (initialState?: DeepPartial<StateSchema>) =>
