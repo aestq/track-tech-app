@@ -17,7 +17,8 @@ export function buildPlugins (options: BuildOptions): WebpackPluginInstance[] {
     new BundleAnalyzerPlugin(),
     new DefinePlugin({
       __IS_DEV__: JSON.stringify(options.isDev),
-      __API__: JSON.stringify(options.apiUrl)
+      __API__: JSON.stringify(options.apiUrl),
+      __PROJECT__: JSON.stringify(options.project)
     })
   ]
 }

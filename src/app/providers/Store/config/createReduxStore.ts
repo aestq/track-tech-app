@@ -1,10 +1,16 @@
-import { type CombinedState, configureStore, type Reducer, type ReducersMapObject } from '@reduxjs/toolkit'
+import {
+  type CombinedState,
+  configureStore,
+  type Reducer,
+  type ReducersMapObject
+} from '@reduxjs/toolkit'
 import { userReducer } from 'entities/User'
 import { $api } from 'shared/api/api'
+import { type ReducersList } from 'shared/lib/hooks/useReducersLoader'
 import { createReducerManager } from '../config/reducerManager'
 import { type StateSchema } from '../config/StateSchema'
 
-export function createReduxStore(initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) {
+export function createReduxStore(initialState?: StateSchema, asyncReducers?: ReducersList) {
   const rootReducer: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     user: userReducer

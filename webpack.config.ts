@@ -16,7 +16,7 @@ export default (env: BuildEnv): Configuration => {
   }
 
   const config: Configuration = buildWebpackConfig({
-    isDev, mode, paths, apiUrl
+    isDev, mode, paths, apiUrl, project: 'frontend'
   })
 
   return config

@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import type { StorybookConfig } from '@storybook/react-webpack5'
-import webpack, { DefinePlugin } from 'webpack'
+import { DefinePlugin, type RuleSetRule } from 'webpack'
 import { buildCssLoader } from '../webpack/loader/buildCssLoader'
 
 const config: StorybookConfig = {
@@ -18,17 +18,28 @@ const config: StorybookConfig = {
     autodocs: 'tag'
   },
   webpackFinal: (config) => {
-    config.optimization = { splitChunks: { chunks: 'async' } }
-    config.output = { ...config.output, chunkFilename: '[chunkhash].chunk.js' }
-    config.plugins!.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }))
+    // config.output!.publicPath = '/'
     const src = resolve(__dirname, '..', '..', 'src')
     config.resolve!.modules!.push(src)
     config.resolve!.extensions!.push('.ts', '.tsx')
     config.module!.rules!.push(buildCssLoader(true))
-
+    // @ts-expect-error
+    config.module!.rules = config.module!.rules!.map((rule: RuleSetRule) => {
+      // eslint-disable-next-line
+      if(/svg/.test(rule.test as string)) {
+        return { ...rule, exclude: /\.svg$/i }
+      }
+      return rule
+    })
+    config.module!.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack']
+    })
     config.plugins!.push(new DefinePlugin({
       __API__: '',
-      __IS_DEV__: true
+      __IS_DEV__: true,
+      __PROJECT__: 'storybook'
     }))
 
     return config

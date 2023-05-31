@@ -55,7 +55,7 @@ export const Modal = (props: ModalProps) => {
     <Portal>
       <div className={classNames(cls.Modal, mods, [className])} onClick={onCloseHandler}>
         <div className={cls.content} onClick={onClickContent}>
-          <header className={cls.header}>
+          <header className={classNames(cls.header, { [cls.withTitle]: title })}>
             {title && (
               <Text
                 className={cls.title}

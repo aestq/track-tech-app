@@ -1,4 +1,5 @@
 export type Mode = 'development' | 'production'
+export type Project = 'frontend' | 'storybook'
 
 export interface BuildEnv {
   mode: Mode
@@ -17,4 +18,5 @@ export interface BuildOptions {
   isDev: boolean
   mode: Mode
   apiUrl: string
+  project: Project
 }

@@ -19,6 +19,10 @@
 
 .header {
   display: flex;
+  justify-content: flex-end;
+}
+
+.withTitle {
   justify-content: space-between;
 }
 
