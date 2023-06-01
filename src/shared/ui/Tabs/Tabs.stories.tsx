@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 import { type TabItem, Tabs } from './Tabs'
 
@@ -18,7 +19,7 @@ export const Primary: Story = {
   args: {
     tabs: items,
     value: items[0].value,
-    onChange: () => {}
+    onChange: action('onChange')
   }
 }
 
