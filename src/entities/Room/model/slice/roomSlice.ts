@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchRoomsService } from 'entities/Room/model/services/fetchRoomsService'
+import { fetchRooms } from 'entities/Room/model/services/fetchRooms'
 import { type RoomSchema } from '../types/roomSchema'
 
 const initialState: RoomSchema = {
@@ -11,15 +11,15 @@ const roomSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchRoomsService.fulfilled, (state, action) => {
+    builder.addCase(fetchRooms.fulfilled, (state, action) => {
       state.isLoading = false
       state.data = action.payload
     })
-    builder.addCase(fetchRoomsService.pending, (state) => {
+    builder.addCase(fetchRooms.pending, (state) => {
       state.isLoading = true
       state.error = undefined
     })
-    builder.addCase(fetchRoomsService.rejected, (state, action) => {
+    builder.addCase(fetchRooms.rejected, (state, action) => {
       state.isLoading = false
       state.error = action.payload
     })

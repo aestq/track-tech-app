@@ -3,8 +3,8 @@ import axios from 'axios'
 import { type ThunkConfig } from 'app/providers/Store'
 import { type Room } from 'entities/Room/model/types/roomSchema'
 
-export const fetchRoomsService = createAsyncThunk<Room[], void, ThunkConfig<string>>(
-  'room/fetchRoomsService',
+export const fetchRooms = createAsyncThunk<Room[], void, ThunkConfig<string>>(
+  'room/fetchRooms',
   async (_, thunkAPI) => {
     const { extra, rejectWithValue } = thunkAPI
     try {

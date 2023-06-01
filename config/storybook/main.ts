@@ -39,7 +39,7 @@ const config: StorybookConfig = {
     config.plugins!.push(new DefinePlugin({
       __API__: '',
       __IS_DEV__: true,
-      __PROJECT__: 'storybook'
+      __PROJECT__: JSON.stringify('storybook')
     }))
 
     return config

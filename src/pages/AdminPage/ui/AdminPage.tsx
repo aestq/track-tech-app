@@ -1,5 +1,5 @@
 import { Page } from 'widgets/Page'
-import { AddEquipmentForm } from 'features/AddEquipmentForm'
+
 
 const AdminPage = () => {
   return (

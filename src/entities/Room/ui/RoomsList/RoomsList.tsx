@@ -1,14 +1,15 @@
-import { memo, useCallback, useEffect } from 'react'
+import { memo, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { Text } from 'shared/ui/Text/Text'
 import { getRoomData } from '../../model/selectors/getRoomData'
 import { getRoomError } from '../../model/selectors/getRoomError'
 import { getRoomIsLoading } from '../../model/selectors/getRoomIsLoading'
-import { fetchRoomsService } from '../../model/services/fetchRoomsService'
+import { fetchRooms } from '../../model/services/fetchRooms'
 import { roomReducer } from '../../model/slice/roomSlice'
 import { type Room } from '../../model/types/roomSchema'
 import { RoomsItem } from '../RoomsItem/RoomsItem'
@@ -30,9 +31,9 @@ export const RoomsList = memo((props: RoomsListProps) => {
   const error = useSelector(getRoomError)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(fetchRoomsService())
-  }, [dispatch])
+  useInitialEffect(() => {
+    dispatch(fetchRooms())
+  })
 
   const render = useCallback((item: Room) => (
     <RoomsItem
@@ -58,6 +59,14 @@ export const RoomsList = memo((props: RoomsListProps) => {
         <Skeleton width={120} height={120} />
         <Skeleton width={120} height={120} />
       </div>
+    )
+  }
+
+  if(!items?.length) {
+    return (
+      <Text
+        text='Кабинеты не найдены'
+      />
     )
   }
 

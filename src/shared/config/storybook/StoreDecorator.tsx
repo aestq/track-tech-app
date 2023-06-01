@@ -4,12 +4,14 @@ import { type StateSchema, StoreProvider } from 'app/providers/Store'
 import { loginReducer } from 'features/LoginForm/model/slice/loginSlice'
 import { signupReducer } from 'features/SignupForm/model/slice/signupSlice'
 import { profileCardReducer } from 'entities/Profile/model/slice/ProfileCardSlice'
+import { roomReducer } from 'entities/Room/model/slice/roomSlice'
 import { type ReducersList } from 'shared/lib/hooks/useReducersLoader'
 
 const asyncReducers: ReducersList = {
   loginForm: loginReducer,
   signupForm: signupReducer,
-  profileCard: profileCardReducer
+  profileCard: profileCardReducer,
+  room: roomReducer
 }
 
 export const StoreDecorator = (initialState?: DeepPartial<StateSchema>) =>
