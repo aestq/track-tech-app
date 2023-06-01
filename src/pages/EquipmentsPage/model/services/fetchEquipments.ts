@@ -9,8 +9,8 @@ import { getEquipmentsRoom } from '../selectors/getEquipmentsRoom'
 import { getEquipmentsSearch } from '../selectors/getEquipmentsSearch'
 import { getEquipmentsStatus } from '../selectors/getEquipmentsStatus'
 
-export const fetchEquipmentsService = createAsyncThunk<Equipment[], void, ThunkConfig<string>>(
-  'equipments/fetchEquipmentsService',
+export const fetchEquipments = createAsyncThunk<Equipment[], void, ThunkConfig<string>>(
+  'equipments/fetchEquipments',
   async (_, thunkAPI) => {
     const { extra, rejectWithValue, getState } = thunkAPI
     const search = getEquipmentsSearch(getState())

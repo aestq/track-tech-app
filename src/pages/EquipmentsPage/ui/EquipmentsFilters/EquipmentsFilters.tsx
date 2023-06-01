@@ -10,7 +10,7 @@ import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { getEquipmentsRoom } from '../../model/selectors/getEquipmentsRoom'
 import { getEquipmentsSearch } from '../../model/selectors/getEquipmentsSearch'
 import { getEquipmentsStatus } from '../../model/selectors/getEquipmentsStatus'
-import { fetchEquipmentsService } from '../../model/services/fetchEquipmentsService'
+import { fetchEquipments } from '../../model/services/fetchEquipments'
 import { equipmentsActions } from '../../model/slice/equipmentsSlice'
 import cls from './EquipmentsFilters.module.scss'
 
@@ -26,7 +26,7 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
   const dispatch = useAppDispatch()
 
   const fetchData = useCallback(() => {
-    dispatch(fetchEquipmentsService())
+    dispatch(fetchEquipments())
   }, [dispatch])
 
   const debouncedFetchData = useDebounce(fetchData, 500)

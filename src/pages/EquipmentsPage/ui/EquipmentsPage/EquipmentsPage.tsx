@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Page } from 'widgets/Page'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
-import { initEquipmentsService } from '../../model/services/initEquipmentsService'
+import { initEquipmentsPage } from '../../model/services/initEquipmentsPage'
 import { equipmentsReducer } from '../../model/slice/equipmentsSlice'
 import { EquipmentsFilters } from '../EquipmentsFilters/EquipmentsFilters'
 import { EquipmentsPageTable } from '../EquipmentsPageTable/EquipmentsPageTable'
@@ -20,10 +21,9 @@ const EquipmentsPage = () => {
 
   console.log(searchParams)
 
-  useEffect(() => {
-    dispatch(initEquipmentsService(searchParams))
-    // eslint-disable-next-line
-  }, [])
+  useInitialEffect(() => {
+    dispatch(initEquipmentsPage(searchParams))
+  })
 
   return (
     <Page title='Оборудование'>

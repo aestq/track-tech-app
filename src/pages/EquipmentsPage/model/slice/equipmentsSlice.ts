@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { SortByRoom } from 'features/EquipmentsSortByRoom'
 import { SortByStatus } from 'features/EquipmentsSortByStatus'
-import { fetchEquipmentsService } from '../services/fetchEquipmentsService'
+import { fetchEquipments } from '../services/fetchEquipments'
 import { type EquipmentsSchema } from '../types/EquipmentsSchema'
 
 const initialState: EquipmentsSchema = {
@@ -26,15 +26,15 @@ const equipmentsSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchEquipmentsService.fulfilled, (state, action) => {
+    builder.addCase(fetchEquipments.fulfilled, (state, action) => {
       state.data = action.payload
       state.isLoading = false
     })
-    builder.addCase(fetchEquipmentsService.pending, (state) => {
+    builder.addCase(fetchEquipments.pending, (state) => {
       state.error = undefined
       state.isLoading = true
     })
-    builder.addCase(fetchEquipmentsService.rejected, (state, action) => {
+    builder.addCase(fetchEquipments.rejected, (state, action) => {
       state.error = action.payload
       state.isLoading = false
     })

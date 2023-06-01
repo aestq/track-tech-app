@@ -3,10 +3,10 @@ import { type ThunkConfig } from 'app/providers/Store'
 import { equipmentsActions } from 'pages/EquipmentsPage/model/slice/equipmentsSlice'
 import { type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { type SortByStatus } from 'features/EquipmentsSortByStatus'
-import { fetchEquipmentsService } from './fetchEquipmentsService'
+import { fetchEquipments } from './fetchEquipments'
 
-export const initEquipmentsService = createAsyncThunk<void, URLSearchParams, ThunkConfig<string>>(
-  'equipments/initEquipmentsService',
+export const initEquipmentsPage = createAsyncThunk<void, URLSearchParams, ThunkConfig<string>>(
+  'equipments/initEquipmentsPage',
   async (searchParams, thunkAPI) => {
     const { dispatch } = thunkAPI
     const search = searchParams.get('search')
@@ -25,6 +25,6 @@ export const initEquipmentsService = createAsyncThunk<void, URLSearchParams, Thu
       dispatch(equipmentsActions.setRoom(room as SortByRoom))
     }
 
-    dispatch(fetchEquipmentsService())
+    dispatch(fetchEquipments())
   }
 )
