@@ -11,30 +11,32 @@ type Story = StoryObj<typeof LoginForm>
 
 export const Primary: Story = {
   decorators: [StoreDecorator({
-    // loginForm: {
-    //   login: '',
-    //   password: ''
-    // }
+    loginForm: {
+      login: '',
+      password: '',
+      isLoading: false
+    }
   })]
 }
 
 export const Loading: Story = {
   decorators: [StoreDecorator({
-    // loginForm: {
-    //   login: '',
-    //   password: '',
-    //   isLoading: true
-    // }
+    loginForm: {
+      login: '',
+      password: '',
+      isLoading: true
+    }
   })]
 }
 
 export const Error: Story = {
   decorators: [StoreDecorator({
-    // loginForm: {
-    //   login: '',
-    //   password: '',
-    //   error: 'Неверный пароль'
-    // }
+    loginForm: {
+      login: '',
+      password: '',
+      isLoading: false,
+      error: 'Неверный пароль'
+    }
   })]
 }
 

@@ -1,6 +1,5 @@
 import { Listbox } from '@headlessui/react'
 import { useState } from 'react'
-import { classNames } from 'shared/lib/classNames/classNames'
 import { Button } from 'shared/ui/Button/Button'
 import { Card } from 'shared/ui/Card/Card'
 import cls from './Select.module.scss'
