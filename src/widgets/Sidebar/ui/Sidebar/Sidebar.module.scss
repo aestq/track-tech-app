@@ -1,6 +1,6 @@
 .Sidebar {
   border-right: 2px solid var(--secondary-color);
-  max-width: 250px;
+  min-width: 250px;
   height: 100vh;
   padding: 30px 10px;
 }

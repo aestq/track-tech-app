@@ -28,7 +28,7 @@ export const EquipmentsTable = memo((props: EquipmentTableProps) => {
   }, [])
 
   const onOpen = useCallback((item: Equipment) => {
-    setSpecifications(item.specifications)
+    setSpecifications(item?.specifications ?? '')
     setIsOpen(true)
   }, [])
 

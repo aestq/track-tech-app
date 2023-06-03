@@ -1,0 +1,56 @@
+import { type ChangeEvent, type TextareaHTMLAttributes } from 'react'
+import { classNames } from 'shared/lib/classNames/classNames'
+import { Text } from 'shared/ui/Text/Text'
+import cls from './Textarea.module.scss'
+
+type TextareaHTMLProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange'>
+
+interface TextareaProps extends TextareaHTMLProps {
+  className?: string
+  value?: string
+  onChange?: (value: string) => void
+  label?: string
+  validateError?: string
+}
+
+export const Textarea = (props: TextareaProps) => {
+  const {
+    className,
+    value,
+    onChange,
+    label,
+    validateError,
+    ...otherProps
+  } = props
+
+  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange?.(event.target.value)
+  }
+
+  return (
+    <label className={classNames(cls.TextareaWrapper, {}, [className])}>
+      {label && (
+        <Text
+          className={cls.label}
+          title={label}
+          size='xs'
+        />
+      )}
+      <textarea
+        className={cls.textarea}
+        value={value}
+        onChange={onChangeHandler}
+        {...otherProps}
+      >
+      </textarea>
+      {validateError && (
+        <Text
+          className={cls.validateErrorText}
+          text={validateError}
+          size='xs'
+          theme='error'
+        />
+      )}
+    </label>
+  )
+}

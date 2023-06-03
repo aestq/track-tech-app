@@ -1,17 +1,18 @@
+import { type EquipmentStatus } from 'entities/Equipment'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 
-export const EquipmentStatus: Record<string, string> = {
+export const EquipmentStatusText: Record<EquipmentStatus, string> = {
   discarded: 'Списано',
   use: 'Эксплуатируется'
 }
 
-export const items: TabItem[] = [
+export const items: Array<TabItem<EquipmentStatus>> = [
   {
-    content: EquipmentStatus.use,
+    content: EquipmentStatusText.use,
     value: 'use'
   },
   {
-    content: EquipmentStatus.discarded,
-    value: 'disable'
+    content: EquipmentStatusText.discarded,
+    value: 'discarded'
   }
 ]

@@ -1,7 +1,7 @@
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { SortByRoom } from './types/SortByRoom'
 
-export const items: TabItem[] = [
+export const items: Array<TabItem<SortByRoom>> = [
   {
     value: SortByRoom.ALL,
     content: 'Всё'

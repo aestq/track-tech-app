@@ -1,10 +1,14 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { EquipmentsSortByRoom, type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { EquipmentsSortByStatus, type SortByStatus } from 'features/EquipmentsSortByStatus'
+import { getUserIsAdmin } from 'entities/User'
+import { getRouteEquipmentCreate } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useDebounce } from 'shared/lib/hooks/useDebounce'
+import { Button } from 'shared/ui/Button/Button'
 import { Input } from 'shared/ui/Input/Input'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { getEquipmentsRoom } from '../../model/selectors/getEquipmentsRoom'
@@ -23,7 +27,9 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
   const search = useSelector(getEquipmentsSearch)
   const status = useSelector(getEquipmentsStatus)
   const room = useSelector(getEquipmentsRoom)
+  const isAdmin = useSelector(getUserIsAdmin)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const fetchData = useCallback(() => {
     dispatch(fetchEquipments())
@@ -36,27 +42,38 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
     debouncedFetchData()
   }, [dispatch, debouncedFetchData])
 
-  const onChangeStatus = useCallback((tab: TabItem) => {
-    dispatch(equipmentsActions.setStatus(tab.value as SortByStatus))
+  const onChangeStatus = useCallback((tab: TabItem<SortByStatus>) => {
+    dispatch(equipmentsActions.setStatus(tab.value))
     fetchData()
   }, [dispatch, fetchData])
 
-  const onChangeRoom = useCallback((tab: TabItem) => {
-    dispatch(equipmentsActions.setRoom(tab.value as SortByRoom))
+  const onChangeRoom = useCallback((tab: TabItem<SortByRoom>) => {
+    dispatch(equipmentsActions.setRoom(tab.value))
     fetchData()
   }, [dispatch, fetchData])
+
+  const onClickCreate = useCallback(() => {
+    navigate(getRouteEquipmentCreate())
+  }, [navigate])
 
   return (
     <div className={classNames(cls.EquipmentsFilters, {}, [className])}>
-      <div className={cls.sorts}>
-        <EquipmentsSortByStatus
-          value={status}
-          onChange={onChangeStatus}
-        />
-        <EquipmentsSortByRoom
-          value={room}
-          onChange={onChangeRoom}
-        />
+      <div className={cls.panel}>
+        <div className={cls.sorts}>
+          <EquipmentsSortByStatus
+            value={status}
+            onChange={onChangeStatus}
+          />
+          <EquipmentsSortByRoom
+            value={room}
+            onChange={onChangeRoom}
+          />
+        </div>
+        {isAdmin && (
+          <Button onClick={onClickCreate}>
+            Создать
+          </Button>
+        )}
       </div>
       <Input
         className={cls.search}

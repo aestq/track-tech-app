@@ -5,7 +5,7 @@ import { type SortByRoom } from '../model/types/SortByRoom'
 interface EquipmentsSortByRoomProps {
   className?: string
   value: SortByRoom
-  onChange: (tab: TabItem) => void
+  onChange: (tab: TabItem<SortByRoom>) => void
 }
 
 export const EquipmentsSortByRoom = (props: EquipmentsSortByRoomProps) => {

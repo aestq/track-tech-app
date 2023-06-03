@@ -5,7 +5,7 @@ import { type SortByStatus } from '../model/types/SortByStatus'
 interface EquipmentsSortByStatusProps {
   className?: string
   value: SortByStatus
-  onChange: (tab: TabItem) => void
+  onChange: (tab: TabItem<SortByStatus>) => void
 }
 
 export const EquipmentsSortByStatus = (props: EquipmentsSortByStatusProps) => {

@@ -5,6 +5,11 @@
   gap: 10px;
 }
 
+.panel {
+  display: flex;
+  justify-content: space-between;
+}
+
 .search {
   width: 100%;
 }

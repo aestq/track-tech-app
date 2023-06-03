@@ -1,7 +1,7 @@
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { SortByStatus } from './types/SortByStatus'
 
-export const items: TabItem[] = [
+export const items: Array<TabItem<SortByStatus>> = [
   {
     value: SortByStatus.ALL,
     content: 'Всё'

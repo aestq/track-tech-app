@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 import { type TabItem, Tabs } from './Tabs'
 
-const items: TabItem[] = [
+const items: Array<TabItem<string>> = [
   { value: '1', content: 'Tab 1' },
   { value: '2', content: 'Tab 2' },
   { value: '3', content: 'Tab 3' }

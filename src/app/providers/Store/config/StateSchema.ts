@@ -7,6 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import { type AxiosInstance } from 'axios'
 import { type EquipmentsSchema } from 'pages/EquipmentsPage'
+import { type AddEquipmentSchema } from 'features/AddEquipment'
 import { type LoginSchema } from 'features/LoginForm'
 import { type SignupSchema } from 'features/SignupForm'
 import { type ProfileCardSchema } from 'entities/Profile'
@@ -22,6 +23,7 @@ export interface StateSchema {
   profileCard?: ProfileCardSchema
   equipments?: EquipmentsSchema
   room?: RoomSchema
+  addEquipment?: AddEquipmentSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Page } from 'widgets/Page'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
@@ -18,8 +17,6 @@ const EquipmentsPage = () => {
   useReducersLoader({ reducersList })
   const dispatch = useAppDispatch()
   const [searchParams] = useSearchParams()
-
-  console.log(searchParams)
 
   useInitialEffect(() => {
     dispatch(initEquipmentsPage(searchParams))

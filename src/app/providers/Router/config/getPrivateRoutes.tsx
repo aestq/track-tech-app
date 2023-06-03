@@ -1,10 +1,10 @@
 import { AdminPage } from 'pages/AdminPage'
+import { EquipmentCreatePage } from 'pages/EquipmentCreatePage'
 import { EquipmentsPage } from 'pages/EquipmentsPage'
 import { HistoryPage } from 'pages/HistoryPage'
 import { ProfilePage } from 'pages/ProfilePage'
-import { RoomDetailsPage } from 'pages/RoomDetailsPage'
 import { RoomsPage } from 'pages/RoomsPage'
-import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
+import { getRouteEquipmentCreate, RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 
 export const getPrivateRoutes = (isAdmin: boolean) => {
   const privateRoutes = [
@@ -23,18 +23,21 @@ export const getPrivateRoutes = (isAdmin: boolean) => {
     {
       path: RoutePaths.PROFILE,
       element: <ProfilePage />
-    },
-    {
-      path: RoutePaths.ROOMS + '/:id',
-      element: <RoomDetailsPage />
     }
   ]
 
   if(isAdmin) {
-    privateRoutes.push({
-      path: RoutePaths.ADMIN,
-      element: <AdminPage />
-    })
+    privateRoutes.push(
+      {
+        path: RoutePaths.ADMIN,
+        element: <AdminPage />
+      },
+      {
+        // @ts-expect-error
+        path: `${RoutePaths.EQUIPMENTS}/${getRouteEquipmentCreate()}`,
+        element: <EquipmentCreatePage />
+      }
+    )
   }
 
   return privateRoutes
