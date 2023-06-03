@@ -17,3 +17,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.readOnly {
+  .tab {
+    opacity: 0.65;
+  }
+  .label {
+    opacity: 0.65;
+  }
+}

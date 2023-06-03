@@ -8,6 +8,7 @@ import {
 import { type AxiosInstance } from 'axios'
 import { type EquipmentsSchema } from 'pages/EquipmentsPage'
 import { type AddEquipmentSchema } from 'features/AddEquipment'
+import { type EditEquipmentSchema } from 'features/EditEquipment'
 import { type LoginSchema } from 'features/LoginForm'
 import { type SignupSchema } from 'features/SignupForm'
 import { type ProfileCardSchema } from 'entities/Profile'
@@ -24,6 +25,7 @@ export interface StateSchema {
   equipments?: EquipmentsSchema
   room?: RoomSchema
   addEquipment?: AddEquipmentSchema
+  editEquipment?: EditEquipmentSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

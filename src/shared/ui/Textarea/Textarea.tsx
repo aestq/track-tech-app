@@ -1,5 +1,5 @@
 import { type ChangeEvent, type TextareaHTMLAttributes } from 'react'
-import { classNames } from 'shared/lib/classNames/classNames'
+import { classNames, type Mods } from 'shared/lib/classNames/classNames'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './Textarea.module.scss'
 
@@ -20,6 +20,7 @@ export const Textarea = (props: TextareaProps) => {
     onChange,
     label,
     validateError,
+    readOnly,
     ...otherProps
   } = props
 
@@ -27,8 +28,12 @@ export const Textarea = (props: TextareaProps) => {
     onChange?.(event.target.value)
   }
 
+  const mods: Mods = {
+    [cls.readOnly]: readOnly
+  }
+
   return (
-    <label className={classNames(cls.TextareaWrapper, {}, [className])}>
+    <label className={classNames(cls.TextareaWrapper, mods, [className])}>
       {label && (
         <Text
           className={cls.label}

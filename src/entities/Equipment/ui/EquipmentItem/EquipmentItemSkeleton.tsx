@@ -1,5 +1,5 @@
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
-import cls from './EquipmentTableItem.module.scss'
+import cls from './EquipmentItem.module.scss'
 
 interface EquipmentItemSkeletonProps {
   className?: string

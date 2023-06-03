@@ -1,5 +1,5 @@
-import { memo, type ReactNode, useCallback } from 'react'
-import { classNames } from 'shared/lib/classNames/classNames'
+import { type ReactNode, useCallback } from 'react'
+import { classNames, type Mods } from 'shared/lib/classNames/classNames'
 import { Card } from 'shared/ui/Card/Card'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './Tabs.module.scss'
@@ -15,6 +15,7 @@ interface TabsProps<T extends string> {
   value?: string
   onChange?: (tab: TabItem<T>) => void
   label?: string
+  readOnly?: boolean
 }
 
 export const Tabs = <T extends string>(props: TabsProps<T>) => {
@@ -23,17 +24,24 @@ export const Tabs = <T extends string>(props: TabsProps<T>) => {
     tabs,
     value,
     onChange,
-    label
+    label,
+    readOnly
   } = props
 
   const onClickTab = useCallback((tab: TabItem<T>) => {
     return () => {
-      onChange?.(tab)
+      if(!readOnly) {
+        onChange?.(tab)
+      }
     }
-  }, [onChange])
+  }, [onChange, readOnly])
+
+  const mods: Mods = {
+    [cls.readOnly]: readOnly
+  }
 
   return (
-    <div className={classNames(cls.Tabs, {}, [className])}>
+    <div className={classNames(cls.Tabs, mods, [className])}>
       {label && (
         <Text
           className={cls.label}

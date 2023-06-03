@@ -1,5 +1,7 @@
 import { memo } from 'react'
+import { useSelector } from 'react-redux'
 import { type Equipment, type EquipmentStatus } from 'entities/Equipment'
+import { getUserIsAdmin } from 'entities/User'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { Button } from 'shared/ui/Button/Button'
 import { Input } from 'shared/ui/Input/Input'
@@ -35,6 +37,7 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
     isLoading,
     error
   } = props
+  const isAdmin = useSelector(getUserIsAdmin)
 
   return (
     <div className={classNames(cls.EquipmentForm, {}, [className])}>
@@ -50,18 +53,21 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
         label='Наименование'
         onChange={onChangeName}
         value={data?.name}
+        readOnly={!isAdmin}
       />
       <Input
         placeholder='Введите номер'
         label='Номер'
         onChange={onChangeStockNumber}
         value={data?.stockNumber}
+        readOnly={!isAdmin}
       />
       <Tabs
         tabs={items}
         value={data?.status}
         onChange={onChangeStatus}
         label='Статус'
+        readOnly={!isAdmin}
       />
       <Textarea
         label='Характеристики'
@@ -74,6 +80,7 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
         placeholder='Введите кабинет'
         onChange={onChangeRoom}
         value={data?.room}
+        readOnly={!isAdmin}
       />
       <Button
         onClick={onClick}

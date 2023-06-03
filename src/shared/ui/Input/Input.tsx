@@ -1,5 +1,5 @@
 import { type ChangeEvent, type InputHTMLAttributes, memo } from 'react'
-import { classNames } from 'shared/lib/classNames/classNames'
+import { classNames, type Mods } from 'shared/lib/classNames/classNames'
 import { Text } from 'shared/ui/Text/Text'
 import cls from './Input.module.scss'
 
@@ -20,6 +20,7 @@ export const Input = memo((props: InputProps) => {
     value,
     label,
     validateError,
+    readOnly,
     ...otherProps
   } = props
 
@@ -27,8 +28,12 @@ export const Input = memo((props: InputProps) => {
     onChange?.(event.target.value)
   }
 
+  const mods: Mods = {
+    [cls.readOnly]: readOnly
+  }
+
   return (
-    <label className={classNames(cls.InputWrapper, {}, [className])}>
+    <label className={classNames(cls.InputWrapper, mods, [className])}>
       {label && (
         <Text
           className={cls.label}
@@ -40,6 +45,7 @@ export const Input = memo((props: InputProps) => {
         className={cls.input}
         onChange={onChangeHandler}
         value={value}
+        readOnly={readOnly}
         {...otherProps}
       />
       {validateError && (

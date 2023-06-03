@@ -54,7 +54,7 @@ const AddEquipmentForm = (props: AddEquipmentFormProps) => {
     if(result.meta.requestStatus === 'fulfilled') {
       onSuccess()
     }
-  }, [dispatch])
+  }, [dispatch, onSuccess])
 
   return (
     <EquipmentForm

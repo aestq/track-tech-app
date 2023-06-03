@@ -18,3 +18,17 @@
   margin-top: 5px;
   margin-left: 4px;
 }
+
+.readOnly {
+  .label {
+    opacity: 0.65;
+  }
+
+  .input {
+    opacity: 0.65;
+  }
+
+  .validateErrorText {
+    opacity: 0.65;
+  }
+}
