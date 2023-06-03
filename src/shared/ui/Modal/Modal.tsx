@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, type MouseEvent } from 'react'
+import { type ReactNode, useEffect, type MouseEvent, useState } from 'react'
 import CloseIcon from 'shared/assets/icons/close-icon.svg'
 import { classNames, type Mods } from 'shared/lib/classNames/classNames'
 import { Button } from 'shared/ui/Button/Button'
@@ -12,6 +12,7 @@ interface ModalProps {
   title?: string
   isOpen?: boolean
   children: ReactNode
+  lazy?: boolean
 }
 
 export const Modal = (props: ModalProps) => {
@@ -20,8 +21,17 @@ export const Modal = (props: ModalProps) => {
     children,
     title,
     isOpen,
-    onClose
+    onClose,
+    lazy
   } = props
+
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    if(isOpen) {
+      setIsMounted(true)
+    }
+  }, [isOpen])
 
   const onCloseHandler = () => {
     onClose?.()
@@ -50,6 +60,10 @@ export const Modal = (props: ModalProps) => {
       window.removeEventListener('keydown', onKeyDown)
     }
   })
+
+  if(lazy && !isMounted) {
+    return null
+  }
 
   return (
     <Portal>

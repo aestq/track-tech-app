@@ -1,10 +1,9 @@
 import { AdminPage } from 'pages/AdminPage'
-import { EquipmentCreatePage } from 'pages/EquipmentCreatePage'
 import { EquipmentsPage } from 'pages/EquipmentsPage'
 import { HistoryPage } from 'pages/HistoryPage'
 import { ProfilePage } from 'pages/ProfilePage'
 import { RoomsPage } from 'pages/RoomsPage'
-import { getRouteEquipmentCreate, RoutePaths } from 'shared/config/routeConfig/RoutePaths'
+import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 
 export const getPrivateRoutes = (isAdmin: boolean) => {
   const privateRoutes = [
@@ -31,11 +30,6 @@ export const getPrivateRoutes = (isAdmin: boolean) => {
       {
         path: RoutePaths.ADMIN,
         element: <AdminPage />
-      },
-      {
-        // @ts-expect-error
-        path: `${RoutePaths.EQUIPMENTS}/${getRouteEquipmentCreate()}`,
-        element: <EquipmentCreatePage />
       }
     )
   }

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { AddEquipmentForm } from './AddEquipmentForm'
+import AddEquipmentForm from './AddEquipmentForm'
 
 const meta: Meta<typeof AddEquipmentForm> = {
   title: 'slice/AddEquipmentForm',

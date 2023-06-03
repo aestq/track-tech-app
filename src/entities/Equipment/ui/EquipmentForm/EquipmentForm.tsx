@@ -19,6 +19,7 @@ interface EquipmentFormProps {
   onChangeRoom?: (value: string) => void
   onClick?: () => void
   isLoading?: boolean
+  error?: string
 }
 
 export const EquipmentForm = memo((props: EquipmentFormProps) => {
@@ -31,14 +32,19 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
     onChangeRoom,
     onClick,
     data,
-    isLoading
+    isLoading,
+    error
   } = props
 
   return (
     <div className={classNames(cls.EquipmentForm, {}, [className])}>
-      <Text
-        title='Создание оборудования'
-      />
+      {error && (
+        <Text
+          text={error}
+          theme='error'
+          size='s'
+        />
+      )}
       <Input
         placeholder='Введите наименование'
         label='Наименование'

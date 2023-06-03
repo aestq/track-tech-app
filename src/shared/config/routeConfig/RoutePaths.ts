@@ -7,8 +7,5 @@ export enum RoutePaths {
   HISTORY = '/history',
   PROFILE = '/profile',
   ADMIN = '/admin',
-  EQUIPMENT_CREATE = 'equipments/create',
   NOT_FOUND = '*'
 }
-
-export const getRouteEquipmentCreate = () => 'create'

@@ -1,10 +1,9 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { AddEquipmentModal } from 'features/AddEquipment'
 import { EquipmentsSortByRoom, type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { EquipmentsSortByStatus, type SortByStatus } from 'features/EquipmentsSortByStatus'
 import { getUserIsAdmin } from 'entities/User'
-import { getRouteEquipmentCreate } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useDebounce } from 'shared/lib/hooks/useDebounce'
@@ -24,12 +23,20 @@ interface EquipmentsFiltersProps {
 
 export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
   const { className } = props
+  const [isOpen, setIsOpen] = useState(false)
   const search = useSelector(getEquipmentsSearch)
   const status = useSelector(getEquipmentsStatus)
   const room = useSelector(getEquipmentsRoom)
   const isAdmin = useSelector(getUserIsAdmin)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+
+  const openModal = useCallback(() => {
+    setIsOpen(true)
+  }, [])
+
+  const closeModal = useCallback(() => {
+    setIsOpen(false)
+  }, [])
 
   const fetchData = useCallback(() => {
     dispatch(fetchEquipments())
@@ -52,10 +59,6 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
     fetchData()
   }, [dispatch, fetchData])
 
-  const onClickCreate = useCallback(() => {
-    navigate(getRouteEquipmentCreate())
-  }, [navigate])
-
   return (
     <div className={classNames(cls.EquipmentsFilters, {}, [className])}>
       <div className={cls.panel}>
@@ -70,7 +73,7 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
           />
         </div>
         {isAdmin && (
-          <Button onClick={onClickCreate}>
+          <Button onClick={openModal}>
             Создать
           </Button>
         )}
@@ -80,6 +83,10 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
         placeholder='Поиск'
         value={search}
         onChange={onChangeSearch}
+      />
+      <AddEquipmentModal
+        isOpen={isOpen}
+        onClose={closeModal}
       />
     </div>
   )

@@ -5,22 +5,28 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
-import { getAddEquipmentFormData } from '../model/selectors/getAddEquipmentFormData'
-import { addEquipmentActions, addEquipmentReducer } from '../model/slice/AddEquipmentSlice'
+import { getAddEquipmentError } from '../../model/selectors/getAddEquipmentError'
+import { getAddEquipmentFormData } from '../../model/selectors/getAddEquipmentFormData'
+import { getAddEquipmentIsLoading } from '../../model/selectors/getAddEquipmentIsLoading'
+import { createEquipment } from '../../model/services/createEquipment'
+import { addEquipmentActions, addEquipmentReducer } from '../../model/slice/AddEquipmentSlice'
 import cls from './AddEquipmentForm.module.scss'
 
-interface AddEquipmentFormProps {
+export interface AddEquipmentFormProps {
   className?: string
+  onSuccess: () => void
 }
 
 const reducersList: ReducersList = {
   addEquipment: addEquipmentReducer
 }
 
-export const AddEquipmentForm = (props: AddEquipmentFormProps) => {
+const AddEquipmentForm = (props: AddEquipmentFormProps) => {
   useReducersLoader({ reducersList })
-  const { className } = props
+  const { className, onSuccess } = props
   const formData = useSelector(getAddEquipmentFormData)
+  const isLoading = useSelector(getAddEquipmentIsLoading)
+  const error = useSelector(getAddEquipmentError)
   const dispatch = useAppDispatch()
 
   const onChangeName = useCallback((value: string) => {
@@ -43,21 +49,27 @@ export const AddEquipmentForm = (props: AddEquipmentFormProps) => {
     dispatch(addEquipmentActions.setFormData({ room: value }))
   }, [dispatch])
 
-  const onClickCreate = useCallback(() => {
-    console.log(formData)
-  }, [formData])
+  const onClickCreate = useCallback(async () => {
+    const result = await dispatch(createEquipment())
+    if(result.meta.requestStatus === 'fulfilled') {
+      onSuccess()
+    }
+  }, [dispatch])
 
   return (
-    <div className={classNames(cls.AddEquipmentForm, {}, [className])}>
-      <EquipmentForm
-        data={formData}
-        onChangeName={onChangeName}
-        onChangeStockNumber={onChangeStockNumber}
-        onChangeStatus={onChangeStatus}
-        onChangeSpecifications={onChangeSpecifications}
-        onChangeRoom={onChangeRoom}
-        onClick={onClickCreate}
-      />
-    </div>
+    <EquipmentForm
+      className={classNames(cls.AddEquipment, {}, [className])}
+      data={formData}
+      onChangeName={onChangeName}
+      onChangeStockNumber={onChangeStockNumber}
+      onChangeStatus={onChangeStatus}
+      onChangeSpecifications={onChangeSpecifications}
+      onChangeRoom={onChangeRoom}
+      onClick={onClickCreate}
+      isLoading={isLoading}
+      error={error}
+    />
   )
 }
+
+export default AddEquipmentForm
