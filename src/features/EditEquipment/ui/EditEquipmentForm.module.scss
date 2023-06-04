@@ -1,3 +1,20 @@
 .EditEquipmentForm {
   width: fit-content;
 }
+
+.skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+}
+
+.skeletonTabs {
+  display: flex;
+  gap: 5px;
+}
+
+.label {
+  margin-bottom: 4px;
+  margin-left: 3px;
+}

@@ -4,5 +4,5 @@ export interface EditEquipmentSchema {
   formData?: Equipment
   isLoading: boolean
   error?: string
-  _init: boolean
+  init: boolean
 }

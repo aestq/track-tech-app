@@ -66,21 +66,21 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
         tabs={items}
         value={data?.status}
         onChange={onChangeStatus}
-        label='Статус'
         readOnly={!isAdmin}
+        label='Статус'
       />
       <Textarea
-        label='Характеристики'
         placeholder='Введите характеристики'
         onChange={onChangeSpecifications}
         value={data?.specifications}
+        label='Характеристики'
       />
       <Input
-        label='Кабинет'
         placeholder='Введите кабинет'
         onChange={onChangeRoom}
         value={data?.room}
         readOnly={!isAdmin}
+        label='Кабинет'
       />
       <Button
         onClick={onClick}

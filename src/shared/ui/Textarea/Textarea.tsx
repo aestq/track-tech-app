@@ -37,8 +37,8 @@ export const Textarea = (props: TextareaProps) => {
       {label && (
         <Text
           className={cls.label}
-          title={label}
-          size='xs'
+          text={label}
+          size='s'
         />
       )}
       <textarea

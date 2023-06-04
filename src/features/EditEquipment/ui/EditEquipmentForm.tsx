@@ -6,7 +6,6 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
 import { Card } from 'shared/ui/Card/Card'
-import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { Text } from 'shared/ui/Text/Text'
 import { getEditEquipmentError } from '../model/selectors/getEditEquipmentError'
@@ -16,6 +15,7 @@ import { getEditEquipmentIsLoading } from '../model/selectors/getEditEquipmentIs
 import { fetchEquipment } from '../model/services/fetchEquipment'
 import { editEquipmentActions, editEquipmentReducer } from '../model/slice/editEquipmentSlice'
 import cls from './EditEquipmentForm.module.scss'
+import { SkeletonForm } from './SkeletonForm'
 
 interface EditEquipmentFormProps {
   className?: string
@@ -60,9 +60,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
   }, [dispatch])
 
   if(!init) {
-    return (
-      <Skeleton width={200} height={50} />
-    )
+    return <SkeletonForm />
   }
 
   if(error) {

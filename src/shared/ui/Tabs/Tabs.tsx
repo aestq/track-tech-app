@@ -45,8 +45,8 @@ export const Tabs = <T extends string>(props: TabsProps<T>) => {
       {label && (
         <Text
           className={cls.label}
-          title={label}
-          size='xs'
+          text={label}
+          size='s'
         />
       )}
       <div className={cls.container}>

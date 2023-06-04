@@ -1,5 +1,6 @@
 import { type RouteProps } from 'react-router-dom'
 import { AdminPage } from 'pages/AdminPage'
+import { EquipmentCreatePage } from 'pages/EquipmentCreatePage'
 import { EquipmentDetailsPage } from 'pages/EquipmentDetailsPage'
 import { EquipmentsPage } from 'pages/EquipmentsPage'
 import { HistoryPage } from 'pages/HistoryPage'
@@ -32,6 +33,10 @@ export const getPrivateRoutes = (isAdmin: boolean, isModerator: boolean) => {
       {
         path: RoutePaths.ADMIN,
         element: <AdminPage />
+      },
+      {
+        path: 'equipments/create',
+        element: <EquipmentCreatePage />
       }
     )
   }

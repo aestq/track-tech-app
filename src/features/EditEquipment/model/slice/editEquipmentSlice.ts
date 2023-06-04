@@ -6,7 +6,7 @@ import { type EditEquipmentSchema } from '../types/EditEquipmentSchema'
 
 const initialState: EditEquipmentSchema = {
   isLoading: false,
-  _init: false
+  init: false
 }
 
 export const editEquipmentSlice = createSlice({
@@ -19,14 +19,15 @@ export const editEquipmentSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchEquipment.pending, (state) => {
+      state.init = false
       state.error = undefined
     })
     builder.addCase(fetchEquipment.fulfilled, (state, action) => {
-      state._init = true
+      state.init = true
       state.formData = action.payload
     })
     builder.addCase(fetchEquipment.rejected, (state, action) => {
-      state._init = true
+      state.init = true
       state.error = action.payload
     })
     builder.addCase(updateEquipment.fulfilled, (state) => {

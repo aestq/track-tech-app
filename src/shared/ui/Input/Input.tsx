@@ -37,8 +37,8 @@ export const Input = memo((props: InputProps) => {
       {label && (
         <Text
           className={cls.label}
-          title={label}
-          size='xs'
+          text={label}
+          size='s'
         />
       )}
       <input

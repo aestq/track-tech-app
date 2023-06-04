@@ -1,2 +1,2 @@
-export { AddEquipmentModal } from './ui/AddEquipmentModal/AddEquipmentModal'
+export { AddEquipmentForm } from './ui/AddEquipmentForm'
 export type { AddEquipmentSchema } from './model/types/AddEquipmentSchema'

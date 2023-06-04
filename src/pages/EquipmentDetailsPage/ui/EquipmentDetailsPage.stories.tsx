@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import EquipmentDetailsPage from './EquipmentDetailsPage'
 
 const meta: Meta<typeof EquipmentDetailsPage> = {
-  title: 'pages/EquipmentDetailsPage',
+  title: 'pages/EquipmentCreatePage',
   component: EquipmentDetailsPage
 }
 

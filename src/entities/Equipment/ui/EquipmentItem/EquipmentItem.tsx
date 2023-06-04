@@ -36,7 +36,6 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
     name = (
       <AppLink
         to={`${RoutePaths.EQUIPMENTS}/${item.id}`}
-        className={cls.link}
       >
         <Text
           text={item.name}

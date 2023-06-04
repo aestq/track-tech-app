@@ -4,26 +4,26 @@ import { EquipmentForm, type EquipmentStatus } from 'entities/Equipment'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
+import { Card } from 'shared/ui/Card/Card'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
-import { getAddEquipmentError } from '../../model/selectors/getAddEquipmentError'
-import { getAddEquipmentFormData } from '../../model/selectors/getAddEquipmentFormData'
-import { getAddEquipmentIsLoading } from '../../model/selectors/getAddEquipmentIsLoading'
-import { createEquipment } from '../../model/services/createEquipment'
-import { addEquipmentActions, addEquipmentReducer } from '../../model/slice/AddEquipmentSlice'
+import { getAddEquipmentError } from '../model/selectors/getAddEquipmentError'
+import { getAddEquipmentFormData } from '../model/selectors/getAddEquipmentFormData'
+import { getAddEquipmentIsLoading } from '../model/selectors/getAddEquipmentIsLoading'
+import { createEquipment } from '../model/services/createEquipment'
+import { addEquipmentActions, addEquipmentReducer } from '../model/slice/AddEquipmentSlice'
 import cls from './AddEquipmentForm.module.scss'
 
-export interface AddEquipmentFormProps {
+interface AddEquipmentFormProps {
   className?: string
-  onSuccess: () => void
 }
 
 const reducersList: ReducersList = {
   addEquipment: addEquipmentReducer
 }
 
-const AddEquipmentForm = (props: AddEquipmentFormProps) => {
+export const AddEquipmentForm = (props: AddEquipmentFormProps) => {
   useReducersLoader({ reducersList })
-  const { className, onSuccess } = props
+  const { className } = props
   const formData = useSelector(getAddEquipmentFormData)
   const isLoading = useSelector(getAddEquipmentIsLoading)
   const error = useSelector(getAddEquipmentError)
@@ -49,27 +49,26 @@ const AddEquipmentForm = (props: AddEquipmentFormProps) => {
     dispatch(addEquipmentActions.setFormData({ room: value }))
   }, [dispatch])
 
-  const onClickCreate = useCallback(async () => {
-    const result = await dispatch(createEquipment())
-    if(result.meta.requestStatus === 'fulfilled') {
-      onSuccess()
-    }
-  }, [dispatch, onSuccess])
+  const onClickCreate = useCallback(() => {
+    dispatch(createEquipment())
+  }, [dispatch])
 
   return (
-    <EquipmentForm
+    <Card
       className={classNames(cls.AddEquipment, {}, [className])}
-      data={formData}
-      onChangeName={onChangeName}
-      onChangeStockNumber={onChangeStockNumber}
-      onChangeStatus={onChangeStatus}
-      onChangeSpecifications={onChangeSpecifications}
-      onChangeRoom={onChangeRoom}
-      onClick={onClickCreate}
-      isLoading={isLoading}
-      error={error}
-    />
+      theme='border'
+    >
+      <EquipmentForm
+        data={formData}
+        onChangeName={onChangeName}
+        onChangeStockNumber={onChangeStockNumber}
+        onChangeStatus={onChangeStatus}
+        onChangeSpecifications={onChangeSpecifications}
+        onChangeRoom={onChangeRoom}
+        onClick={onClickCreate}
+        isLoading={isLoading}
+        error={error}
+      />
+    </Card>
   )
 }
-
-export default AddEquipmentForm
