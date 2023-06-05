@@ -8,7 +8,6 @@ import { Td, Tr } from 'shared/ui/Table'
 import { Text } from 'shared/ui/Text/Text'
 import { EquipmentStatusText } from '../../model/consts/consts'
 import { type Equipment } from '../../model/types/Equipment'
-import cls from './EquipmentItem.module.scss'
 
 interface EquipmentItemProps {
   className?: string

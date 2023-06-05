@@ -31,7 +31,10 @@ export const SkeletonForm = () => {
         <Skeleton className={cls.label} width={70} height={14} radius={0} />
         <Skeleton width={400} height={40} radius={5} />
       </div>
-      <Skeleton width={400} height={35} radius={5} />
+      <div className={cls.buttonsSkeletons}>
+        <Skeleton width='100%' height={35} radius={5} />
+        <Skeleton width={60} height={35} radius={5} />
+      </div>
     </Card>
   )
 }

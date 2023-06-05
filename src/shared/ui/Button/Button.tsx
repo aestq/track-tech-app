@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes, memo, type ReactNode } from 'react'
 import { type Additional, classNames, type Mods } from 'shared/lib/classNames/classNames'
 import cls from './Button.module.scss'
 
-type ButtonTheme = 'clear' | 'primary' | 'secondary'
+type ButtonTheme = 'clear' | 'primary' | 'secondary' | 'red'
 type ButtonSize = 's' | 'm' | 'l'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

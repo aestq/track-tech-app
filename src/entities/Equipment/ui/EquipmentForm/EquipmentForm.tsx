@@ -19,8 +19,6 @@ interface EquipmentFormProps {
   onChangeStatus?: (tab: TabItem<EquipmentStatus>) => void
   onChangeSpecifications?: (value: string) => void
   onChangeRoom?: (value: string) => void
-  onClick?: () => void
-  isLoading?: boolean
   error?: string
 }
 
@@ -32,9 +30,7 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
     onChangeStatus,
     onChangeSpecifications,
     onChangeRoom,
-    onClick,
     data,
-    isLoading,
     error
   } = props
   const isAdmin = useSelector(getUserIsAdmin)
@@ -82,12 +78,6 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
         readOnly={!isAdmin}
         label='Кабинет'
       />
-      <Button
-        onClick={onClick}
-        disabled={isLoading}
-      >
-        Создать
-      </Button>
     </div>
   )
 })

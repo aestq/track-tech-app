@@ -1,10 +1,16 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { deleteEquipment } from 'features/EditEquipment/model/services/deleteEquipment'
+import { updateEquipment } from 'features/EditEquipment/model/services/updateEquipment'
 import { EquipmentForm, type EquipmentStatus } from 'entities/Equipment'
+import TrashIcon from 'shared/assets/icons/trash-icon.svg'
+import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
+import { Button } from 'shared/ui/Button/Button'
 import { Card } from 'shared/ui/Card/Card'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { Text } from 'shared/ui/Text/Text'
@@ -34,6 +40,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
   const error = useSelector(getEditEquipmentError)
   const init = useSelector(getEditEquipmentInit)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   useInitialEffect(() => {
     dispatch(fetchEquipment(id))
@@ -59,6 +66,17 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
     dispatch(editEquipmentActions.setFormData({ room: value }))
   }, [dispatch])
 
+  const onClickEdit = useCallback(() => {
+    dispatch(updateEquipment())
+  }, [dispatch])
+
+  const onClickDelete = useCallback(async () => {
+    const result = await dispatch(deleteEquipment(id))
+    if(result.meta.requestStatus === 'fulfilled') {
+      navigate(RoutePaths.EQUIPMENTS)
+    }
+  }, [dispatch, id, navigate])
+
   if(!init) {
     return <SkeletonForm />
   }
@@ -66,7 +84,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
   if(error) {
     return (
       <Text
-        text={error}
+        text='Произошла ошибка при подгрузке оборудования'
         theme='error'
       />
     )
@@ -84,8 +102,24 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
         onChangeStatus={onChangeStatus}
         onChangeSpecifications={onChangeSpecifications}
         onChangeRoom={onChangeRoom}
-        isLoading={isLoading}
       />
+      <div className={cls.buttons}>
+        <Button
+          onClick={onClickEdit}
+          disabled={isLoading}
+          max
+        >
+          Создать
+        </Button>
+        <Button
+          theme='red'
+          size='s'
+          disabled={isLoading}
+          onClick={onClickDelete}
+        >
+          <TrashIcon className={cls.trash} />
+        </Button>
+      </div>
     </Card>
   )
 }

@@ -32,6 +32,15 @@
   }
 }
 
+.red {
+  background-color: var(--red-color);
+  color: var(--bg-color);
+
+  &:hover {
+    background-color: var(--red-color-hover);
+  }
+}
+
 .s {
   font-size: var(--font-size-xs);
   padding: 8px 16px;

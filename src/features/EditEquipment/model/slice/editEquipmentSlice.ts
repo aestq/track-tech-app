@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { deleteEquipment } from 'features/EditEquipment/model/services/deleteEquipment'
 import { type Equipment } from 'entities/Equipment'
 import { fetchEquipment } from '../services/fetchEquipment'
 import { updateEquipment } from '../services/updateEquipment'
@@ -38,6 +39,17 @@ export const editEquipmentSlice = createSlice({
       state.isLoading = false
     })
     builder.addCase(updateEquipment.pending, (state) => {
+      state.error = undefined
+      state.isLoading = true
+    })
+    builder.addCase(deleteEquipment.fulfilled, (state) => {
+      state.isLoading = false
+    })
+    builder.addCase(deleteEquipment.rejected, (state, action) => {
+      state.error = action.payload
+      state.isLoading = false
+    })
+    builder.addCase(deleteEquipment.pending, (state) => {
       state.error = undefined
       state.isLoading = true
     })

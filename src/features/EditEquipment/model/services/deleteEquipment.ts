@@ -2,15 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { isAxiosError } from 'axios'
 import { type ThunkConfig } from 'app/providers/Store'
 import { type Equipment } from 'entities/Equipment'
-import { getEditEquipmentFormData } from '../selectors/getEditEquipmentFormData'
 
-export const updateEquipment = createAsyncThunk<void, void, ThunkConfig<string>>(
-  'editEquipment/updateEquipment',
-  async (_, thunkAPI) => {
-    const { extra, rejectWithValue, getState } = thunkAPI
-    const formData = getEditEquipmentFormData(getState())
+export const deleteEquipment = createAsyncThunk<void, string, ThunkConfig<string>>(
+  'editEquipment/deleteEquipment',
+  async (id, thunkAPI) => {
+    const { extra, rejectWithValue } = thunkAPI
     try {
-      await extra.api.put<Equipment>('/equipments', formData)
+      await extra.api.delete<Equipment>(`/equipments/${id}`)
     } catch(error) {
       if(isAxiosError(error)) {
         return rejectWithValue(error.response?.data?.message)
