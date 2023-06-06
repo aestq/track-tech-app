@@ -68,6 +68,12 @@ export const ProfileCard = (props: ProfileCardProps) => {
       >
         Выйти
       </Button>
+      <Text
+        className={cls.userId}
+        text={`id:${userData?.id ?? ''}`}
+        size='xs'
+        align='center'
+      />
     </Card>
   )
 }

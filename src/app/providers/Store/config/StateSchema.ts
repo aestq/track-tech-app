@@ -6,6 +6,7 @@ import {
   type EnhancedStore
 } from '@reduxjs/toolkit'
 import { type AxiosInstance } from 'axios'
+import { type AdminSchema } from 'pages/AdminPage'
 import { type EquipmentsSchema } from 'pages/EquipmentsPage'
 import { type AddEquipmentSchema } from 'features/AddEquipment'
 import { type EditEquipmentSchema } from 'features/EditEquipment'
@@ -26,6 +27,7 @@ export interface StateSchema {
   room?: RoomSchema
   addEquipment?: AddEquipmentSchema
   editEquipment?: EditEquipmentSchema
+  admin?: AdminSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

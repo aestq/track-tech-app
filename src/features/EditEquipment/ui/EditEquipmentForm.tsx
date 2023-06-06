@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { deleteEquipment } from 'features/EditEquipment/model/services/deleteEquipment'
 import { updateEquipment } from 'features/EditEquipment/model/services/updateEquipment'
 import { EquipmentForm, type EquipmentStatus } from 'entities/Equipment'
+import { getUserIsAdmin } from 'entities/User'
 import TrashIcon from 'shared/assets/icons/trash-icon.svg'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
@@ -39,6 +40,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
   const isLoading = useSelector(getEditEquipmentIsLoading)
   const error = useSelector(getEditEquipmentError)
   const init = useSelector(getEditEquipmentInit)
+  const isAdmin = useSelector(getUserIsAdmin)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -114,7 +116,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
         <Button
           theme='red'
           size='s'
-          disabled={isLoading}
+          disabled={!isAdmin || isLoading}
           onClick={onClickDelete}
         >
           <TrashIcon className={cls.trash} />

@@ -1,0 +1,10 @@
+.Select {
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+  }
+}
