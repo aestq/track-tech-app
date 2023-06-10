@@ -1,16 +1,32 @@
 .HistoryItem {
   display: flex;
   justify-content: space-between;
+}
+
+.link {
+  font-size: var(--font-size-m);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.history {
+  display: flex;
+  justify-content: space-between;
+  width: 55%;
   align-items: center;
 }
 
 .moving {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
-.block {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.arrow {
+  transform: rotate(180deg);
+  width: 20px;
 }

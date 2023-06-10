@@ -9,9 +9,11 @@ import { type AxiosInstance } from 'axios'
 import { type AdminSchema } from 'pages/AdminPage'
 import { type EquipmentsSchema } from 'pages/EquipmentsPage'
 import { type AddEquipmentSchema } from 'features/AddEquipment'
+import { type AddRoomSchema } from 'features/AddRoom'
 import { type EditEquipmentSchema } from 'features/EditEquipment'
 import { type LoginSchema } from 'features/LoginForm'
 import { type SignupSchema } from 'features/SignupForm'
+import { type HistorySchema } from 'entities/History'
 import { type ProfileCardSchema } from 'entities/Profile'
 import { type RoomSchema } from 'entities/Room'
 import { type UserSchema } from 'entities/User'
@@ -28,6 +30,8 @@ export interface StateSchema {
   addEquipment?: AddEquipmentSchema
   editEquipment?: EditEquipmentSchema
   admin?: AdminSchema
+  history?: HistorySchema
+  addRoom?: AddRoomSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

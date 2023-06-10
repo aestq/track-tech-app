@@ -10,3 +10,9 @@ export interface History {
   user: Omit<User, 'roles'>
   equipment: Omit<Equipment, 'specifications' | 'room' | 'status'>
 }
+
+export interface HistorySchema {
+  data?: History[]
+  isLoading: boolean
+  error?: string
+}

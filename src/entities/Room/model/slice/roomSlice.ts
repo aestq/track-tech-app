@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { fetchRooms } from 'entities/Room/model/services/fetchRooms'
-import { type RoomSchema } from '../types/roomSchema'
+import { type Room, type RoomSchema } from '../types/roomSchema'
 
 const initialState: RoomSchema = {
   isLoading: false
@@ -9,7 +9,11 @@ const initialState: RoomSchema = {
 const roomSlice = createSlice({
   name: 'room',
   initialState,
-  reducers: {},
+  reducers: {
+    setRooms: (state, action: PayloadAction<Room>) => {
+      state.data?.push(action.payload)
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchRooms.fulfilled, (state, action) => {
       state.isLoading = false
@@ -27,4 +31,5 @@ const roomSlice = createSlice({
 })
 
 export const { reducer: roomReducer } = roomSlice
-export const { actions: roomActions } = roomSlice
+// For public api
+export const { setRooms } = roomSlice.actions
