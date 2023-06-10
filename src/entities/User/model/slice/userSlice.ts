@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { refreshService } from '../services/refreshService'
+import { refreshUser } from '../services/refreshUser'
 import { type User, type UserSchema } from '../types/UserSchema'
 
 const initialState: UserSchema = {
@@ -18,10 +18,10 @@ const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(refreshService.fulfilled, (state) => {
+    builder.addCase(refreshUser.fulfilled, (state) => {
       state._init = true
     })
-    builder.addCase(refreshService.rejected, (state) => {
+    builder.addCase(refreshUser.rejected, (state) => {
       state._init = true
     })
   }

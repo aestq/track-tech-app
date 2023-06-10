@@ -29,17 +29,6 @@ export const adminSlice = createSlice({
       state.error = action.payload
       state.isLoading = false
     })
-    builder.addCase(changeRole.fulfilled, (state) => {
-      state.isLoading = false
-    })
-    builder.addCase(changeRole.pending, (state) => {
-      state.isLoading = true
-      state.error = undefined
-    })
-    builder.addCase(changeRole.rejected, (state, action) => {
-      state.error = action.payload
-      state.isLoading = false
-    })
   }
 })
 

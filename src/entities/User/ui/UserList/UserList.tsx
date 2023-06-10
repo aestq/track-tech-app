@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { UserCard } from 'entities/User/ui/UserCard/UserCard'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
@@ -9,19 +8,11 @@ interface UserListProps {
   className?: string
   items?: User[]
   isLoading?: boolean
-  onChangeRole?: (value: UserRoles, userId: number) => void
+  onChangeSelect?: (value: UserRoles, userId: number) => void
 }
 
 export const UserList = (props: UserListProps) => {
-  const { className, items, isLoading, onChangeRole } = props
-
-  const render = useCallback((user: User) => (
-    <UserCard
-     user={user}
-     key={user.id}
-     onChangeRole={onChangeRole}
-   />
-  ), [])
+  const { className, items, isLoading, onChangeSelect } = props
 
   if(isLoading) {
     return (
@@ -37,7 +28,13 @@ export const UserList = (props: UserListProps) => {
 
   return (
     <div className={classNames(cls.UserList, {}, [className])}>
-      {items?.map(render)}
+      {items?.map((user) => (
+        <UserCard
+          user={user}
+          key={user.id}
+          onChangeSelect={onChangeSelect}
+        />
+      ))}
     </div>
   )
 }

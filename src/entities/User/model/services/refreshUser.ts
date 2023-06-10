@@ -5,8 +5,8 @@ import { LOCAL_STORAGE_TOKEN_KEY } from 'shared/consts/localStorage'
 import { userActions } from '../slice/userSlice'
 import { type User, type UserData } from '../types/UserSchema'
 
-export const refreshService = createAsyncThunk<User, void, ThunkConfig<string>>(
-  'user/refreshService',
+export const refreshUser = createAsyncThunk<User, void, ThunkConfig<string>>(
+  'user/refreshUser',
   async (_, thunkAPI) => {
     const { dispatch, extra, rejectWithValue } = thunkAPI
 
@@ -16,10 +16,8 @@ export const refreshService = createAsyncThunk<User, void, ThunkConfig<string>>(
 
     try {
       const response = await extra.api.get<UserData>('/auth/refresh')
-
       dispatch(userActions.setUserData(response.data.user))
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
-
       return response.data.user
     } catch(error) {
       if(axios.isAxiosError(error)) {

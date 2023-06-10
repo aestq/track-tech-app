@@ -10,23 +10,21 @@ import cls from './UserCard.module.scss'
 interface UserCardProps {
   className?: string
   user: User
-  onChangeRole?: (value: UserRoles, userId: number) => void
+  onChangeSelect?: (value: UserRoles, userId: number) => void
 }
 
 export const UserCard = memo((props: UserCardProps) => {
   const {
     className,
     user,
-    onChangeRole
+    onChangeSelect
   } = props
   const [selected, setSelected] = useState(user.roles[0])
 
-  const onChangeSelect = useCallback((value: UserRoles) => {
+  const onChangeHandler = useCallback((value: UserRoles) => {
     setSelected(value)
-    if(onChangeRole) {
-      onChangeRole(value, user.id)
-    }
-  }, [onChangeRole, user])
+    onChangeSelect?.(value, user.id)
+  }, [onChangeSelect, user])
 
   return (
     <Card
@@ -44,9 +42,9 @@ export const UserCard = memo((props: UserCardProps) => {
         />
       </div>
       <Select
+        onChange={onChangeHandler}
         items={items}
         value={selected}
-        onChange={onChangeSelect}
       />
     </Card>
   )

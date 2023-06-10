@@ -1,0 +1,16 @@
+.HistoryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moving {
+  display: flex;
+  gap: 10px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

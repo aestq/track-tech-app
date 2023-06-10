@@ -9,3 +9,5 @@ const meta: Meta<typeof Select> = {
 type Story = StoryObj<typeof Select>
 
 export const Primary: Story = {}
+
+export default meta
