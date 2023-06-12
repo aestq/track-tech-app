@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
@@ -30,12 +30,12 @@ export const AdminPageFilters = (props: AdminPageFiltersProps) => {
   }, [dispatch, debouncedFetchData])
 
   return (
-    <div className={classNames(cls.AdminPageFilters, {}, [className])}>
+    <header className={classNames(cls.AdminPageFilters, {}, [className])}>
       <Input
         placeholder='Поиск'
         value={search}
         onChange={onChangeSearch}
       />
-    </div>
+    </header>
   )
 }

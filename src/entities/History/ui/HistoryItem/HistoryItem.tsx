@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux'
+import { getUserIsAdmin, getUserIsModerator } from 'entities/User'
 import ArrowIcon from 'shared/assets/icons/back-arrow.png'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
@@ -12,10 +14,30 @@ interface HistoryItemProps {
   history: History
 }
 
-const getEquipmentRoute = (id: number) => `${RoutePaths.EQUIPMENTS}/${id}`
+const getEquipmentRoute = (id: number) => RoutePaths.EQUIPMENTS + String(id)
 
 export const HistoryItem = (props: HistoryItemProps) => {
   const { className, history } = props
+  const isAdmin = useSelector(getUserIsAdmin)
+  const isModerator = useSelector(getUserIsModerator)
+  let name
+
+  if(isModerator || isAdmin) {
+    name = (
+      <AppLink
+        className={cls.link}
+        to={getEquipmentRoute(history.equipment.id ?? 1)}
+      >
+        {history.equipment.name}
+      </AppLink>
+    )
+  } else {
+    name = (
+      <Text
+        text={history.equipment.name}
+      />
+    )
+  }
 
   return (
     <Card
@@ -23,12 +45,7 @@ export const HistoryItem = (props: HistoryItemProps) => {
       theme='secondary'
     >
       <div className={cls.info}>
-        <AppLink
-          className={cls.link}
-          to={getEquipmentRoute(history.equipment.id ?? 1)}
-        >
-          {history.equipment.name}
-        </AppLink>
+        {name}
         <Text
           text={history.equipment.stockNumber}
           size='s'

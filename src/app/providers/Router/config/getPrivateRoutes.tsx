@@ -4,6 +4,7 @@ import { EquipmentCreatePage } from 'pages/EquipmentCreatePage'
 import { EquipmentDetailsPage } from 'pages/EquipmentDetailsPage'
 import { EquipmentsPage } from 'pages/EquipmentsPage'
 import { HistoryPage } from 'pages/HistoryPage'
+import { NotFoundPage } from 'pages/NotFoundPage'
 import { ProfilePage } from 'pages/ProfilePage'
 import { RoomsPage } from 'pages/RoomsPage'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
@@ -25,6 +26,10 @@ export const getPrivateRoutes = (isAdmin: boolean, isModerator: boolean) => {
     {
       path: RoutePaths.PROFILE,
       element: <ProfilePage />
+    },
+    {
+      path: RoutePaths.NOT_FOUND,
+      element: <NotFoundPage />
     }
   ]
 
@@ -35,7 +40,7 @@ export const getPrivateRoutes = (isAdmin: boolean, isModerator: boolean) => {
         element: <AdminPage />
       },
       {
-        path: 'equipments/create',
+        path: RoutePaths.EQUIPMENTS_CREATE,
         element: <EquipmentCreatePage />
       }
     )

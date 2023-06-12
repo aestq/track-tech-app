@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { type Room } from 'entities/Room'
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator'
-import RoomsPage from './RoomsPage'
+import RoomsPage from'./RoomsPage'
 
 const data: Room[] = [
   { id: 1, number: '100' },

@@ -10,9 +10,7 @@ export const logoutUser = createAsyncThunk<void, void, ThunkConfig<string>>(
     const { dispatch, extra, rejectWithValue } = thunkAPI
     try {
       await extra.api.post('/auth/logout')
-
       dispatch(userActions.logout())
-
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY)
     } catch(error) {
       if(axios.isAxiosError(error)) {

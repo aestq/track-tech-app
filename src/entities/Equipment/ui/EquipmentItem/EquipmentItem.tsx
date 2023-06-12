@@ -15,6 +15,8 @@ interface EquipmentItemProps {
   onClick?: (item: Equipment) => void
 }
 
+const getRoute = (id: number) => RoutePaths.EQUIPMENTS + String(id)
+
 export const EquipmentItem = memo((props: EquipmentItemProps) => {
   const { className, item, onClick } = props
   const isAdmin = useSelector(getUserIsAdmin)
@@ -34,7 +36,7 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
   if(isModerator || isAdmin) {
     name = (
       <AppLink
-        to={`${RoutePaths.EQUIPMENTS}/${item.id}`}
+        to={getRoute(item.id)}
       >
         <Text
           text={item.name}

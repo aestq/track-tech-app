@@ -15,23 +15,18 @@ export const RoomsItem = (props: RoomsItemProps) => {
   const { className, item } = props
 
   return (
-    <AppLink
-      className={cls.link}
-      to={`${RoutePaths.ROOMS}/${item.id}`}
+    <Card
+      className={classNames(cls.RoomsItem, {}, [className])}
+      theme='border'
     >
-      <Card
-        className={classNames(cls.RoomsItem, {}, [className])}
-        theme='border'
-      >
-        <Text
-          title={item.number}
-          align='center'
-        />
-        <Text
-          text='Кабинет'
-          size='s'
-        />
-      </Card>
-    </AppLink>
+      <Text
+        title={item.number}
+        align='center'
+      />
+      <Text
+        text='Кабинет'
+        size='s'
+      />
+    </Card>
   )
 }

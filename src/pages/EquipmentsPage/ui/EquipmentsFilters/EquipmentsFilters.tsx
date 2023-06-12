@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { EquipmentsSortByRoom, type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { EquipmentsSortByStatus, type SortByStatus } from 'features/EquipmentsSortByStatus'
 import { getUserIsAdmin } from 'entities/User'
+import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useDebounce } from 'shared/lib/hooks/useDebounce'
@@ -52,11 +53,11 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
   }, [dispatch, fetchData])
 
   const onClickCreate = useCallback(() => {
-    navigate('/equipments/create')
+    navigate(RoutePaths.EQUIPMENTS_CREATE)
   }, [navigate])
 
   return (
-    <div className={classNames(cls.EquipmentsFilters, {}, [className])}>
+    <header className={classNames(cls.EquipmentsFilters, {}, [className])}>
       <div className={cls.panel}>
         <div className={cls.sorts}>
           <EquipmentsSortByStatus
@@ -80,6 +81,6 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
         value={search}
         onChange={onChangeSearch}
       />
-    </div>
+    </header>
   )
 }
