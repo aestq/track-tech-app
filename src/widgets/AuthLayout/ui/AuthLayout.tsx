@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react'
 import backArrow from 'shared/assets/icons/back-arrow.png'
-import waves from 'shared/assets/images/waves.png'
+import waves from 'shared/assets/images/waves.jpg'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { AppLink } from 'shared/ui/AppLink/AppLink'
 import cls from './AuthLayout.module.scss'

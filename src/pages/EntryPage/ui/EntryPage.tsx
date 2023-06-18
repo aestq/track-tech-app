@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import waves from 'shared/assets/images/waves.png'
+import waves from 'shared/assets/images/waves.jpg'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { Button } from 'shared/ui/Button/Button'
 import { Logo } from 'shared/ui/Logo/Logo'
@@ -32,7 +32,7 @@ const EntryPage = () => {
             className={cls.waves}
             src={waves}
             alt='waves'
-          />
+           />
           <Text
             text='Система учёта оборудования :D'
             align='center'
