@@ -9,3 +9,5 @@ const meta: Meta<typeof RoomsPageHeader> = {
 type Story = StoryObj<typeof RoomsPageHeader>
 
 export const Primary: Story = {}
+
+export default meta

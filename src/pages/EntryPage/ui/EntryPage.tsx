@@ -20,12 +20,12 @@ const EntryPage = () => {
   return (
     <div className={cls.EntryPage}>
       <header className={cls.header}>
-        <Button onClick={onClickLogin}>Войти</Button>
+        <Button role='link' onClick={onClickLogin}>Войти</Button>
       </header>
       <main className={cls.main}>
         <section className={cls.getStarted}>
-          <Logo size='xl' />
-          <Button onClick={onClickSignUp}>Начать</Button>
+          <Logo size='xl' className={cls.logo}/>
+          <Button role='link' onClick={onClickSignUp}>Начать</Button>
         </section>
         <section className={cls.background}>
           <img
@@ -34,9 +34,7 @@ const EntryPage = () => {
             alt='waves'
           />
           <Text
-            className={cls.title}
             text='Система учёта оборудования :D'
-            size='m'
             align='center'
           />
         </section>

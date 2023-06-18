@@ -14,7 +14,6 @@ export const loginService = createAsyncThunk<User, void, ThunkConfig<string>>(
     const login = getLoginFormLogin(getState())
     const password = getLoginFormPassword(getState())
     try {
-      dispatch(userActions.setInit(false))
       const response = await extra.api.post<UserData>('/auth/login', { login, password })
       dispatch(userActions.setUserData(response.data.user))
       localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)

@@ -9,3 +9,5 @@ const meta: Meta<typeof HistoryItem> = {
 type Story = StoryObj<typeof HistoryItem>
 
 export const Primary: Story = {}
+
+export default meta

@@ -9,3 +9,5 @@ const meta: Meta<typeof AddRoomForm> = {
 type Story = StoryObj<typeof AddRoomForm>
 
 export const Primary: Story = {}
+
+export default meta

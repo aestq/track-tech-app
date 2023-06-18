@@ -26,11 +26,11 @@ export const getPrivateRoutes = (isAdmin: boolean, isModerator: boolean) => {
     {
       path: RoutePaths.PROFILE,
       element: <ProfilePage />
-    },
-    {
-      path: RoutePaths.NOT_FOUND,
-      element: <NotFoundPage />
     }
+    // {
+    //   path: RoutePaths.NOT_FOUND,
+    //   element: <NotFoundPage />
+    // }
   ]
 
   if(isAdmin) {

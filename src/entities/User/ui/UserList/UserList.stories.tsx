@@ -9,3 +9,5 @@ const meta: Meta<typeof UserList> = {
 type Story = StoryObj<typeof UserList>
 
 export const Primary: Story = {}
+
+export default meta

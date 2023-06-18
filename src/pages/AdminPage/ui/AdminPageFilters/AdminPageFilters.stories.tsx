@@ -9,3 +9,5 @@ const meta: Meta<typeof AdminPageFilters> = {
 type Story = StoryObj<typeof AdminPageFilters>
 
 export const Primary: Story = {}
+
+export default meta

@@ -12,13 +12,9 @@ const userSlice = createSlice({
   reducers: {
     setUserData: (state, action: PayloadAction<User>) => {
       state.userData = action.payload
-      state._init = true
     },
     logout: (state) => {
       state.userData = undefined
-    },
-    setInit: (state, action: PayloadAction<boolean>) => {
-      state._init = action.payload
     }
   },
   extraReducers: (builder) => {

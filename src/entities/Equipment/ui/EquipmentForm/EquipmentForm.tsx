@@ -75,7 +75,6 @@ export const EquipmentForm = memo((props: EquipmentFormProps) => {
         placeholder='Введите кабинет'
         onChange={onChangeRoom}
         value={data?.room}
-        readOnly={!isAdmin}
         label='Кабинет'
       />
     </div>

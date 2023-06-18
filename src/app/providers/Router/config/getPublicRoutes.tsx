@@ -17,10 +17,10 @@ export const getPublicRoutes = () => (
     {
       path: RoutePaths.LOGIN,
       element: <LoginPage />
-    },
-    {
-      path: RoutePaths.NOT_FOUND,
-      element: <NotFoundPage />
     }
+    // {
+    //   path: RoutePaths.NOT_FOUND,
+    //   element: <NotFoundPage />
+    // }
   ]
 )

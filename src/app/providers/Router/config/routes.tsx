@@ -1,17 +1,13 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { getUserData, getUserInit, getUserIsAdmin, getUserIsModerator } from 'entities/User'
+import { getUserData, getUserIsAdmin, getUserIsModerator } from 'entities/User'
 import { getPrivateRoutes } from './getPrivateRoutes'
 import { getPublicRoutes } from './getPublicRoutes'
 
 export const getRoutes = createSelector(
-  getUserData, getUserIsAdmin, getUserIsModerator, getUserInit,
-  (userData, isAdmin, isModerator, init) => {
+  getUserData, getUserIsAdmin, getUserIsModerator,
+  (userData, isAdmin, isModerator) => {
     if(userData) {
       return getPrivateRoutes(isAdmin, isModerator)
-    }
-
-    if(!init) {
-      return []
     }
 
     return getPublicRoutes()
