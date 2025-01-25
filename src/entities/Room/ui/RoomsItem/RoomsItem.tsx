@@ -7,26 +7,17 @@ import { type Room } from '../../model/types/roomSchema'
 import cls from './RoomsItem.module.scss'
 
 interface RoomsItemProps {
-  className?: string
-  item: Room
+    className?: string
+    item: Room
 }
 
 export const RoomsItem = (props: RoomsItemProps) => {
-  const { className, item } = props
+    const { className, item } = props
 
-  return (
-    <Card
-      className={classNames(cls.RoomsItem, {}, [className])}
-      theme='border'
-    >
-      <Text
-        title={item.number}
-        align='center'
-      />
-      <Text
-        text='Кабинет'
-        size='s'
-      />
-    </Card>
-  )
+    return (
+        <Card className={classNames(cls.RoomsItem, {}, [className])} theme="border">
+            <Text title={item.number} align="center" />
+            <Text text="Кабинет" size="s" />
+        </Card>
+    )
 }

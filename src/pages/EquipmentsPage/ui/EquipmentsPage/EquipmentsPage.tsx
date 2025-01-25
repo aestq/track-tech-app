@@ -10,26 +10,24 @@ import { EquipmentsPageTable } from '../EquipmentsPageTable/EquipmentsPageTable'
 import cls from './EquipmentsPage.module.scss'
 
 const reducersList: ReducersList = {
-  equipments: equipmentsReducer
+    equipments: equipmentsReducer,
 }
 
 const EquipmentsPage = () => {
-  useReducersLoader({ reducersList })
-  const dispatch = useAppDispatch()
-  const [searchParams] = useSearchParams()
+    useReducersLoader({ reducersList })
+    const dispatch = useAppDispatch()
+    const [searchParams] = useSearchParams()
 
-  useInitialEffect(() => {
-    dispatch(initEquipmentsPage(searchParams))
-  })
+    useInitialEffect(() => {
+        dispatch(initEquipmentsPage(searchParams))
+    })
 
-  return (
-    <Page title='Оборудование'>
-      <EquipmentsFilters />
-      <EquipmentsPageTable
-        className={cls.table}
-      />
-    </Page>
-  )
+    return (
+        <Page title="Оборудование">
+            <EquipmentsFilters />
+            <EquipmentsPageTable className={cls.table} />
+        </Page>
+    )
 }
 
 export default EquipmentsPage

@@ -1,10 +1,10 @@
 export interface Room {
-  id: number
-  number: string
+    id: number
+    number: string
 }
 
 export interface RoomSchema {
-  data?: Room[]
-  isLoading: boolean
-  error?: string
+    data?: Room[]
+    isLoading: boolean
+    error?: string
 }

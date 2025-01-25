@@ -6,26 +6,18 @@ import { getUserInit } from 'entities/User'
 import { getRoutes } from '../config/routes'
 
 export const AppRouter = () => {
-  const routes = useSelector(getRoutes)
-  const userInit = useSelector(getUserInit)
+    const routes = useSelector(getRoutes)
+    const userInit = useSelector(getUserInit)
 
-  const render = useCallback((route: RouteProps) => (
-    <Route
-      path={route.path}
-      element={route.element}
-      key={route.path}
-    />
-  ), [])
+    const render = useCallback((route: RouteProps) => <Route path={route.path} element={route.element} key={route.path} />, [])
 
-  if(!userInit) {
-    return <PageLoader />
-  }
+    if (!userInit) {
+        return <PageLoader />
+    }
 
-  return (
-    <Suspense fallback={<PageLoader/>}>
-      <Routes>
-        {routes.map(render)}
-      </Routes>
-    </Suspense>
-  )
+    return (
+        <Suspense fallback={<PageLoader />}>
+            <Routes>{routes.map(render)}</Routes>
+        </Suspense>
+    )
 }

@@ -1,13 +1,27 @@
-@import "global-vars";
-@import "reset";
+@use "sass:meta";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@include meta.load-css('global-vars.scss');
+@include meta.load-css('reset.scss');
 
 body {
-  font-size: var(--font-size-m);
-  font-family: var(--font-family-main);
-  overflow: hidden;
+    font-size: var(--font-size-m);
+    font-family: var(--font-family-main);
+    overflow: hidden;
+}
+
+.grid {
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 .content-page {
-  height: 100vh;
-  display: flex;
+    height: 100vh;
+    display: flex;
+}
+
+::selection {
+    background-color: rgba(48, 49, 49, 0.3);
 }

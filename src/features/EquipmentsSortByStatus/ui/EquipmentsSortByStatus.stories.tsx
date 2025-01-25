@@ -4,17 +4,17 @@ import { SortByStatus } from '../model/types/SortByStatus'
 import { EquipmentsSortByStatus } from './EquipmentsSortByStatus'
 
 const meta: Meta<typeof EquipmentsSortByStatus> = {
-  title: 'features/EquipmentsSortByStatus',
-  component: EquipmentsSortByStatus
+    title: 'features/EquipmentsSortByStatus',
+    component: EquipmentsSortByStatus,
 }
 
 type Story = StoryObj<typeof EquipmentsSortByStatus>
 
 export const Primary: Story = {
-  args: {
-    value: SortByStatus.ALL,
-    onChange: action('onChange')
-  }
+    args: {
+        value: SortByStatus.ALL,
+        onChange: action('onChange'),
+    },
 }
 
 export default meta

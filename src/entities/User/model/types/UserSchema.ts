@@ -1,21 +1,21 @@
 export enum UserRoles {
-  USER = 'USER',
-  MODERATOR = 'MODERATOR',
-  ADMIN = 'ADMIN'
+    USER = 'USER',
+    MODERATOR = 'MODERATOR',
+    ADMIN = 'ADMIN',
 }
 
 export interface User {
-  id: number
-  name: string
-  roles: UserRoles[]
+    id: number
+    name: string
+    roles: UserRoles[]
 }
 
 export interface UserData {
-  user: User
-  accessToken: string
+    user: User
+    accessToken: string
 }
 
 export interface UserSchema {
-  userData?: User
-  _init: boolean
+    userData?: User
+    _init: boolean
 }

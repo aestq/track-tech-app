@@ -4,23 +4,18 @@ import { Text } from 'shared/ui/Text/Text'
 import cls from './Page.module.scss'
 
 interface PageProps {
-  className?: string
-  title?: string
-  children: ReactNode
+    className?: string
+    title?: string
+    children: ReactNode
 }
 
 export const Page = (props: PageProps) => {
-  const { className, children, title } = props
+    const { className, children, title } = props
 
-  return (
-    <section className={classNames(cls.Page, {}, [className])}>
-      {title && (
-        <Text
-          className={cls.title}
-          title={title}
-        />
-      )}
-      {children}
-    </section>
-  )
+    return (
+        <section className={classNames(cls.Page, {}, [className])}>
+            {title && <Text className={cls.title} title={title} />}
+            {children}
+        </section>
+    )
 }

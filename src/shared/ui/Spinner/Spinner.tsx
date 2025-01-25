@@ -5,25 +5,15 @@ type SpinnerSize = 's' | 'm' | 'l'
 type SpinnerTheme = 'primary' | 'background'
 
 interface SpinnerProps {
-  className?: string
-  theme?: SpinnerTheme
-  size?: SpinnerSize
+    className?: string
+    theme?: SpinnerTheme
+    size?: SpinnerSize
 }
 
 export const Spinner = (props: SpinnerProps) => {
-  const {
-    className,
-    size = 'm',
-    theme = 'primary'
-  } = props
+    const { className, size = 'm', theme = 'primary' } = props
 
-  const additional: Additional = [
-    className,
-    cls[theme],
-    cls[size]
-  ]
+    const additional: Additional = [className, cls[theme], cls[size]]
 
-  return (
-    <div className={classNames(cls.Spinner, {}, additional)} />
-  )
+    return <div className={classNames(cls.Spinner, {}, additional)} />
 }

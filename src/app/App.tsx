@@ -6,21 +6,23 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 
 export const App = () => {
-  const dispatch = useAppDispatch()
-  const userData = useSelector(getUserData)
+    const dispatch = useAppDispatch()
+    const userData = useSelector(getUserData)
 
-  useInitialEffect(() => {
-    dispatch(refreshUser())
-  })
+    useInitialEffect(() => {
+        dispatch(refreshUser())
+    })
 
-  if(userData) {
-    return (
-      <main className='content-page'>
-        <Sidebar />
-        <AppRouter />
-      </main>
-    )
-  }
+    if (userData) {
+        return (
+            <div className="grid">
+                <main className="content-page">
+                    <Sidebar />
+                    <AppRouter />
+                </main>
+            </div>
+        )
+    }
 
-  return <AppRouter />
+    return <AppRouter />
 }

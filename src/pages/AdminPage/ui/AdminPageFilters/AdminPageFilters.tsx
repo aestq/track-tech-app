@@ -10,32 +10,31 @@ import { adminActions } from '../../model/slice/adminSlice'
 import cls from './AdminPageFilters.module.scss'
 
 interface AdminPageFiltersProps {
-  className?: string
+    className?: string
 }
 
 export const AdminPageFilters = (props: AdminPageFiltersProps) => {
-  const { className } = props
-  const search = useSelector(getAdminSearch)
-  const dispatch = useAppDispatch()
+    const { className } = props
+    const search = useSelector(getAdminSearch)
+    const dispatch = useAppDispatch()
 
-  const fetchData = useCallback(() => {
-    dispatch(fetchUsers())
-  }, [dispatch])
+    const fetchData = useCallback(() => {
+        dispatch(fetchUsers())
+    }, [dispatch])
 
-  const debouncedFetchData = useDebounce(fetchData, 500)
+    const debouncedFetchData = useDebounce(fetchData, 500)
 
-  const onChangeSearch = useCallback((value: string) => {
-    dispatch(adminActions.setSearch(value))
-    debouncedFetchData()
-  }, [dispatch, debouncedFetchData])
+    const onChangeSearch = useCallback(
+        (value: string) => {
+            dispatch(adminActions.setSearch(value))
+            debouncedFetchData()
+        },
+        [dispatch, debouncedFetchData]
+    )
 
-  return (
-    <header className={classNames(cls.AdminPageFilters, {}, [className])}>
-      <Input
-        placeholder='Поиск'
-        value={search}
-        onChange={onChangeSearch}
-      />
-    </header>
-  )
+    return (
+        <header className={classNames(cls.AdminPageFilters, {}, [className])}>
+            <Input placeholder="Поиск" value={search} onChange={onChangeSearch} />
+        </header>
+    )
 }

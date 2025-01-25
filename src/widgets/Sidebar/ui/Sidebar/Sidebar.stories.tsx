@@ -5,28 +5,32 @@ import { StoreDecorator } from 'shared/config/storybook/StoreDecorator'
 import { Sidebar } from './Sidebar'
 
 const userData: User = {
-  id: 1,
-  name: 'Имя',
-  roles: []
+    id: 1,
+    name: 'Имя',
+    roles: [],
 }
 
 const meta: Meta<typeof Sidebar> = {
-  title: 'widgets/Sidebar',
-  component: Sidebar
+    title: 'widgets/Sidebar',
+    component: Sidebar,
 }
 
 type Story = StoryObj<typeof Sidebar>
 
 export const Primary: Story = {
-  decorators: [StoreDecorator({
-    user: { userData }
-  })]
+    decorators: [
+        StoreDecorator({
+            user: { userData },
+        }),
+    ],
 }
 
 export const Admin: Story = {
-  decorators: [StoreDecorator({
-    user: { userData: { ...userData, roles: [UserRoles.ADMIN] } }
-  })]
+    decorators: [
+        StoreDecorator({
+            user: { userData: { ...userData, roles: [UserRoles.ADMIN] } },
+        }),
+    ],
 }
 
 export default meta

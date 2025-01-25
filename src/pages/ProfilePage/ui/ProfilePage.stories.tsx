@@ -4,23 +4,25 @@ import { StoreDecorator } from 'shared/config/storybook/StoreDecorator'
 import ProfilePage from './ProfilePage'
 
 const userData: User = {
-  id: 1,
-  name: 'Имя',
-  roles: []
+    id: 1,
+    name: 'Имя',
+    roles: [],
 }
 
 const meta: Meta<typeof ProfilePage> = {
-  title: 'pages/ProfilePage',
-  component: ProfilePage
+    title: 'pages/ProfilePage',
+    component: ProfilePage,
 }
 
 type Story = StoryObj<typeof ProfilePage>
 
 export const Primary: Story = {
-  decorators: [StoreDecorator({
-    user: { userData },
-    profileCard: { isLoading: false }
-  })]
+    decorators: [
+        StoreDecorator({
+            user: { userData },
+            profileCard: { isLoading: false },
+        }),
+    ],
 }
 
 export default meta

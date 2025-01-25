@@ -6,16 +6,16 @@ import 'app/styles/index.scss'
 
 const rootContainer = document.getElementById('root')
 
-if(rootContainer === null) {
-  throw new Error('Not found root')
+if (rootContainer === null) {
+    throw new Error('Not found root')
 }
 
 const root = createRoot(rootContainer)
 
 root.render(
-  <BrowserRouter>
-    <StoreProvider>
-      <App />
-    </StoreProvider>
-  </BrowserRouter>
+    <BrowserRouter>
+        <StoreProvider>
+            <App />
+        </StoreProvider>
+    </BrowserRouter>
 )

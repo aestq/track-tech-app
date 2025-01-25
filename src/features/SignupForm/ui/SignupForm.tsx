@@ -19,82 +19,65 @@ import { signupActions, signupReducer } from '../model/slice/signupSlice'
 import cls from './SignupForm.module.scss'
 
 interface SignupFormProps {
-  className?: string
+    className?: string
 }
 
 const reducersList: ReducersList = {
-  signupForm: signupReducer
+    signupForm: signupReducer,
 }
 
 export const SignupForm = (props: SignupFormProps) => {
-  useReducersLoader({ reducersList, removeAfterUnmount: true })
-  const { className } = props
-  const login = useSelector(getSignupFormLogin)
-  const name = useSelector(getSignupFormName)
-  const password = useSelector(getSignupFormPassword)
-  const isLoading = useSelector(getSignupIsLoading)
-  const error = useSelector(getSignupError)
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+    useReducersLoader({ reducersList, removeAfterUnmount: true })
+    const { className } = props
+    const login = useSelector(getSignupFormLogin)
+    const name = useSelector(getSignupFormName)
+    const password = useSelector(getSignupFormPassword)
+    const isLoading = useSelector(getSignupIsLoading)
+    const error = useSelector(getSignupError)
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
-  const onChangeLogin = useCallback((value: string) => {
-    dispatch(signupActions.setLogin(value))
-  }, [dispatch])
+    const onChangeLogin = useCallback(
+        (value: string) => {
+            dispatch(signupActions.setLogin(value))
+        },
+        [dispatch]
+    )
 
-  const onChangeName = useCallback((value: string) => {
-    dispatch(signupActions.setName(value))
-  }, [dispatch])
+    const onChangeName = useCallback(
+        (value: string) => {
+            dispatch(signupActions.setName(value))
+        },
+        [dispatch]
+    )
 
-  const onChangePassword = useCallback((value: string) => {
-    dispatch(signupActions.setPassword(value))
-  }, [dispatch])
+    const onChangePassword = useCallback(
+        (value: string) => {
+            dispatch(signupActions.setPassword(value))
+        },
+        [dispatch]
+    )
 
-  const onSignUpClick = useCallback(async () => {
-    const result = await dispatch(signupService())
-    if(result.meta.requestStatus === 'fulfilled') {
-      navigate(RoutePaths.EQUIPMENTS)
-    }
-  }, [dispatch, navigate])
+    const onSignUpClick = useCallback(async () => {
+        const result = await dispatch(signupService())
+        if (result.meta.requestStatus === 'fulfilled') {
+            navigate(RoutePaths.EQUIPMENTS)
+        }
+    }, [dispatch, navigate])
 
-  return (
-    <div className={classNames(cls.SignupForm, {}, [className])}>
-      <Text title='Регистрация' />
-      {error && (
-        <Text
-          className={cls.error}
-          text={error}
-          theme='error'
-          size='s'
-        />
-      )}
-      <Input
-        label='Логин'
-        placeholder='Введите логин'
-        onChange={onChangeLogin}
-        value={login}
-      />
-      <Input
-        label='Имя'
-        placeholder='Введите имя'
-        onChange={onChangeName}
-        value={name}
-      />
-      <Input
-        label='Пароль'
-        placeholder='Введите пароль'
-        type='password'
-        onChange={onChangePassword}
-        value={password}
-      />
-      <Button
-        onClick={onSignUpClick}
-        disabled={isLoading}
-      >
-        Начать
-      </Button>
-      <AppLink className={cls.link} to={RoutePaths.LOGIN}>
-        Есть уч. запись?
-      </AppLink>
-    </div>
-  )
+    return (
+        <div className={classNames(cls.SignupForm, {}, [className])}>
+            <Text title="Регистрация" />
+            {error && <Text className={cls.error} text={error} theme="error" size="s" />}
+            <Input label="Логин" placeholder="Введите логин" onChange={onChangeLogin} value={login} />
+            <Input label="Имя" placeholder="Введите имя" onChange={onChangeName} value={name} />
+            <Input label="Пароль" placeholder="Введите пароль" type="password" onChange={onChangePassword} value={password} />
+            <Button onClick={onSignUpClick} disabled={isLoading}>
+                Начать
+            </Button>
+            <AppLink className={cls.link} to={RoutePaths.LOGIN}>
+                Есть уч. запись?
+            </AppLink>
+        </div>
+    )
 }

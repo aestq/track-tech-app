@@ -4,32 +4,32 @@ import { fetchUsers } from '../services/fetchUsers'
 import { type AdminSchema } from '../types/AdminSchema'
 
 const initialState: AdminSchema = {
-  isLoading: false,
-  search: ''
+    isLoading: false,
+    search: '',
 }
 
 export const adminSlice = createSlice({
-  name: 'admin',
-  initialState,
-  reducers: {
-    setSearch: (state, action: PayloadAction<string>) => {
-      state.search = action.payload
-    }
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      state.data = action.payload
-      state.isLoading = false
-    })
-    builder.addCase(fetchUsers.pending, (state) => {
-      state.isLoading = true
-      state.error = undefined
-    })
-    builder.addCase(fetchUsers.rejected, (state, action) => {
-      state.error = action.payload
-      state.isLoading = false
-    })
-  }
+    name: 'admin',
+    initialState,
+    reducers: {
+        setSearch: (state, action: PayloadAction<string>) => {
+            state.search = action.payload
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchUsers.fulfilled, (state, action) => {
+            state.data = action.payload
+            state.isLoading = false
+        })
+        builder.addCase(fetchUsers.pending, (state) => {
+            state.isLoading = true
+            state.error = undefined
+        })
+        builder.addCase(fetchUsers.rejected, (state, action) => {
+            state.error = action.payload
+            state.isLoading = false
+        })
+    },
 })
 
 export const { reducer: adminReducer } = adminSlice

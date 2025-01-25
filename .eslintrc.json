@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "prettier",
     "plugin:react/recommended",
     "standard-with-typescript",
     "@feature-sliced"
@@ -28,9 +29,11 @@
   },
   "plugins": [
     "react",
-    "react-hooks"
+    "react-hooks",
+    "prettier"
   ],
   "rules": {
+    "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/keyword-spacing": "off",
     "react-hooks/rules-of-hooks": "error",
@@ -42,7 +45,8 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "jsx-quotes": ["error", "prefer-single"],
-    "react/jsx-indent": ["error", 2],
+    "@typescript-eslint/indent": [2, 4],
+    "react/jsx-indent": [2, 4],
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-non-null-assertion": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",

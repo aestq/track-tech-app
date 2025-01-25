@@ -9,21 +9,17 @@ import { roomReducer } from 'entities/Room/model/slice/roomSlice'
 import { type ReducersList } from 'shared/lib/hooks/useReducersLoader'
 
 const asyncReducers: ReducersList = {
-  loginForm: loginReducer,
-  signupForm: signupReducer,
-  profileCard: profileCardReducer,
-  room: roomReducer,
-  equipments: equipmentsReducer
+    loginForm: loginReducer,
+    signupForm: signupReducer,
+    profileCard: profileCardReducer,
+    room: roomReducer,
+    equipments: equipmentsReducer,
 }
 
-export const StoreDecorator = (initialState?: DeepPartial<StateSchema>) =>
-  (StoryComponent: StoryFn) => {
+export const StoreDecorator = (initialState?: DeepPartial<StateSchema>) => (StoryComponent: StoryFn) => {
     return (
-      <StoreProvider
-        asyncReducers={asyncReducers}
-        initialState={initialState}
-      >
-        <StoryComponent />
-      </StoreProvider>
+        <StoreProvider asyncReducers={asyncReducers} initialState={initialState}>
+            <StoryComponent />
+        </StoreProvider>
     )
-  }
+}

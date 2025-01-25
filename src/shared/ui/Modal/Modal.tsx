@@ -7,86 +7,70 @@ import { Text } from 'shared/ui/Text/Text'
 import cls from './Modal.module.scss'
 
 interface ModalProps {
-  className?: string
-  onClose?: () => void
-  title?: string
-  isOpen?: boolean
-  children: ReactNode
-  lazy?: boolean
+    className?: string
+    onClose?: () => void
+    title?: string
+    isOpen?: boolean
+    children: ReactNode
+    lazy?: boolean
 }
 
 export const Modal = (props: ModalProps) => {
-  const {
-    className,
-    children,
-    title,
-    isOpen,
-    onClose,
-    lazy
-  } = props
+    const { className, children, title, isOpen, onClose, lazy } = props
 
-  const [isMounted, setIsMounted] = useState(false)
+    const [isMounted, setIsMounted] = useState(false)
 
-  useEffect(() => {
-    if(isOpen) {
-      setIsMounted(true)
-    }
-  }, [isOpen])
+    useEffect(() => {
+        if (isOpen) {
+            setIsMounted(true)
+        }
+    }, [isOpen])
 
-  const onCloseHandler = () => {
-    onClose?.()
-  }
-
-  const onClickContent = (event: MouseEvent) => {
-    event.stopPropagation()
-  }
-
-  const onKeyDown = (event: KeyboardEvent) => {
-    if(event.key === 'Escape') {
-      onCloseHandler()
-    }
-  }
-
-  const mods: Mods = {
-    [cls.isOpen]: isOpen
-  }
-
-  useEffect(() => {
-    if(isOpen) {
-      window.addEventListener('keydown', onKeyDown)
+    const onCloseHandler = () => {
+        onClose?.()
     }
 
-    return () => {
-      window.removeEventListener('keydown', onKeyDown)
+    const onClickContent = (event: MouseEvent) => {
+        event.stopPropagation()
     }
-  })
 
-  if(lazy && !isMounted) {
-    return null
-  }
+    const onKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            onCloseHandler()
+        }
+    }
 
-  return (
-    <Portal>
-      <div className={classNames(cls.Modal, mods, [className])} onClick={onCloseHandler}>
-        <div className={cls.content} onClick={onClickContent}>
-          <header className={classNames(cls.header, { [cls.withTitle]: title })}>
-            {title && (
-              <Text
-                className={cls.title}
-                title={title}
-              />
-            )}
-            <Button
-              className={cls.buttonClose}
-              theme='clear'
-              onClick={onCloseHandler}
-            >
-              <CloseIcon className={cls.close}/>
-            </Button>
-          </header>
-          {children}
-        </div>
-      </div>
-    </Portal>
-  )
+    const mods: Mods = {
+        [cls.isOpen]: isOpen,
+    }
+
+    useEffect(() => {
+        if (isOpen) {
+            window.addEventListener('keydown', onKeyDown)
+        }
+
+        return () => {
+            window.removeEventListener('keydown', onKeyDown)
+        }
+    })
+
+    if (lazy && !isMounted) {
+        return null
+    }
+
+    return (
+        <Portal>
+            <div className={classNames(cls.Modal, mods, [className])} onClick={onCloseHandler}>
+                <div className={cls.content} onClick={onClickContent}>
+                    <header className={classNames(cls.header, { [cls.withTitle]: title })}>
+                        {title && <Text className={cls.title} title={title} />}
+                        <Button className={cls.buttonClose} theme="clear" onClick={onCloseHandler}>
+                            <CloseIcon className={cls.close} />
+                        </Button>
+                    </header>
+                    {children}
+                </div>
+            </div>
+        </Portal>
+    )
 }

@@ -1,43 +1,35 @@
 import { createSelector } from '@reduxjs/toolkit'
+import { AiOutlineDesktop, AiOutlineRadiusUpright, AiOutlineClockCircle, AiOutlineUsergroupAdd } from 'react-icons/ai'
 import { type Item } from 'widgets/Sidebar/model/items'
 import { getUserIsAdmin } from 'entities/User'
-import HistoryIcon from 'shared/assets/icons/history-icon.svg'
-import HomeIcon from 'shared/assets/icons/home-icon.svg'
-import ProfileIcon from 'shared/assets/icons/profile-icon.svg'
-import RoomIcon from 'shared/assets/icons/room-icon.svg'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 
 export const getSidebarItems = createSelector(getUserIsAdmin, (isAdmin) => {
-  const items: Item[] = [
-    {
-      text: 'Оборудование',
-      path: RoutePaths.EQUIPMENTS,
-      icon: HomeIcon
-    },
-    {
-      text: 'Кабинеты',
-      path: RoutePaths.ROOMS,
-      icon: RoomIcon
-    },
-    {
-      text: 'История',
-      path: RoutePaths.HISTORY,
-      icon: HistoryIcon
-    },
-    {
-      text: 'Профиль',
-      path: RoutePaths.PROFILE,
-      icon: ProfileIcon
+    const items: Item[] = [
+        {
+            text: 'Оборудование',
+            path: RoutePaths.EQUIPMENTS,
+            icon: AiOutlineDesktop,
+        },
+        {
+            text: 'Кабинеты',
+            path: RoutePaths.ROOMS,
+            icon: AiOutlineRadiusUpright,
+        },
+        {
+            text: 'История',
+            path: RoutePaths.HISTORY,
+            icon: AiOutlineClockCircle,
+        },
+    ]
+
+    if (isAdmin) {
+        items.push({
+            text: 'Пользователи',
+            path: RoutePaths.ADMIN,
+            icon: AiOutlineUsergroupAdd,
+        })
     }
-  ]
 
-  if(isAdmin) {
-    items.push({
-      text: 'Админ',
-      path: RoutePaths.ADMIN,
-      icon: ProfileIcon
-    })
-  }
-
-  return items
+    return items
 })

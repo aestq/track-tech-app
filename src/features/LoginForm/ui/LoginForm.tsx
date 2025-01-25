@@ -18,71 +18,56 @@ import { loginActions, loginReducer } from '../model/slice/loginSlice'
 import cls from './LoginForm.module.scss'
 
 interface LoginFormProps {
-  className?: string
+    className?: string
 }
 
 const reducersList: ReducersList = {
-  loginForm: loginReducer
+    loginForm: loginReducer,
 }
 
 export const LoginForm = memo((props: LoginFormProps) => {
-  useReducersLoader({ reducersList, removeAfterUnmount: true })
-  const { className } = props
-  const login = useSelector(getLoginFormLogin)
-  const password = useSelector(getLoginFormPassword)
-  const isLoading = useSelector(getLoginFormIsLoading)
-  const error = useSelector(getLoginFormError)
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+    useReducersLoader({ reducersList, removeAfterUnmount: true })
+    const { className } = props
+    const login = useSelector(getLoginFormLogin)
+    const password = useSelector(getLoginFormPassword)
+    const isLoading = useSelector(getLoginFormIsLoading)
+    const error = useSelector(getLoginFormError)
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
-  const onChangeLogin = useCallback((value: string) => {
-    dispatch(loginActions.setLogin(value))
-  }, [dispatch])
+    const onChangeLogin = useCallback(
+        (value: string) => {
+            dispatch(loginActions.setLogin(value))
+        },
+        [dispatch]
+    )
 
-  const onChangePassword = useCallback((value: string) => {
-    dispatch(loginActions.setPassword(value))
-  }, [dispatch])
+    const onChangePassword = useCallback(
+        (value: string) => {
+            dispatch(loginActions.setPassword(value))
+        },
+        [dispatch]
+    )
 
-  const onClickLogin = useCallback(async () => {
-    const result = await dispatch(loginService())
-    if(result.meta.requestStatus === 'fulfilled') {
-      navigate(RoutePaths.EQUIPMENTS)
-    }
-  }, [dispatch, navigate])
+    const onClickLogin = useCallback(async () => {
+        const result = await dispatch(loginService())
+        if (result.meta.requestStatus === 'fulfilled') {
+            navigate(RoutePaths.EQUIPMENTS)
+        }
+    }, [dispatch, navigate])
 
-  return (
-    <div className={classNames(cls.LoginForm, {}, [className])}>
-      <Text title='Логин' />
-      {error && (
-        <Text
-          className={cls.error}
-          text={error}
-          theme='error'
-          size='s'
-        />
-      )}
-      <Input
-        placeholder='Введите логин'
-        label='Логин'
-        onChange={onChangeLogin}
-        value={login}
-      />
-      <Input
-        placeholder='Введите пароль'
-        label='Пароль'
-        type='password'
-        onChange={onChangePassword}
-        value={password}
-      />
-      <Button
-        onClick={onClickLogin}
-        disabled={isLoading}
-      >
-        Войти
-      </Button>
-      <AppLink className={cls.link} to={RoutePaths.SING_UP}>
-        Нет уч. записи?
-      </AppLink>
-    </div>
-  )
+    return (
+        <div className={classNames(cls.LoginForm, {}, [className])}>
+            <Text title="Логин" />
+            {error && <Text className={cls.error} text={error} theme="error" size="s" />}
+            <Input placeholder="Введите логин" label="Логин" onChange={onChangeLogin} value={login} />
+            <Input placeholder="Введите пароль" label="Пароль" type="password" onChange={onChangePassword} value={password} />
+            <Button onClick={onClickLogin} disabled={isLoading}>
+                Войти
+            </Button>
+            <AppLink className={cls.link} to={RoutePaths.SING_UP}>
+                Нет уч. записи?
+            </AppLink>
+        </div>
+    )
 })

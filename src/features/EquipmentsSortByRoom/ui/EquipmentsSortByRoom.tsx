@@ -3,20 +3,13 @@ import { items } from '../model/items'
 import { type SortByRoom } from '../model/types/SortByRoom'
 
 interface EquipmentsSortByRoomProps {
-  className?: string
-  value: SortByRoom
-  onChange: (tab: TabItem<SortByRoom>) => void
+    className?: string
+    value: SortByRoom
+    onChange: (tab: TabItem<SortByRoom>) => void
 }
 
 export const EquipmentsSortByRoom = (props: EquipmentsSortByRoomProps) => {
-  const { className, value, onChange } = props
+    const { className, value, onChange } = props
 
-  return (
-    <Tabs
-     className={className}
-     tabs={items}
-     value={value}
-     onChange={onChange}
-   />
-  )
+    return <Tabs className={className} tabs={items} value={value} onChange={onChange} />
 }

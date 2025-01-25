@@ -5,36 +5,30 @@ import { type User, type UserRoles } from '../../model/types/UserSchema'
 import cls from './UserList.module.scss'
 
 interface UserListProps {
-  className?: string
-  items?: User[]
-  isLoading?: boolean
-  onChangeSelect?: (value: UserRoles, userId: number) => void
+    className?: string
+    items?: User[]
+    isLoading?: boolean
+    onChangeSelect?: (value: UserRoles, userId: number) => void
 }
 
 export const UserList = (props: UserListProps) => {
-  const { className, items, isLoading, onChangeSelect } = props
+    const { className, items, isLoading, onChangeSelect } = props
 
-  if(isLoading) {
+    if (isLoading) {
+        return (
+            <div className={cls.UserList}>
+                <Skeleton width="100%" height={54} />
+                <Skeleton width="100%" height={54} />
+                <Skeleton width="100%" height={54} />
+                <Skeleton width="100%" height={54} />
+                <Skeleton width="100%" height={54} />
+            </div>
+        )
+    }
+
     return (
-      <div className={cls.UserList}>
-        <Skeleton width='100%' height={54} />
-        <Skeleton width='100%' height={54} />
-        <Skeleton width='100%' height={54} />
-        <Skeleton width='100%' height={54} />
-        <Skeleton width='100%' height={54} />
-      </div>
+        <div className={classNames(cls.UserList, {}, [className])}>
+            {items?.map((user) => <UserCard user={user} key={user.id} onChangeSelect={onChangeSelect} />)}
+        </div>
     )
-  }
-
-  return (
-    <div className={classNames(cls.UserList, {}, [className])}>
-      {items?.map((user) => (
-        <UserCard
-          user={user}
-          key={user.id}
-          onChangeSelect={onChangeSelect}
-        />
-      ))}
-    </div>
-  )
 }

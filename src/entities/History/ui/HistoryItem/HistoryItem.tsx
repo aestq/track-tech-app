@@ -10,66 +10,42 @@ import { type History } from '../../model/types/HistorySchema'
 import cls from './HistoryItem.module.scss'
 
 interface HistoryItemProps {
-  className?: string
-  history: History
+    className?: string
+    history: History
 }
 
 const getEquipmentRoute = (id: number) => RoutePaths.EQUIPMENTS + String(id)
 
 export const HistoryItem = (props: HistoryItemProps) => {
-  const { className, history } = props
-  const isAdmin = useSelector(getUserIsAdmin)
-  const isModerator = useSelector(getUserIsModerator)
-  let name
+    const { className, history } = props
+    const isAdmin = useSelector(getUserIsAdmin)
+    const isModerator = useSelector(getUserIsModerator)
+    let name
 
-  if(isModerator || isAdmin) {
-    name = (
-      <AppLink
-        className={cls.link}
-        to={getEquipmentRoute(history.equipment.id ?? 1)}
-      >
-        {history.equipment.name}
-      </AppLink>
-    )
-  } else {
-    name = (
-      <Text
-        text={history.equipment.name}
-      />
-    )
-  }
+    if (isModerator || isAdmin) {
+        name = (
+            <AppLink className={cls.link} to={getEquipmentRoute(history.equipment.id ?? 1)}>
+                {history.equipment.name}
+            </AppLink>
+        )
+    } else {
+        name = <Text text={history.equipment.name} />
+    }
 
-  return (
-    <Card
-      className={classNames(cls.HistoryItem, {}, [className])}
-      theme='secondary'
-    >
-      <div className={cls.info}>
-        {name}
-        <Text
-          text={history.equipment.stockNumber}
-          size='s'
-        />
-      </div>
-      <div className={cls.history}>
-        <div className={cls.moving}>
-          <Text
-            text={history.from}
-          />
-          <img
-            className={cls.arrow}
-            src={ArrowIcon}
-            alt='arrow'
-          />
-          <Text
-            text={history.to}
-          />
-        </div>
-        <Text
-          text={history.createdAt}
-          size='s'
-        />
-      </div>
-    </Card>
-  )
+    return (
+        <Card className={classNames(cls.HistoryItem, {}, [className])} theme="secondary">
+            <div className={cls.info}>
+                {name}
+                <Text text={history.equipment.stockNumber} size="s" />
+            </div>
+            <div className={cls.history}>
+                <div className={cls.moving}>
+                    <Text text={history.from} />
+                    <img className={cls.arrow} src={ArrowIcon} alt="arrow" />
+                    <Text text={history.to} />
+                </div>
+                <Text text={history.createdAt} size="s" />
+            </div>
+        </Card>
+    )
 }

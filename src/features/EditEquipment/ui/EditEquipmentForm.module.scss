@@ -1,32 +1,32 @@
 .EditEquipmentForm {
-  width: fit-content;
+    width: fit-content;
 }
 
 .skeletons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
 }
 
 .skeletonTabs {
-  display: flex;
-  gap: 5px;
+    display: flex;
+    gap: 5px;
 }
 
 .label {
-  margin-bottom: 4px;
-  margin-left: 3px;
+    margin-bottom: 4px;
+    margin-left: 3px;
 }
 
 .buttons {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .buttonsSkeletons {
-  display: flex;
-  gap: 5px;
+    display: flex;
+    gap: 5px;
 }

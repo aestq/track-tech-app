@@ -10,58 +10,53 @@ import { EquipmentStatusText } from '../../model/consts/consts'
 import { type Equipment } from '../../model/types/Equipment'
 
 interface EquipmentItemProps {
-  className?: string
-  item: Equipment
-  onClick?: (item: Equipment) => void
+    className?: string
+    item: Equipment
+    onClick?: (item: Equipment) => void
 }
 
 const getRoute = (id: number) => RoutePaths.EQUIPMENTS + String(id)
 
 export const EquipmentItem = memo((props: EquipmentItemProps) => {
-  const { className, item, onClick } = props
-  const isAdmin = useSelector(getUserIsAdmin)
-  const isModerator = useSelector(getUserIsModerator)
-  let name
+    const { className, item, onClick } = props
+    const isAdmin = useSelector(getUserIsAdmin)
+    const isModerator = useSelector(getUserIsModerator)
+    let name
 
-  const onClickHandler = useCallback((item: Equipment) => {
-    return () => {
-      onClick?.(item)
-    }
-  }, [onClick])
-
-  if(!item?.id) {
-    return null
-  }
-
-  if(isModerator || isAdmin) {
-    name = (
-      <AppLink
-        to={getRoute(item.id)}
-      >
-        <Text
-          text={item.name}
-          align='center'
-        />
-      </AppLink>
+    const onClickHandler = useCallback(
+        (item: Equipment) => {
+            return () => {
+                onClick?.(item)
+            }
+        },
+        [onClick]
     )
-  } else {
-    name = item.name
-  }
 
-  return (
-    <Tr className={className}>
-      <Td>{name}</Td>
-      <Td>{item.stockNumber}</Td>
-      <Td>{EquipmentStatusText[item?.status ?? 'use']}</Td>
-      <Td>
-        <Button
-          size='s'
-          onClick={onClickHandler(item)}
-        >
-          Посмотреть
-        </Button>
-      </Td>
-      <Td>{item.room}</Td>
-    </Tr>
-  )
+    if (!item?.id) {
+        return null
+    }
+
+    if (isModerator || isAdmin) {
+        name = (
+            <AppLink to={getRoute(item.id)}>
+                <Text text={item.name} align="center" />
+            </AppLink>
+        )
+    } else {
+        name = item.name
+    }
+
+    return (
+        <Tr className={className}>
+            <Td>{name}</Td>
+            <Td>{item.stockNumber}</Td>
+            <Td>{EquipmentStatusText[item?.status ?? 'use']}</Td>
+            <Td>
+                <Button size="s" onClick={onClickHandler(item)}>
+                    Посмотреть
+                </Button>
+            </Td>
+            <Td>{item.room}</Td>
+        </Tr>
+    )
 })

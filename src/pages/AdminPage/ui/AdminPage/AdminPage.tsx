@@ -8,23 +8,23 @@ import { AdminPageFilters } from '../AdminPageFilters/AdminPageFilters'
 import { AdminPageUserList } from '../AdminPageUserList/AdminPageUserList'
 
 const reducersList: ReducersList = {
-  admin: adminReducer
+    admin: adminReducer,
 }
 
 const AdminPage = () => {
-  useReducersLoader({ reducersList })
-  const dispatch = useAppDispatch()
+    useReducersLoader({ reducersList })
+    const dispatch = useAppDispatch()
 
-  useInitialEffect(() => {
-    dispatch(fetchUsers())
-  })
+    useInitialEffect(() => {
+        dispatch(fetchUsers())
+    })
 
-  return (
-    <Page title='Админ'>
-      <AdminPageFilters />
-      <AdminPageUserList />
-    </Page>
-  )
+    return (
+        <Page title="Админ">
+            <AdminPageFilters />
+            <AdminPageUserList />
+        </Page>
+    )
 }
 
 export default AdminPage

@@ -1,32 +1,32 @@
 .HistoryItem {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .link {
-  font-size: var(--font-size-m);
+    font-size: var(--font-size-m);
 }
 
 .info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .history {
-  display: flex;
-  justify-content: space-between;
-  width: 55%;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+    align-items: center;
 }
 
 .moving {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .arrow {
-  transform: rotate(180deg);
-  width: 20px;
+    transform: rotate(180deg);
+    width: 20px;
 }

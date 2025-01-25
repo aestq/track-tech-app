@@ -5,17 +5,17 @@ import { type Equipment } from 'entities/Equipment'
 import { getAddEquipmentFormData } from '../selectors/getAddEquipmentFormData'
 
 export const createEquipment = createAsyncThunk<void, void, ThunkConfig<string>>(
-  'addEquipment/updateEquipment',
-  async (_, thunkAPI) => {
-    const { extra, rejectWithValue, getState } = thunkAPI
-    const formData = getAddEquipmentFormData(getState())
-    try {
-      await extra.api.post<Equipment>('/equipments', formData)
-    } catch(error) {
-      if(isAxiosError(error)) {
-        return rejectWithValue(error.response?.data?.message)
-      }
-      return rejectWithValue('Произошла неизвестная ошибка')
+    'addEquipment/updateEquipment',
+    async (_, thunkAPI) => {
+        const { extra, rejectWithValue, getState } = thunkAPI
+        const formData = getAddEquipmentFormData(getState())
+        try {
+            await extra.api.post<Equipment>('/equipments', formData)
+        } catch (error) {
+            if (isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message)
+            }
+            return rejectWithValue('Произошла неизвестная ошибка')
+        }
     }
-  }
 )

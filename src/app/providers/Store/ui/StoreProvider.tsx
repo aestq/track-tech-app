@@ -6,18 +6,14 @@ import { type ReducersList } from 'shared/lib/hooks/useReducersLoader'
 import { createReduxStore } from '../config/createReduxStore'
 
 interface StoreProviderProps {
-  children: ReactNode
-  initialState?: DeepPartial<StateSchema>
-  asyncReducers?: ReducersList
+    children: ReactNode
+    initialState?: DeepPartial<StateSchema>
+    asyncReducers?: ReducersList
 }
 
 export const StoreProvider = (props: StoreProviderProps) => {
-  const { children, initialState, asyncReducers } = props
-  const store = createReduxStore(initialState as StateSchema, asyncReducers)
+    const { children, initialState, asyncReducers } = props
+    const store = createReduxStore(initialState as StateSchema, asyncReducers)
 
-  return (
-    <Provider store={store}>
-      {children}
-    </Provider>
-  )
+    return <Provider store={store}>{children}</Provider>
 }

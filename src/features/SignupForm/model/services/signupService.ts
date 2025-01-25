@@ -9,27 +9,29 @@ import { getSignupFormName } from '../selectors/getSignupFormName'
 import { getSignupFormPassword } from '../selectors/getSignupFormPassword'
 
 export const signupService = createAsyncThunk<User, void, ThunkConfig<string>>(
-  'signupForm/signupService',
-  async (_, thunkAPI) => {
-    const { dispatch, extra, rejectWithValue, getState } = thunkAPI
-    const login = getSignupFormLogin(getState())
-    const name = getSignupFormName(getState())
-    const password = getSignupFormPassword(getState())
+    'signupForm/signupService',
+    async (_, thunkAPI) => {
+        const { dispatch, extra, rejectWithValue, getState } = thunkAPI
+        const login = getSignupFormLogin(getState())
+        const name = getSignupFormName(getState())
+        const password = getSignupFormPassword(getState())
 
-    try {
-      const response = await extra.api.post<UserData>('/auth/signup', {
-        login, name, password
-      })
+        try {
+            const response = await extra.api.post<UserData>('/auth/signup', {
+                login,
+                name,
+                password,
+            })
 
-      dispatch(userActions.setUserData(response.data.user))
-      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
+            dispatch(userActions.setUserData(response.data.user))
+            localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
 
-      return response.data.user
-    } catch(error) {
-      if(axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data?.message)
-      }
-      return rejectWithValue('Произошла неизвестная ошибка')
+            return response.data.user
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message)
+            }
+            return rejectWithValue('Произошла неизвестная ошибка')
+        }
     }
-  }
 )

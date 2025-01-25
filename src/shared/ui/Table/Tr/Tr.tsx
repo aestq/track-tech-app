@@ -3,16 +3,12 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Tr.module.scss'
 
 interface TrProps {
-  className?: string
-  children: ReactNode
+    className?: string
+    children: ReactNode
 }
 
 export const Tr = (props: TrProps) => {
-  const { className, children } = props
+    const { className, children } = props
 
-  return (
-    <tr className={classNames(cls.Tr, {}, [className])}>
-      {children}
-    </tr>
-  )
+    return <tr className={classNames(cls.Tr, {}, [className])}>{children}</tr>
 }

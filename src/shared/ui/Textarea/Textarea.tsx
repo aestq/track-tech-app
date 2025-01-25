@@ -6,56 +6,29 @@ import cls from './Textarea.module.scss'
 type TextareaHTMLProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange'>
 
 interface TextareaProps extends TextareaHTMLProps {
-  className?: string
-  value?: string
-  onChange?: (value: string) => void
-  label?: string
-  validateError?: string
+    className?: string
+    value?: string
+    onChange?: (value: string) => void
+    label?: string
+    validateError?: string
 }
 
 export const Textarea = (props: TextareaProps) => {
-  const {
-    className,
-    value,
-    onChange,
-    label,
-    validateError,
-    readOnly,
-    ...otherProps
-  } = props
+    const { className, value, onChange, label, validateError, readOnly, ...otherProps } = props
 
-  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    onChange?.(event.target.value)
-  }
+    const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        onChange?.(event.target.value)
+    }
 
-  const mods: Mods = {
-    [cls.readOnly]: readOnly
-  }
+    const mods: Mods = {
+        [cls.readOnly]: readOnly,
+    }
 
-  return (
-    <label className={classNames(cls.TextareaWrapper, mods, [className])}>
-      {label && (
-        <Text
-          className={cls.label}
-          text={label}
-          size='s'
-        />
-      )}
-      <textarea
-        className={cls.textarea}
-        value={value}
-        onChange={onChangeHandler}
-        {...otherProps}
-      >
-      </textarea>
-      {validateError && (
-        <Text
-          className={cls.validateErrorText}
-          text={validateError}
-          size='xs'
-          theme='error'
-        />
-      )}
-    </label>
-  )
+    return (
+        <label className={classNames(cls.TextareaWrapper, mods, [className])}>
+            {label && <Text className={cls.label} text={label} size="s" />}
+            <textarea className={cls.textarea} value={value} onChange={onChangeHandler} {...otherProps}></textarea>
+            {validateError && <Text className={cls.validateErrorText} text={validateError} size="xs" theme="error" />}
+        </label>
+    )
 }

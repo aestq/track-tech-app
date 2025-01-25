@@ -10,34 +10,34 @@ import { getEquipmentsSearch } from '../selectors/getEquipmentsSearch'
 import { getEquipmentsStatus } from '../selectors/getEquipmentsStatus'
 
 export const fetchEquipments = createAsyncThunk<Equipment[], void, ThunkConfig<string>>(
-  'equipments/fetchEquipments',
-  async (_, thunkAPI) => {
-    const { extra, rejectWithValue, getState } = thunkAPI
-    const search = getEquipmentsSearch(getState())
-    const status = getEquipmentsStatus(getState())
-    const room = getEquipmentsRoom(getState())
+    'equipments/fetchEquipments',
+    async (_, thunkAPI) => {
+        const { extra, rejectWithValue, getState } = thunkAPI
+        const search = getEquipmentsSearch(getState())
+        const status = getEquipmentsStatus(getState())
+        const room = getEquipmentsRoom(getState())
 
-    addQueryParams({
-      search,
-      status,
-      room
-    })
+        addQueryParams({
+            search,
+            status,
+            room,
+        })
 
-    try {
-      const response = await extra.api.get<Equipment[]>('/equipments', {
-        params: {
-          search,
-          status: status === SortByStatus.ALL ? undefined : status,
-          room: room === SortByRoom.ALL ? undefined : room
+        try {
+            const response = await extra.api.get<Equipment[]>('/equipments', {
+                params: {
+                    search,
+                    status: status === SortByStatus.ALL ? undefined : status,
+                    room: room === SortByRoom.ALL ? undefined : room,
+                },
+            })
+
+            return response.data
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data?.message)
+            }
+            return rejectWithValue('Произошла неизвестная ошибка')
         }
-      })
-
-      return response.data
-    } catch(error) {
-      if(axios.isAxiosError(error)) {
-        return rejectWithValue(error.response?.data?.message)
-      }
-      return rejectWithValue('Произошла неизвестная ошибка')
     }
-  }
 )

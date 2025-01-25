@@ -17,63 +17,40 @@ import { profileCardReducer } from '../model/slice/ProfileCardSlice'
 import cls from './ProfileCard.module.scss'
 
 interface ProfileCardProps {
-  className?: string
+    className?: string
 }
 
 const reducersList: ReducersList = {
-  profileCard: profileCardReducer
+    profileCard: profileCardReducer,
 }
 
 export const ProfileCard = (props: ProfileCardProps) => {
-  useReducersLoader({ reducersList })
-  const { className } = props
-  const userData = useSelector(getUserData)
-  const isLoading = useSelector(getProfileCardIsLoading)
-  const error = useSelector(getProfileCardError)
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+    useReducersLoader({ reducersList })
+    const { className } = props
+    const userData = useSelector(getUserData)
+    const isLoading = useSelector(getProfileCardIsLoading)
+    const error = useSelector(getProfileCardError)
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
-  const onClickLogout = useCallback(async () => {
-    const result = await dispatch(logoutUser())
-    if(result.meta.requestStatus === 'fulfilled') {
-      navigate(RoutePaths.ENTRY)
-    }
-  }, [dispatch, navigate])
+    const onClickLogout = useCallback(async () => {
+        const result = await dispatch(logoutUser())
+        if (result.meta.requestStatus === 'fulfilled') {
+            navigate(RoutePaths.ENTRY)
+        }
+    }, [dispatch, navigate])
 
-  return (
-    <Card
-      className={classNames(cls.ProfileCard, {}, [className])}
-      theme='border'
-    >
-      {error && (
-        <Text
-          className={cls.error}
-          text='Произошла ошибка при выходе из уч. записи'
-          theme='error'
-          size='s'
-        />
-      )}
-      <div className={cls.user}>
-        <Avatar />
-        <Text
-          text={userData?.name}
-          size='s'
-        />
-      </div>
-      <Button
-        size='s'
-        onClick={onClickLogout}
-        disabled={isLoading}
-        max
-      >
-        Выйти
-      </Button>
-      <Text
-        className={cls.userId}
-        text={`id:${userData?.id ?? ''}`}
-        size='xs'
-        align='center'
-      />
-    </Card>
-  )
+    return (
+        <Card className={classNames(cls.ProfileCard, {}, [className])} theme="border">
+            {error && <Text className={cls.error} text="Произошла ошибка при выходе из уч. записи" theme="error" size="s" />}
+            <div className={cls.user}>
+                <Avatar />
+                <Text text={userData?.name} size="s" />
+            </div>
+            <Button size="s" onClick={onClickLogout} disabled={isLoading} max>
+                Выйти
+            </Button>
+            <Text className={cls.userId} text={`id:${userData?.id ?? ''}`} size="xs" align="center" />
+        </Card>
+    )
 }

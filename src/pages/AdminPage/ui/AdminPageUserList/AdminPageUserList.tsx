@@ -9,36 +9,26 @@ import { getAdminError } from '../../model/selectors/getAdminError'
 import { getAdminIsLoading } from '../../model/selectors/getAdminIsLoading'
 
 interface AdminPageUserListProps {
-  className?: string
+    className?: string
 }
 
 export const AdminPageUserList = (props: AdminPageUserListProps) => {
-  const { className } = props
-  const data = useSelector(getAdminData)
-  const isLoading = useSelector(getAdminIsLoading)
-  const error = useSelector(getAdminError)
-  const dispatch = useAppDispatch()
+    const { className } = props
+    const data = useSelector(getAdminData)
+    const isLoading = useSelector(getAdminIsLoading)
+    const error = useSelector(getAdminError)
+    const dispatch = useAppDispatch()
 
-  const onChangeRole = useCallback(
-    (value: UserRoles, userId: number) => {
-      dispatch(changeRole({ value, userId }))
-    }, [dispatch])
-
-  if(error) {
-    return (
-      <Text
-        text='Произошла ошибка при подгрузке пользователей'
-        theme='error'
-      />
+    const onChangeRole = useCallback(
+        (value: UserRoles, userId: number) => {
+            dispatch(changeRole({ value, userId }))
+        },
+        [dispatch]
     )
-  }
 
-  return (
-    <UserList
-      className={className}
-      items={data}
-      isLoading={isLoading}
-      onChangeSelect={onChangeRole}
-    />
-  )
+    if (error) {
+        return <Text text="Произошла ошибка при подгрузке пользователей" theme="error" />
+    }
+
+    return <UserList className={className} items={data} isLoading={isLoading} onChangeSelect={onChangeRole} />
 }

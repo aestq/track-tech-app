@@ -2,17 +2,17 @@ import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import cls from './EquipmentItem.module.scss'
 
 interface EquipmentItemSkeletonProps {
-  className?: string
+    className?: string
 }
 
 export const EquipmentItemSkeleton = (props: EquipmentItemSkeletonProps) => {
-  return (
-    <div className={cls.skeletonItem}>
-      <Skeleton className={cls.skeleton} />
-      <Skeleton className={cls.skeleton} />
-      <Skeleton className={cls.skeleton} />
-      <Skeleton className={cls.skeleton} />
-      <Skeleton className={cls.skeleton} />
-    </div>
-  )
+    return (
+        <div className={cls.skeletonItem}>
+            <Skeleton className={cls.skeleton} />
+            <Skeleton className={cls.skeleton} />
+            <Skeleton className={cls.skeleton} />
+            <Skeleton className={cls.skeleton} />
+            <Skeleton className={cls.skeleton} />
+        </div>
+    )
 }

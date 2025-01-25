@@ -6,32 +6,24 @@ import { AppLink } from 'shared/ui/AppLink/AppLink'
 import cls from './AuthLayout.module.scss'
 
 interface AuthLayoutProps {
-  children: ReactNode
+    children: ReactNode
 }
 
 export const AuthLayout = (props: AuthLayoutProps) => {
-  const { children } = props
+    const { children } = props
 
-  return (
-    <>
-      <header className={cls.header}>
-        <AppLink className={cls.backLink} to={RoutePaths.ENTRY}>
-          <img
-            className={cls.backArrow}
-            src={backArrow}
-            alt='back'
-          />
-          Вернуться на главную
-        </AppLink>
-      </header>
-      <main className={cls.main}>
-        {children}
-        <img
-          className={cls.waves}
-          src={waves}
-          alt='waves'
-        />
-      </main>
-    </>
-  )
+    return (
+        <>
+            <header className={cls.header}>
+                <AppLink className={cls.backLink} to={RoutePaths.ENTRY}>
+                    <img className={cls.backArrow} src={backArrow} alt="back" />
+                    Вернуться на главную
+                </AppLink>
+            </header>
+            <main className={cls.main}>
+                {children}
+                <img className={cls.waves} src={waves} alt="waves" />
+            </main>
+        </>
+    )
 }

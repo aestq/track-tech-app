@@ -1,5 +1,5 @@
 export enum SortByStatus {
-  ALL = 'all',
-  USE = 'use',
-  DISCARDED = 'discarded'
+    ALL = 'all',
+    USE = 'use',
+    DISCARDED = 'discarded',
 }

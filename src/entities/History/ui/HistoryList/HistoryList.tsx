@@ -16,55 +16,41 @@ import { HistoryItem } from '../HistoryItem/HistoryItem'
 import cls from './HistoryList.module.scss'
 
 interface HistoryListProps {
-  className?: string
+    className?: string
 }
 
 const reducersList: ReducersList = {
-  history: historyReducer
+    history: historyReducer,
 }
 
 export const HistoryList = (props: HistoryListProps) => {
-  useReducersLoader({ reducersList })
-  const { className } = props
-  const stories = useSelector(getHistoryData)
-  const isLoading = useSelector(getHistoryIsLoading)
-  const error = useSelector(getHistoryError)
-  const dispatch = useAppDispatch()
+    useReducersLoader({ reducersList })
+    const { className } = props
+    const stories = useSelector(getHistoryData)
+    const isLoading = useSelector(getHistoryIsLoading)
+    const error = useSelector(getHistoryError)
+    const dispatch = useAppDispatch()
 
-  useInitialEffect(() => {
-    dispatch(fetchStories())
-  })
+    useInitialEffect(() => {
+        dispatch(fetchStories())
+    })
 
-  const render = useCallback((history: History) => (
-    <HistoryItem
-      history={history}
-      key={history.id}
-    />
-  ), [])
+    const render = useCallback((history: History) => <HistoryItem history={history} key={history.id} />, [])
 
-  if(isLoading) {
-    return (
-      <div className={cls.HistoryList}>
-        <Skeleton width='100%' height={62} />
-        <Skeleton width='100%' height={62} />
-        <Skeleton width='100%' height={62} />
-        <Skeleton width='100%' height={62} />
-      </div>
-    )
-  }
+    if (isLoading) {
+        return (
+            <div className={cls.HistoryList}>
+                <Skeleton width="100%" height={62} />
+                <Skeleton width="100%" height={62} />
+                <Skeleton width="100%" height={62} />
+                <Skeleton width="100%" height={62} />
+            </div>
+        )
+    }
 
-  if(error) {
-    return (
-      <Text
-        text='Произошла ошибка при подгрузке истории'
-        theme='error'
-      />
-    )
-  }
+    if (error) {
+        return <Text text="Произошла ошибка при подгрузке истории" theme="error" />
+    }
 
-  return (
-    <div className={classNames(cls.HistoryList, {}, [className])}>
-      {stories?.map(render)}
-    </div>
-  )
+    return <div className={classNames(cls.HistoryList, {}, [className])}>{stories?.map(render)}</div>
 }

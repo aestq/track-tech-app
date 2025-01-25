@@ -3,12 +3,12 @@ import { RoomsList } from 'entities/Room'
 import { RoomsPageHeader } from '../RoomsPageHeader/RoomsPageHeader'
 
 const RoomsPage = () => {
-  return (
-    <Page title='Кабинеты'>
-      <RoomsPageHeader />
-      <RoomsList />
-    </Page>
-  )
+    return (
+        <Page title="Кабинеты">
+            <RoomsPageHeader />
+            <RoomsList />
+        </Page>
+    )
 }
 
 export default RoomsPage

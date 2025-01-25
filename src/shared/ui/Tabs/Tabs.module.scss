@@ -1,29 +1,29 @@
 .label {
-  margin-bottom: 4px;
-  margin-left: 3px;
+    margin-bottom: 4px;
+    margin-left: 3px;
 }
 
 .container {
-  display: flex;
-  gap: 5px;
+    display: flex;
+    gap: 5px;
 }
 
 .tab {
-  cursor: pointer;
-  font-size: var(--font-size-s);
-  border-radius: 5px;
-  padding: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    cursor: pointer;
+    font-size: var(--font-size-s);
+    border-radius: 5px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .readOnly {
-  .tab {
-    opacity: 0.65;
-  }
+    .tab {
+        opacity: 0.65;
+    }
 
-  .label {
-    opacity: 0.65;
-  }
+    .label {
+        opacity: 0.65;
+    }
 }

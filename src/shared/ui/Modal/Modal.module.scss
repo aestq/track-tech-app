@@ -1,41 +1,41 @@
 .Modal {
-  background-color: var(--overlay-color);
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.2s;
+    background-color: var(--overlay-color);
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
 }
 
 .content {
-  background-color: var(--bg-color);
-  border-radius: 10px;
-  padding: 15px 20px;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    padding: 15px 20px;
 }
 
 .header {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .withTitle {
-  justify-content: space-between;
+    justify-content: space-between;
 }
 
 .close {
-  stroke: var(--primary-color);
-  width: 30px;
+    stroke: var(--primary-color);
+    width: 30px;
 }
 
 .buttonClose {
-  padding: 0;
+    padding: 0;
 }
 
 .isOpen {
-  z-index: var(--index-modal);
-  opacity: 1;
-  pointer-events: auto;
+    z-index: var(--index-modal);
+    opacity: 1;
+    pointer-events: auto;
 }

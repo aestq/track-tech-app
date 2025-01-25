@@ -1,10 +1,4 @@
-import {
-  type CombinedState,
-  type Reducer,
-  type ReducersMapObject,
-  type AnyAction,
-  type EnhancedStore
-} from '@reduxjs/toolkit'
+import { type CombinedState, type Reducer, type ReducersMapObject, type AnyAction, type EnhancedStore } from '@reduxjs/toolkit'
 import { type AxiosInstance } from 'axios'
 import { type AdminSchema } from 'pages/AdminPage'
 import { type EquipmentsSchema } from 'pages/EquipmentsPage'
@@ -19,40 +13,40 @@ import { type RoomSchema } from 'entities/Room'
 import { type UserSchema } from 'entities/User'
 
 export interface StateSchema {
-  user: UserSchema
+    user: UserSchema
 
-  // async reducers
-  loginForm?: LoginSchema
-  signupForm?: SignupSchema
-  profileCard?: ProfileCardSchema
-  equipments?: EquipmentsSchema
-  room?: RoomSchema
-  addEquipment?: AddEquipmentSchema
-  editEquipment?: EditEquipmentSchema
-  admin?: AdminSchema
-  history?: HistorySchema
-  addRoom?: AddRoomSchema
+    // async reducers
+    loginForm?: LoginSchema
+    signupForm?: SignupSchema
+    profileCard?: ProfileCardSchema
+    equipments?: EquipmentsSchema
+    room?: RoomSchema
+    addEquipment?: AddEquipmentSchema
+    editEquipment?: EditEquipmentSchema
+    admin?: AdminSchema
+    history?: HistorySchema
+    addRoom?: AddRoomSchema
 }
 
 export type StateSchemaKey = keyof StateSchema
 
 export interface ReducerManager {
-  getReducerMap: () => ReducersMapObject<StateSchema>
-  reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>
-  add: (key: StateSchemaKey, reducer: Reducer) => void
-  remove: (key: StateSchemaKey) => void
+    getReducerMap: () => ReducersMapObject<StateSchema>
+    reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>
+    add: (key: StateSchemaKey, reducer: Reducer) => void
+    remove: (key: StateSchemaKey) => void
 }
 
 export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
-  reducerManager: ReducerManager
+    reducerManager: ReducerManager
 }
 
 interface ExtraArgs {
-  api: AxiosInstance
+    api: AxiosInstance
 }
 
 export interface ThunkConfig<T> {
-  extra: ExtraArgs
-  rejectValue: T
-  state: StateSchema
+    extra: ExtraArgs
+    rejectValue: T
+    state: StateSchema
 }

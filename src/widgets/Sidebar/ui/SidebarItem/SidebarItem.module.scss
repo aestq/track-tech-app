@@ -1,14 +1,22 @@
 .SidebarItem {
-  text-decoration: none;
-  width: 100%;
+    text-decoration: none;
+    width: 100%;
 }
 
 .card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: .2s;
+    padding: 10px 14px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+
+    &:hover {
+        background-color: rgba(236, 236, 236, 0.6);
+    }
 }
 
 .icon {
-  width: 20px;
+    font-size: 18px;
 }

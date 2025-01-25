@@ -6,56 +6,29 @@ import cls from './Input.module.scss'
 type InputHTMLProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
 
 interface InputProps extends InputHTMLProps {
-  className?: string
-  onChange?: (value: string) => void
-  value?: string
-  label?: string
-  validateError?: string
+    className?: string
+    onChange?: (value: string) => void
+    value?: string
+    label?: string
+    validateError?: string
 }
 
 export const Input = memo((props: InputProps) => {
-  const {
-    className,
-    onChange,
-    value,
-    label,
-    validateError,
-    readOnly,
-    ...otherProps
-  } = props
+    const { className, onChange, value, label, validateError, readOnly, ...otherProps } = props
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.value)
-  }
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        onChange?.(event.target.value)
+    }
 
-  const mods: Mods = {
-    [cls.readOnly]: readOnly
-  }
+    const mods: Mods = {
+        [cls.readOnly]: readOnly,
+    }
 
-  return (
-    <label className={classNames(cls.InputWrapper, mods, [className])}>
-      {label && (
-        <Text
-          className={cls.label}
-          text={label}
-          size='s'
-        />
-      )}
-      <input
-        className={cls.input}
-        onChange={onChangeHandler}
-        value={value}
-        readOnly={readOnly}
-        {...otherProps}
-      />
-      {validateError && (
-        <Text
-          className={cls.validateErrorText}
-          text={validateError}
-          size='xs'
-          theme='error'
-        />
-      )}
-    </label>
-  )
+    return (
+        <label className={classNames(cls.InputWrapper, mods, [className])}>
+            {label && <Text className={cls.label} text={label} size="s" />}
+            <input className={cls.input} onChange={onChangeHandler} value={value} readOnly={readOnly} {...otherProps} />
+            {validateError && <Text className={cls.validateErrorText} text={validateError} size="xs" theme="error" />}
+        </label>
+    )
 })

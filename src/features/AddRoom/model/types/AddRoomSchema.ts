@@ -1,5 +1,5 @@
 export interface AddRoomSchema {
-  number: string
-  isLoading: boolean
-  error?: string
+    number: string
+    isLoading: boolean
+    error?: string
 }

@@ -1,23 +1,96 @@
 .Logo {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .square {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 .m {
-  .square {
-    width: 30px;
-    height: 30px;
-  }
+    .square {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .xl {
-  .square {
-    width: 40px;
-    height: 40px;
-  }
+    .square {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.logo-item {
+    position: absolute;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+
+    --logo-offset: 6px;
+
+    &:first-child {
+        background: rgba(48, 49, 49, 0.6);
+        bottom: 0;
+        right: 0;
+        animation: logo-block-1 2s infinite 1s;
+    }
+
+    &:last-child {
+        background: rgba(48, 49, 49, 0.8);
+        top: 0;
+        left: 0;
+        animation: logo-block-2 2s infinite 1s;
+    }
+}
+
+.logo-wrapper {
+    position: relative;
+    width: 42px;
+    height: 42px;
+}
+
+@keyframes logo-block-1 {
+    0% {
+        top: 0;
+        left: 0;
+        transform: rotate(0);
+    }
+    25%,
+    35%,
+    45% {
+        top: var(--logo-offset);
+        left: var(--logo-offset);
+        transform: rotate(-90deg);
+    }
+    75%,
+    85%,
+    100% {
+        top: 0;
+        left: 0;
+        transform: rotate(0);
+    }
+}
+
+@keyframes logo-block-2 {
+    0% {
+        bottom: 0;
+        right: 0;
+        transform: rotate(0);
+    }
+    25%,
+    35%,
+    45% {
+        bottom: var(--logo-offset);
+        right: var(--logo-offset);
+        transform: rotate(90deg);
+    }
+    75%,
+    85%,
+    100% {
+        bottom: 0;
+        right: 0;
+        transform: rotate(0);
+    }
 }

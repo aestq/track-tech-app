@@ -3,18 +3,16 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import cls from './Table.module.scss'
 
 interface TableProps {
-  className?: string
-  children: ReactNode
+    className?: string
+    children: ReactNode
 }
 
 export const Table = memo((props: TableProps) => {
-  const { className, children } = props
+    const { className, children } = props
 
-  return (
-    <table className={classNames(cls.Table, {}, [className])}>
-      <tbody>
-        {children}
-      </tbody>
-    </table>
-  )
+    return (
+        <table className={classNames(cls.Table, {}, [className])}>
+            <tbody>{children}</tbody>
+        </table>
+    )
 })

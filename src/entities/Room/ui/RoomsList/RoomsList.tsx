@@ -16,63 +16,45 @@ import { RoomsItem } from '../RoomsItem/RoomsItem'
 import cls from './RoomsList.module.scss'
 
 interface RoomsListProps {
-  className?: string
+    className?: string
 }
 
 const reducersList: ReducersList = {
-  room: roomReducer
+    room: roomReducer,
 }
 
 export const RoomsList = memo((props: RoomsListProps) => {
-  useReducersLoader({ reducersList })
-  const { className } = props
-  const items = useSelector(getRoomData)
-  const isLoading = useSelector(getRoomIsLoading)
-  const error = useSelector(getRoomError)
-  const dispatch = useAppDispatch()
+    useReducersLoader({ reducersList })
+    const { className } = props
+    const items = useSelector(getRoomData)
+    const isLoading = useSelector(getRoomIsLoading)
+    const error = useSelector(getRoomError)
+    const dispatch = useAppDispatch()
 
-  useInitialEffect(() => {
-    dispatch(fetchRooms())
-  })
+    useInitialEffect(() => {
+        dispatch(fetchRooms())
+    })
 
-  const render = useCallback((item: Room) => (
-    <RoomsItem
-      item={item}
-      key={item.id}
-    />
-  ), [])
+    const render = useCallback((item: Room) => <RoomsItem item={item} key={item.id} />, [])
 
-  if(error) {
-    return (
-      <Text
-        text='Произошла ошибка при подгрузке кабинетов'
-        theme='error'
-      />
-    )
-  }
+    if (error) {
+        return <Text text="Произошла ошибка при подгрузке кабинетов" theme="error" />
+    }
 
-  if(isLoading) {
-    return (
-      <div className={cls.RoomsList}>
-        <Skeleton width={120} height={120} />
-        <Skeleton width={120} height={120} />
-        <Skeleton width={120} height={120} />
-        <Skeleton width={120} height={120} />
-      </div>
-    )
-  }
+    if (isLoading) {
+        return (
+            <div className={cls.RoomsList}>
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+            </div>
+        )
+    }
 
-  if(!items?.length) {
-    return (
-      <Text
-        text='Кабинеты не найдены'
-      />
-    )
-  }
+    if (!items?.length) {
+        return <Text text="Кабинеты не найдены" />
+    }
 
-  return (
-    <section className={classNames(cls.RoomsList, {}, [className])}>
-      {items?.map(render)}
-    </section>
-  )
+    return <section className={classNames(cls.RoomsList, {}, [className])}>{items?.map(render)}</section>
 })

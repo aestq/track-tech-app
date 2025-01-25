@@ -15,67 +15,74 @@ import { addEquipmentActions, addEquipmentReducer } from '../model/slice/AddEqui
 import cls from './AddEquipmentForm.module.scss'
 
 interface AddEquipmentFormProps {
-  className?: string
+    className?: string
 }
 
 const reducersList: ReducersList = {
-  addEquipment: addEquipmentReducer
+    addEquipment: addEquipmentReducer,
 }
 
 export const AddEquipmentForm = (props: AddEquipmentFormProps) => {
-  useReducersLoader({ reducersList })
-  const { className } = props
-  const formData = useSelector(getAddEquipmentFormData)
-  const isLoading = useSelector(getAddEquipmentIsLoading)
-  const error = useSelector(getAddEquipmentError)
-  const dispatch = useAppDispatch()
+    useReducersLoader({ reducersList })
+    const { className } = props
+    const formData = useSelector(getAddEquipmentFormData)
+    const isLoading = useSelector(getAddEquipmentIsLoading)
+    const error = useSelector(getAddEquipmentError)
+    const dispatch = useAppDispatch()
 
-  const onChangeName = useCallback((value: string) => {
-    dispatch(addEquipmentActions.setFormData({ name: value }))
-  }, [dispatch])
+    const onChangeName = useCallback(
+        (value: string) => {
+            dispatch(addEquipmentActions.setFormData({ name: value }))
+        },
+        [dispatch]
+    )
 
-  const onChangeStockNumber = useCallback((value: string) => {
-    dispatch(addEquipmentActions.setFormData({ stockNumber: value }))
-  }, [dispatch])
+    const onChangeStockNumber = useCallback(
+        (value: string) => {
+            dispatch(addEquipmentActions.setFormData({ stockNumber: value }))
+        },
+        [dispatch]
+    )
 
-  const onChangeStatus = useCallback((tab: TabItem<EquipmentStatus>) => {
-    dispatch(addEquipmentActions.setFormData({ status: tab.value }))
-  }, [dispatch])
+    const onChangeStatus = useCallback(
+        (tab: TabItem<EquipmentStatus>) => {
+            dispatch(addEquipmentActions.setFormData({ status: tab.value }))
+        },
+        [dispatch]
+    )
 
-  const onChangeSpecifications = useCallback((value: string) => {
-    dispatch(addEquipmentActions.setFormData({ specifications: value }))
-  }, [dispatch])
+    const onChangeSpecifications = useCallback(
+        (value: string) => {
+            dispatch(addEquipmentActions.setFormData({ specifications: value }))
+        },
+        [dispatch]
+    )
 
-  const onChangeRoom = useCallback((value: string) => {
-    dispatch(addEquipmentActions.setFormData({ room: value }))
-  }, [dispatch])
+    const onChangeRoom = useCallback(
+        (value: string) => {
+            dispatch(addEquipmentActions.setFormData({ room: value }))
+        },
+        [dispatch]
+    )
 
-  const onClickCreate = useCallback(() => {
-    dispatch(createEquipment())
-  }, [dispatch])
+    const onClickCreate = useCallback(() => {
+        dispatch(createEquipment())
+    }, [dispatch])
 
-  return (
-    <Card
-      className={classNames(cls.AddEquipment, {}, [className])}
-      theme='border'
-    >
-      <EquipmentForm
-        data={formData}
-        onChangeName={onChangeName}
-        onChangeStockNumber={onChangeStockNumber}
-        onChangeStatus={onChangeStatus}
-        onChangeSpecifications={onChangeSpecifications}
-        onChangeRoom={onChangeRoom}
-        error={error}
-      />
-      <Button
-        className={cls.create}
-        onClick={onClickCreate}
-        disabled={isLoading}
-        max
-      >
-        Создать
-      </Button>
-    </Card>
-  )
+    return (
+        <Card className={classNames(cls.AddEquipment, {}, [className])} theme="border">
+            <EquipmentForm
+                data={formData}
+                onChangeName={onChangeName}
+                onChangeStockNumber={onChangeStockNumber}
+                onChangeStatus={onChangeStatus}
+                onChangeSpecifications={onChangeSpecifications}
+                onChangeRoom={onChangeRoom}
+                error={error}
+            />
+            <Button className={cls.create} onClick={onClickCreate} disabled={isLoading} max>
+                Создать
+            </Button>
+        </Card>
+    )
 }
