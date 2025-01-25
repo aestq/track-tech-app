@@ -4,6 +4,7 @@ import { Sidebar } from 'widgets/Sidebar'
 import { getUserData, refreshUser } from 'entities/User'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
+import { Toaster } from 'shared/ui/redesign/sonner'
 
 export const App = () => {
     const dispatch = useAppDispatch()
@@ -19,10 +20,16 @@ export const App = () => {
                 <main className="flex max-w-7xl grid-cols-[250px,1fr] w-full justify-self-center gap-5">
                     <Sidebar />
                     <AppRouter />
+                    <Toaster />
                 </main>
             </div>
         )
     }
 
-    return <AppRouter />
+    return (
+        <>
+            <AppRouter />
+            <Toaster />
+        </>
+    )
 }

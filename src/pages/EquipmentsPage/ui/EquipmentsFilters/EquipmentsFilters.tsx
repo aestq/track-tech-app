@@ -1,14 +1,14 @@
-import { type ChangeEvent, useCallback } from 'react'
+import { type ChangeEvent, useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { EditEquipmentForm } from 'features/EditEquipment'
 import { EquipmentsSortByRoom, type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { EquipmentsSortByStatus, type SortByStatus } from 'features/EquipmentsSortByStatus'
 import { getUserIsAdmin } from 'entities/User'
-import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useDebounce } from 'shared/lib/hooks/useDebounce'
 import { Button } from 'shared/ui/redesign/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from 'shared/ui/redesign/dialog'
 import { Input } from 'shared/ui/redesign/input'
 import { type TabItem } from 'shared/ui/Tabs/Tabs'
 import { getEquipmentsRoom } from '../../model/selectors/getEquipmentsRoom'
@@ -29,7 +29,7 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
     const room = useSelector(getEquipmentsRoom)
     const isAdmin = useSelector(getUserIsAdmin)
     const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    const [isOpen, setIsOpen] = useState(false)
 
     const fetchData = useCallback(() => {
         dispatch(fetchEquipments())
@@ -61,19 +61,30 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
         [dispatch, fetchData]
     )
 
-    const onClickCreate = useCallback(() => {
-        navigate(RoutePaths.EQUIPMENTS_CREATE)
-    }, [navigate])
-
     return (
         <header className={classNames(cls.EquipmentsFilters, {}, [className])}>
             <div className={cls.sorts}>
                 <EquipmentsSortByStatus value={status} onChange={onChangeStatus} />
                 <EquipmentsSortByRoom value={room} onChange={onChangeRoom} />
                 {isAdmin && (
-                    <Button className="justify-self-end" onClick={onClickCreate}>
-                        Создать
-                    </Button>
+                    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                        <DialogTrigger asChild>
+                            <Button className="justify-self-end">Создать</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Создание оборудования</DialogTitle>
+                                <DialogDescription></DialogDescription>
+                            </DialogHeader>
+
+                            <EditEquipmentForm
+                                onSuccess={() => {
+                                    setIsOpen(false)
+                                    fetchData()
+                                }}
+                            />
+                        </DialogContent>
+                    </Dialog>
                 )}
             </div>
             <Input className={'w-full flex-shrink-0'} placeholder="Поиск" value={search} onChange={onChangeSearch} />

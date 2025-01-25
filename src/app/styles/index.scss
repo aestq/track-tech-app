@@ -88,6 +88,8 @@ body {
 @layer base {
   * {
     @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: var(hsl(0 0% 89.8%));
     }
   body {
     @apply bg-background text-foreground;

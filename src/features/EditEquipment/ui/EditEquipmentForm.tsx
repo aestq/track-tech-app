@@ -1,32 +1,33 @@
-import { useCallback } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { deleteEquipment } from 'features/EditEquipment/model/services/deleteEquipment'
+import { toast } from 'sonner'
+import { editEquipmentSchema, type EditEquipmentSchema } from 'features/EditEquipment/lib/schema'
+import { createEquipment } from 'features/EditEquipment/model/services/createEquipment'
 import { updateEquipment } from 'features/EditEquipment/model/services/updateEquipment'
-import { EquipmentForm, type EquipmentStatus } from 'entities/Equipment'
+import { type Equipment } from 'entities/Equipment'
+import { items } from 'entities/Equipment/model/consts/consts'
+import { RoomSelect } from 'entities/Room'
 import { getUserIsAdmin } from 'entities/User'
-import TrashIcon from 'shared/assets/icons/trash-icon.svg'
-import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
-import { Button } from 'shared/ui/Button/Button'
-import { Card } from 'shared/ui/Card/Card'
-import { type TabItem } from 'shared/ui/Tabs/Tabs'
-import { Text } from 'shared/ui/Text/Text'
+import { Button } from 'shared/ui/redesign/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from 'shared/ui/redesign/form'
+import { Input } from 'shared/ui/redesign/input'
+import { Tabs, TabsList, TabsTrigger } from 'shared/ui/redesign/tabs'
+import { Textarea } from 'shared/ui/redesign/textarea'
+import { Spinner } from 'shared/ui/Spinner/Spinner'
 import { getEditEquipmentError } from '../model/selectors/getEditEquipmentError'
-import { getEditEquipmentFormData } from '../model/selectors/getEditEquipmentFormData'
-import { getEditEquipmentInit } from '../model/selectors/getEditEquipmentInit'
 import { getEditEquipmentIsLoading } from '../model/selectors/getEditEquipmentIsLoading'
-import { fetchEquipment } from '../model/services/fetchEquipment'
-import { editEquipmentActions, editEquipmentReducer } from '../model/slice/editEquipmentSlice'
+import { editEquipmentReducer } from '../model/slice/editEquipmentSlice'
 import cls from './EditEquipmentForm.module.scss'
-import { SkeletonForm } from './SkeletonForm'
 
 interface EditEquipmentFormProps {
+    data?: Equipment
     className?: string
-    id: string
+    onSuccess?: () => void
 }
 
 const reducersList: ReducersList = {
@@ -35,91 +36,122 @@ const reducersList: ReducersList = {
 
 export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
     useReducersLoader({ reducersList })
-    const { className, id } = props
-    const formData = useSelector(getEditEquipmentFormData)
+    const { className, data, onSuccess } = props
     const isLoading = useSelector(getEditEquipmentIsLoading)
     const error = useSelector(getEditEquipmentError)
-    const init = useSelector(getEditEquipmentInit)
     const isAdmin = useSelector(getUserIsAdmin)
     const dispatch = useAppDispatch()
-    const navigate = useNavigate()
 
-    useInitialEffect(() => {
-        dispatch(fetchEquipment(id))
+    const form = useForm<EditEquipmentSchema>({
+        mode: 'onTouched',
+        defaultValues: {
+            name: data?.name ?? '',
+            roomId: data?.room ?? null,
+            specifications: data?.specifications ?? '',
+            status: data?.status ?? 'use',
+            stockNumber: data?.stockNumber ?? '',
+        },
+        resolver: zodResolver(editEquipmentSchema),
     })
 
-    const onChangeName = useCallback(
-        (value: string) => {
-            dispatch(editEquipmentActions.setFormData({ name: value }))
-        },
-        [dispatch]
-    )
-
-    const onChangeStockNumber = useCallback(
-        (value: string) => {
-            dispatch(editEquipmentActions.setFormData({ stockNumber: value }))
-        },
-        [dispatch]
-    )
-
-    const onChangeStatus = useCallback(
-        (tab: TabItem<EquipmentStatus>) => {
-            dispatch(editEquipmentActions.setFormData({ status: tab.value }))
-        },
-        [dispatch]
-    )
-
-    const onChangeSpecifications = useCallback(
-        (value: string) => {
-            dispatch(editEquipmentActions.setFormData({ specifications: value }))
-        },
-        [dispatch]
-    )
-
-    const onChangeRoom = useCallback(
-        (value: string) => {
-            dispatch(editEquipmentActions.setFormData({ room: value }))
-        },
-        [dispatch]
-    )
-
-    const onClickEdit = useCallback(() => {
-        dispatch(updateEquipment())
-    }, [dispatch])
-
-    const onClickDelete = useCallback(async () => {
-        const result = await dispatch(deleteEquipment(id))
-        if (result.meta.requestStatus === 'fulfilled') {
-            navigate(RoutePaths.EQUIPMENTS)
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
         }
-    }, [dispatch, id, navigate])
+    }, [error])
 
-    if (!init) {
-        return <SkeletonForm />
-    }
+    const onClickEdit = async (formData: EditEquipmentSchema) => {
+        const result = await dispatch(data ? updateEquipment(formData) : createEquipment(formData))
 
-    if (error) {
-        return <Text text="Произошла ошибка при подгрузке оборудования" theme="error" />
+        if (result.meta.requestStatus === 'fulfilled') {
+            onSuccess?.()
+        }
     }
 
     return (
-        <Card className={classNames(cls.EditEquipmentForm, {}, [className])} theme="border">
-            <EquipmentForm
-                data={formData}
-                onChangeName={onChangeName}
-                onChangeStockNumber={onChangeStockNumber}
-                onChangeStatus={onChangeStatus}
-                onChangeSpecifications={onChangeSpecifications}
-                onChangeRoom={onChangeRoom}
-            />
-            <div className={cls.buttons}>
-                <Button onClick={onClickEdit} disabled={isLoading} max>
-                    Создать
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onClickEdit)}
+                className={classNames(cls.EditEquipmentForm, {}, [className, 'space-y-3'])}
+            >
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Наименование</FormLabel>
+                            <FormControl>
+                                <Input className="w-full" placeholder="Введите наименование" readOnly={!isAdmin} {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="stockNumber"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Номер</FormLabel>
+                            <FormControl>
+                                <Input className="w-full" placeholder="Введите номер" readOnly={!isAdmin} {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="status"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Статус</FormLabel>
+                            <FormControl>
+                                <Tabs value={field.value} onValueChange={field.onChange}>
+                                    <TabsList className="w-full">
+                                        {items.map((item) => (
+                                            <TabsTrigger className="w-full" key={item.value} value={item.value}>
+                                                {item.content}
+                                            </TabsTrigger>
+                                        ))}
+                                    </TabsList>
+                                </Tabs>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="specifications"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Характеристики</FormLabel>
+                            <FormControl>
+                                <Textarea className="w-full" placeholder="Введите характеристики" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="roomId"
+                    render={() => (
+                        <FormItem>
+                            <FormLabel>Кабинет</FormLabel>
+                            <FormControl>
+                                <RoomSelect />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button type="submit" disabled={!form.formState.isValid || isLoading} className="w-full">
+                    {data ? 'Сохранить' : 'Создать'}
+                    {isLoading && <Spinner theme="background" size="s" />}
                 </Button>
-                <Button theme="red" size="s" disabled={!isAdmin || isLoading} onClick={onClickDelete}>
-                    <TrashIcon className={cls.trash} />
-                </Button>
-            </div>
-        </Card>
+            </form>
+        </Form>
     )
 }

@@ -51,6 +51,7 @@ export const EquipmentsTable = memo((props: EquipmentTableProps) => {
                     <TableHead>Статус</TableHead>
                     <TableHead>Характеристики</TableHead>
                     <TableHead>Кабинет</TableHead>
+                    <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
 

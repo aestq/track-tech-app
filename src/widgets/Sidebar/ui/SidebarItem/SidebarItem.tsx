@@ -3,6 +3,7 @@ import { type RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { AppLink } from 'shared/ui/AppLink/AppLink'
 import { Card } from 'shared/ui/Card/Card'
+import { buttonVariants } from 'shared/ui/redesign/button'
 import cls from './SidebarItem.module.scss'
 
 interface SidebarItemProps {
@@ -16,11 +17,11 @@ export const SidebarItem = (props: SidebarItemProps) => {
     const { className, Icon, text, path } = props
 
     return (
-        <AppLink className={classNames(cls.SidebarItem, {}, [className])} to={path}>
-            <div className={cls.card}>
+        <AppLink className={classNames(cls.SidebarItem, {}, [buttonVariants({ variant: 'outline' })])} to={path}>
+            <span className="flex w-full gap-3 items-center">
                 <Icon className={cls.icon} />
                 {text}
-            </div>
+            </span>
         </AppLink>
     )
 }

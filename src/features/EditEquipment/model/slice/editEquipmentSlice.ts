@@ -1,13 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { deleteEquipment } from 'features/EditEquipment/model/services/deleteEquipment'
+import { createEquipment } from 'features/EditEquipment/model/services/createEquipment'
 import { type Equipment } from 'entities/Equipment'
-import { fetchEquipment } from '../services/fetchEquipment'
 import { updateEquipment } from '../services/updateEquipment'
 import { type EditEquipmentSchema } from '../types/EditEquipmentSchema'
 
 const initialState: EditEquipmentSchema = {
     isLoading: false,
-    init: false,
 }
 
 export const editEquipmentSlice = createSlice({
@@ -19,18 +17,6 @@ export const editEquipmentSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchEquipment.pending, (state) => {
-            state.init = false
-            state.error = undefined
-        })
-        builder.addCase(fetchEquipment.fulfilled, (state, action) => {
-            state.init = true
-            state.formData = action.payload
-        })
-        builder.addCase(fetchEquipment.rejected, (state, action) => {
-            state.init = true
-            state.error = action.payload
-        })
         builder.addCase(updateEquipment.fulfilled, (state) => {
             state.isLoading = false
         })
@@ -42,14 +28,14 @@ export const editEquipmentSlice = createSlice({
             state.error = undefined
             state.isLoading = true
         })
-        builder.addCase(deleteEquipment.fulfilled, (state) => {
+        builder.addCase(createEquipment.fulfilled, (state) => {
             state.isLoading = false
         })
-        builder.addCase(deleteEquipment.rejected, (state, action) => {
+        builder.addCase(createEquipment.rejected, (state, action) => {
             state.error = action.payload
             state.isLoading = false
         })
-        builder.addCase(deleteEquipment.pending, (state) => {
+        builder.addCase(createEquipment.pending, (state) => {
             state.error = undefined
             state.isLoading = true
         })
