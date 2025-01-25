@@ -7,22 +7,8 @@
 @include meta.load-css('reset.scss');
 
 body {
-    font-size: var(--font-size-m);
     font-family: var(--font-family-main);
-    overflow: hidden;
-}
-
-.grid {
-    display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr;
-}
-
-.content-page {
-    height: 100vh;
-     max-width: 1440px;
-    width: 100%;
-    display: flex;
+    font-size: var(--font-size-m);
 }
 
 ::selection {

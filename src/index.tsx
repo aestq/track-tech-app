@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import { App } from 'app/App'
 import { StoreProvider } from 'app/providers/Store'
 import 'app/styles/index.scss'
+import { Toaster } from 'shared/ui/redesign/sonner'
 
 const rootContainer = document.getElementById('root')
 
@@ -13,9 +13,8 @@ if (rootContainer === null) {
 const root = createRoot(rootContainer)
 
 root.render(
-    <BrowserRouter>
-        <StoreProvider>
-            <App />
-        </StoreProvider>
-    </BrowserRouter>
+    <StoreProvider>
+        <App />
+        <Toaster />
+    </StoreProvider>
 )

@@ -1,5 +1,6 @@
-import { type ChangeEvent, useCallback, useState } from 'react'
+import { type ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import { EditEquipmentForm } from 'features/EditEquipment'
 import { EquipmentsSortByRoom, type SortByRoom } from 'features/EquipmentsSortByRoom'
 import { EquipmentsSortByStatus, type SortByStatus } from 'features/EquipmentsSortByStatus'
@@ -30,10 +31,19 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
     const isAdmin = useSelector(getUserIsAdmin)
     const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState(false)
+    const [, setSearchParams] = useSearchParams()
 
     const fetchData = useCallback(() => {
         dispatch(fetchEquipments())
     }, [dispatch])
+
+    useEffect(() => {
+        setSearchParams({
+            status,
+            search,
+            room,
+        })
+    }, [status, search, room])
 
     const debouncedFetchData = useDebounce(fetchData, 500)
 

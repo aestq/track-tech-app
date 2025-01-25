@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { Outlet } from 'react-router-dom'
 import { AppRouter } from 'app/providers/Router'
 import { Sidebar } from 'widgets/Sidebar'
 import { getUserData, refreshUser } from 'entities/User'
@@ -14,22 +15,5 @@ export const App = () => {
         dispatch(refreshUser())
     })
 
-    if (userData) {
-        return (
-            <div className="grid grid-cols-1 h-screen">
-                <main className="flex max-w-7xl grid-cols-[250px,1fr] w-full justify-self-center gap-5">
-                    <Sidebar />
-                    <AppRouter />
-                    <Toaster />
-                </main>
-            </div>
-        )
-    }
-
-    return (
-        <>
-            <AppRouter />
-            <Toaster />
-        </>
-    )
+    return <AppRouter />
 }

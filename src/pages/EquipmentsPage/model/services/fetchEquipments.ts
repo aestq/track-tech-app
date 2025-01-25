@@ -17,12 +17,6 @@ export const fetchEquipments = createAsyncThunk<Equipment[], void, ThunkConfig<s
         const status = getEquipmentsStatus(getState())
         const room = getEquipmentsRoom(getState())
 
-        addQueryParams({
-            search,
-            status,
-            room,
-        })
-
         try {
             const response = await extra.api.get<Equipment[]>('/equipments', {
                 params: {
