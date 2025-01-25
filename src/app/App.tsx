@@ -15,8 +15,8 @@ export const App = () => {
 
     if (userData) {
         return (
-            <div className="grid">
-                <main className="content-page">
+            <div className="grid grid-cols-1 h-screen">
+                <main className="flex max-w-7xl grid-cols-[250px,1fr] w-full justify-self-center gap-5">
                     <Sidebar />
                     <AppRouter />
                 </main>

@@ -2,10 +2,8 @@ import { memo, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { getUserIsAdmin, getUserIsModerator } from 'entities/User'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
-import { AppLink } from 'shared/ui/AppLink/AppLink'
-import { Button } from 'shared/ui/Button/Button'
-import { Td, Tr } from 'shared/ui/Table'
-import { Text } from 'shared/ui/Text/Text'
+import { Button } from 'shared/ui/redesign/button'
+import { TableCell, TableRow } from 'shared/ui/redesign/table'
 import { EquipmentStatusText } from '../../model/consts/consts'
 import { type Equipment } from '../../model/types/Equipment'
 
@@ -21,7 +19,6 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
     const { className, item, onClick } = props
     const isAdmin = useSelector(getUserIsAdmin)
     const isModerator = useSelector(getUserIsModerator)
-    let name
 
     const onClickHandler = useCallback(
         (item: Equipment) => {
@@ -36,27 +33,17 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
         return null
     }
 
-    if (isModerator || isAdmin) {
-        name = (
-            <AppLink to={getRoute(item.id)}>
-                <Text text={item.name} align="center" />
-            </AppLink>
-        )
-    } else {
-        name = item.name
-    }
-
     return (
-        <Tr className={className}>
-            <Td>{name}</Td>
-            <Td>{item.stockNumber}</Td>
-            <Td>{EquipmentStatusText[item?.status ?? 'use']}</Td>
-            <Td>
-                <Button size="s" onClick={onClickHandler(item)}>
+        <TableRow className={className}>
+            <TableCell>{item.name}</TableCell>
+            <TableCell>{item.stockNumber}</TableCell>
+            <TableCell>{EquipmentStatusText[item?.status ?? 'use']}</TableCell>
+            <TableCell>
+                <Button size="sm" onClick={onClickHandler(item)}>
                     Посмотреть
                 </Button>
-            </Td>
-            <Td>{item.room}</Td>
-        </Tr>
+            </TableCell>
+            <TableCell>{item.room}</TableCell>
+        </TableRow>
     )
 })

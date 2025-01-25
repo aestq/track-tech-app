@@ -1,7 +1,7 @@
 import { memo, useCallback, useState } from 'react'
 import { SpecificationsModal } from 'entities/Equipment/ui/SpecificationsModal'
 import { classNames } from 'shared/lib/classNames/classNames'
-import { Table, Th, Tr } from 'shared/ui/Table'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from 'shared/ui/redesign/table'
 import { Text } from 'shared/ui/Text/Text'
 import { type Equipment } from '../../model/types/Equipment'
 import { EquipmentItem } from '../EquipmentItem/EquipmentItem'
@@ -42,20 +42,29 @@ export const EquipmentsTable = memo((props: EquipmentTableProps) => {
         )
     }
 
-    if (!items?.length) {
-        return <Text className={cls.notFound} text="Оборудование не найдено" />
-    }
-
     return (
         <Table className={classNames(cls.EquipmentsTable, {}, [className])}>
-            <Tr>
-                <Th>Наименование</Th>
-                <Th>Номер</Th>
-                <Th>Статус</Th>
-                <Th>Характеристики</Th>
-                <Th>Кабинет</Th>
-            </Tr>
-            {items?.map(render)}
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Наименование</TableHead>
+                    <TableHead>Номер</TableHead>
+                    <TableHead>Статус</TableHead>
+                    <TableHead>Характеристики</TableHead>
+                    <TableHead>Кабинет</TableHead>
+                </TableRow>
+            </TableHeader>
+
+            <TableBody>
+                {items?.length ? (
+                    items?.map(render)
+                ) : (
+                    <TableRow>
+                        <TableCell className="text-center" colSpan={5}>
+                            Нет данных
+                        </TableCell>
+                    </TableRow>
+                )}
+            </TableBody>
             <SpecificationsModal isOpen={isOpen} onClose={onClose} specifications={specifications} />
         </Table>
     )

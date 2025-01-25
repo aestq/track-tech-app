@@ -19,7 +19,7 @@ export const Logo = memo((props: LogoProps) => {
                 <div className={cls['logo-item']}></div>
                 <div className={cls['logo-item']}></div>
             </div>
-            <Text title="TrackTech" size={size} />
+            <Text className={cls.title} title="TrackTech" size={size} />
         </div>
     )
 })

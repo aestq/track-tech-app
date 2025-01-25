@@ -1,0 +1,1 @@
+import{r as l,j as c,c as r}from"./index-HctxX4w8.js";const i="_Skeleton_15b58_1",d="_loading_15b58_1",m={Skeleton:i,loading:d},_=o=>{const{className:a,width:s,height:e,radius:t=10}=o,n=l.useMemo(()=>({width:s,height:e,borderRadius:t}),[s,e,t]);return c.jsx("div",{className:r(m.Skeleton,{},[a]),style:n})};export{_ as S};

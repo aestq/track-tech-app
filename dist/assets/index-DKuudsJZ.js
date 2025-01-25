@@ -1,0 +1,1 @@
+import{b as o}from"./index-HctxX4w8.js";const{Axios:a,AxiosError:e,CanceledError:s,isCancel:i,CancelToken:t,VERSION:n,all:l,Cancel:x,isAxiosError:C,spread:c,toFormData:m,AxiosHeaders:d,HttpStatusCode:p,formToJSON:A,mergeConfig:E}=o;export{C as i};

@@ -1,0 +1,1 @@
+import{j as t,c as i,T as n}from"./index-HctxX4w8.js";const o="_Page_sxv8c_1",r="_title_sxv8c_8",e={Page:o,title:r},m=a=>{const{className:c,children:l,title:s}=a;return t.jsxs("section",{className:i(e.Page,{},[c]),children:[s&&t.jsx(n,{className:e.title,title:s}),l]})};export{m as P};
