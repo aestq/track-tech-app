@@ -1,41 +1,66 @@
-import { useNavigate } from 'react-router-dom'
-import waves from 'shared/assets/images/waves.jpg'
-import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
-import { Button } from 'shared/ui/Button/Button'
+import { Clock, DoorClosedIcon, LaptopMinimal, UserSearchIcon } from 'lucide-react'
+import { LoginForm } from 'features/LoginForm'
+import { SignupForm } from 'features/SignupForm'
 import { Logo } from 'shared/ui/Logo/Logo'
-import { Text } from 'shared/ui/Text/Text'
-import cls from './EntryPage.module.scss'
+import { Card, CardContent } from 'shared/ui/redesign/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'shared/ui/redesign/tabs'
 
 const EntryPage = () => {
-    const navigate = useNavigate()
-
-    const onClickSignUp = () => {
-        navigate(RoutePaths.SING_UP)
-    }
-
-    const onClickLogin = () => {
-        navigate(RoutePaths.LOGIN)
-    }
-
     return (
-        <div className={cls.EntryPage}>
-            <header className={cls.header}>
-                <Button role="link" onClick={onClickLogin}>
-                    Войти
-                </Button>
-            </header>
-            <main className={cls.main}>
-                <section className={cls.getStarted}>
-                    <Logo size="xl" className={cls.logo} />
-                    <Button role="link" onClick={onClickSignUp}>
-                        Начать
-                    </Button>
+        <div className="grid grid-cols-1">
+            <div className="grid-cols-[1fr,1fr] w-full h-screen grid items-center max-w-6xl justify-self-center gap-12 px-10 overflow-x-auto">
+                <section className="flex flex-col gap-8 items-center justify-self-start">
+                    <Logo size="xl" />
+                    <div className="flex items-center gap-3">
+                        <Card className="size-10 flex justify-center items-center p-0">
+                            <CardContent className="p-0">
+                                <LaptopMinimal className="size-5" />
+                            </CardContent>
+                        </Card>
+                        <Card className="size-10 flex justify-center items-center p-0">
+                            <CardContent className="p-0">
+                                <DoorClosedIcon className="size-5" />
+                            </CardContent>
+                        </Card>
+                        <Card className="size-10 flex justify-center items-center p-0">
+                            <CardContent className="p-0">
+                                <Clock className="size-5" />
+                            </CardContent>
+                        </Card>
+                        <Card className="size-10 flex justify-center items-center p-0">
+                            <CardContent className="p-0">
+                                <UserSearchIcon className="size-5" />
+                            </CardContent>
+                        </Card>
+                    </div>
                 </section>
-                <section className={cls.background}>
-                    <img className={cls.waves} src={waves} alt="waves" />
-                    <Text text="Система учёта оборудования :D" align="center" />
+                <section className="justify-self-end">
+                    <Tabs defaultValue="register">
+                        <TabsList className="w-full">
+                            <TabsTrigger className="w-full" value="register">
+                                Регистрация
+                            </TabsTrigger>
+                            <TabsTrigger className="w-full" value="login">
+                                Вход
+                            </TabsTrigger>
+                        </TabsList>
+                        <TabsContent className="mt-4" value="register">
+                            <Card>
+                                <CardContent className="pt-6">
+                                    <SignupForm />
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
+                        <TabsContent className="mt-4" value="login">
+                            <Card>
+                                <CardContent className="pt-6">
+                                    <LoginForm />
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
+                    </Tabs>
                 </section>
-            </main>
+            </div>
         </div>
     )
 }

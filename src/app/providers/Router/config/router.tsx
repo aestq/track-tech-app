@@ -6,9 +6,8 @@ import { AdminPage } from 'pages/AdminPage'
 import { EntryPage } from 'pages/EntryPage'
 import { EquipmentsPage } from 'pages/EquipmentsPage'
 import { HistoryPage } from 'pages/HistoryPage'
-import { LoginPage } from 'pages/LoginPage'
+import { NotFoundPage } from 'pages/NotFoundPage'
 import { RoomsPage } from 'pages/RoomsPage'
-import { SignupPage } from 'pages/SignupPage'
 import { PageLoader } from 'widgets/PageLoader'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
 import { MainLayout } from 'shared/layouts/MainLayout'
@@ -55,15 +54,11 @@ export const router = createBrowserRouter([
                         path: RoutePaths.ENTRY,
                         element: <EntryPage />,
                     },
-                    {
-                        path: RoutePaths.SING_UP,
-                        element: <SignupPage />,
-                    },
-                    {
-                        path: RoutePaths.LOGIN,
-                        element: <LoginPage />,
-                    },
                 ],
+            },
+            {
+                path: RoutePaths.NOT_FOUND,
+                element: <NotFoundPage />,
             },
         ],
     },

@@ -57,36 +57,7 @@ export const EquipmentsTable = memo((props: EquipmentTableProps) => {
 
             <TableBody>
                 {items?.length ? (
-                    [
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                        ...items,
-                    ]?.map(render)
+                    items?.map(render)
                 ) : (
                     <TableRow>
                         <TableCell className="text-center" colSpan={5}>

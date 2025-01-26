@@ -1,24 +1,15 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { loginService } from 'features/LoginForm/model/services/loginService'
 import { type LoginSchema } from '../types/loginSchema'
 
 const initialState: LoginSchema = {
-    login: '',
-    password: '',
     isLoading: false,
 }
 
 const loginSlice = createSlice({
     name: 'login',
     initialState,
-    reducers: {
-        setLogin: (state, action: PayloadAction<string>) => {
-            state.login = action.payload
-        },
-        setPassword: (state, action: PayloadAction<string>) => {
-            state.password = action.payload
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(loginService.fulfilled, (state) => {
             state.isLoading = false
@@ -35,4 +26,3 @@ const loginSlice = createSlice({
 })
 
 export const { reducer: loginReducer } = loginSlice
-export const { actions: loginActions } = loginSlice

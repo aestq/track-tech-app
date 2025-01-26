@@ -3,12 +3,14 @@ import { Sidebar } from 'widgets/Sidebar'
 
 export const MainLayout = () => {
     return (
-        <div className="flex justify-center">
-            <main className="flex max-w-7xl h-screen w-full gap-5">
-                <div className="sticky top-0 h-[80vh]">
+        <div className="grid grid-cols-1">
+            <main className="p-3 grid max-w-7xl grid-cols-[min-content,1fr] w-full justify-self-center gap-5">
+                <div className="sticky top-3 h-[80vh]">
                     <Sidebar />
                 </div>
-                <Outlet />
+                <div>
+                    <Outlet />
+                </div>
             </main>
         </div>
     )

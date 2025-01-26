@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { AiOutlineDesktop, AiOutlineRadiusUpright, AiOutlineClockCircle, AiOutlineUsergroupAdd } from 'react-icons/ai'
+import { ClockIcon, DoorClosedIcon, LaptopMinimalIcon, UserSearchIcon } from 'lucide-react'
 import { type Item } from 'widgets/Sidebar/model/items'
 import { getUserIsAdmin } from 'entities/User'
 import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
@@ -9,17 +9,17 @@ export const getSidebarItems = createSelector(getUserIsAdmin, (isAdmin) => {
         {
             text: 'Оборудование',
             path: RoutePaths.EQUIPMENTS,
-            icon: AiOutlineDesktop,
+            icon: LaptopMinimalIcon,
         },
         {
             text: 'Кабинеты',
             path: RoutePaths.ROOMS,
-            icon: AiOutlineRadiusUpright,
+            icon: DoorClosedIcon,
         },
         {
             text: 'История',
             path: RoutePaths.HISTORY,
-            icon: AiOutlineClockCircle,
+            icon: ClockIcon,
         },
     ]
 
@@ -27,7 +27,7 @@ export const getSidebarItems = createSelector(getUserIsAdmin, (isAdmin) => {
         items.push({
             text: 'Пользователи',
             path: RoutePaths.ADMIN,
-            icon: AiOutlineUsergroupAdd,
+            icon: UserSearchIcon,
         })
     }
 

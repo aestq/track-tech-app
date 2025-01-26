@@ -1,28 +1,15 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { signupService } from '../services/signupService'
 import { type SignupSchema } from '../types/signupSchema'
 
 const initialState: SignupSchema = {
-    login: '',
-    name: '',
-    password: '',
     isLoading: false,
 }
 
 const signupSlice = createSlice({
     name: 'signup',
     initialState,
-    reducers: {
-        setLogin: (state, action: PayloadAction<string>) => {
-            state.login = action.payload
-        },
-        setName: (state, action: PayloadAction<string>) => {
-            state.name = action.payload
-        },
-        setPassword: (state, action: PayloadAction<string>) => {
-            state.password = action.payload
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(signupService.fulfilled, (state) => {
             state.isLoading = false
@@ -39,4 +26,3 @@ const signupSlice = createSlice({
 })
 
 export const { reducer: signupReducer } = signupSlice
-export const { actions: signupActions } = signupSlice

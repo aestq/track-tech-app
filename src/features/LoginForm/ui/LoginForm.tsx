@@ -1,20 +1,20 @@
-import { memo, useCallback } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { memo, useCallback, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { RoutePaths } from 'shared/config/routeConfig/RoutePaths'
+import { toast } from 'sonner'
+import { type LoginFormSchema, loginFormSchema } from 'features/LoginForm/lib/schema'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
-import { AppLink } from 'shared/ui/AppLink/AppLink'
-import { Button } from 'shared/ui/Button/Button'
-import { Input } from 'shared/ui/Input/Input'
-import { Text } from 'shared/ui/Text/Text'
+import { Button } from 'shared/ui/redesign/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from 'shared/ui/redesign/form'
+import { Input } from 'shared/ui/redesign/input'
+import { Spinner } from 'shared/ui/Spinner/Spinner'
 import { getLoginFormError } from '../model/selectors/getLoginFormError'
 import { getLoginFormIsLoading } from '../model/selectors/getLoginFormIsLoading'
-import { getLoginFormLogin } from '../model/selectors/getLoginFormLogin'
-import { getLoginFormPassword } from '../model/selectors/getLoginFormPassword'
 import { loginService } from '../model/services/loginService'
-import { loginActions, loginReducer } from '../model/slice/loginSlice'
+import { loginReducer } from '../model/slice/loginSlice'
 import cls from './LoginForm.module.scss'
 
 interface LoginFormProps {
@@ -28,46 +28,66 @@ const reducersList: ReducersList = {
 export const LoginForm = memo((props: LoginFormProps) => {
     useReducersLoader({ reducersList, removeAfterUnmount: true })
     const { className } = props
-    const login = useSelector(getLoginFormLogin)
-    const password = useSelector(getLoginFormPassword)
     const isLoading = useSelector(getLoginFormIsLoading)
     const error = useSelector(getLoginFormError)
-    const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const onChangeLogin = useCallback(
-        (value: string) => {
-            dispatch(loginActions.setLogin(value))
+    const form = useForm<LoginFormSchema>({
+        mode: 'onTouched',
+        defaultValues: {
+            login: '',
+            password: '',
         },
-        [dispatch]
-    )
+        resolver: zodResolver(loginFormSchema),
+    })
 
-    const onChangePassword = useCallback(
-        (value: string) => {
-            dispatch(loginActions.setPassword(value))
-        },
-        [dispatch]
-    )
-
-    const onClickLogin = useCallback(async () => {
-        const result = await dispatch(loginService())
-        if (result.meta.requestStatus === 'fulfilled') {
-            navigate(RoutePaths.EQUIPMENTS)
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
         }
-    }, [dispatch, navigate])
+    }, [error])
+
+    const onClickLogin = useCallback(
+        (formData: LoginFormSchema) => {
+            dispatch(loginService(formData))
+        },
+        [dispatch]
+    )
 
     return (
-        <div className={classNames(cls.LoginForm, {}, [className])}>
-            <Text title="Логин" />
-            {error && <Text className={cls.error} text={error} theme="error" size="s" />}
-            <Input placeholder="Введите логин" label="Логин" onChange={onChangeLogin} value={login} />
-            <Input placeholder="Введите пароль" label="Пароль" type="password" onChange={onChangePassword} value={password} />
-            <Button onClick={onClickLogin} disabled={isLoading}>
-                Войти
-            </Button>
-            <AppLink className={cls.link} to={RoutePaths.SING_UP}>
-                Нет уч. записи?
-            </AppLink>
-        </div>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onClickLogin)} className={classNames(cls.LoginForm, {}, [className])}>
+                <FormField
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Логин</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Введите логин" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                    name={'login'}
+                />
+                <FormField
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Пароль</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Введите пароль" type="password" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                    name={'password'}
+                />
+                <Button type="submit" disabled={isLoading}>
+                    Войти
+                    {isLoading && <Spinner className="ml-1" theme="background" size="s" />}
+                </Button>
+            </form>
+        </Form>
     )
 })

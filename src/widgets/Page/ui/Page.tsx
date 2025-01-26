@@ -13,9 +13,9 @@ export const Page = (props: PageProps) => {
     const { className, children, title } = props
 
     return (
-        <section className={classNames(cls.Page, {}, [className])}>
+        <div className={classNames(cls.Page, {}, [className])}>
             {title && <Text className={cls.title} title={title} />}
             {children}
-        </section>
+        </div>
     )
 }
