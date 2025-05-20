@@ -20,7 +20,7 @@ const AdminPage = () => {
     })
 
     return (
-        <Page title="Админ">
+        <Page title="Пользователи">
             <AdminPageFilters />
             <AdminPageUserList />
         </Page>

@@ -17,7 +17,7 @@ export const getSidebarItems = createSelector(getUserIsAdmin, (isAdmin) => {
             icon: DoorClosedIcon,
         },
         {
-            text: 'История',
+            text: 'Журнал',
             path: RoutePaths.HISTORY,
             icon: ClockIcon,
         },

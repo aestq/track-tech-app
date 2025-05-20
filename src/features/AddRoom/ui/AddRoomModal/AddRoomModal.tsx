@@ -1,18 +1,20 @@
 import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { getUserIsAdmin } from 'entities/User'
-import { Modal } from 'shared/ui/Modal/Modal'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from 'shared/ui/redesign/dialog'
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { AddRoomFormAsync } from '../AddRoomForm/AddRoomForm.async'
 import cls from './AddRoomModal.module.scss'
+import { Room } from 'entities/Room'
 
 interface AddRoomModalProps {
     isOpen: boolean
     onClose: () => void
+    room?: Room
 }
 
 export const AddRoomModal = (props: AddRoomModalProps) => {
-    const { isOpen, onClose } = props
+    const { isOpen, onClose, room } = props
     const isAdmin = useSelector(getUserIsAdmin)
 
     if (!isAdmin) {
@@ -30,10 +32,17 @@ export const AddRoomModal = (props: AddRoomModalProps) => {
     )
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title="Создание кабинета" lazy>
-            <Suspense fallback={fallback}>
-                <AddRoomFormAsync onSuccess={onClose} />
-            </Suspense>
-        </Modal>
+        <Dialog open={isOpen} onOpenChange={onClose}>
+            <DialogContent className="w-[395px]">
+                <DialogHeader>
+                    <DialogTitle>{room ? 'Редактирование кабинета' : 'Создание кабинета'}</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                </DialogHeader>
+
+                <Suspense fallback={fallback}>
+                    <AddRoomFormAsync onSuccess={onClose} room={room} />
+                </Suspense>
+            </DialogContent>
+        </Dialog>
     )
 }

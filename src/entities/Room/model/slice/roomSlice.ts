@@ -20,7 +20,10 @@ const roomSlice = createSlice({
             state.data = action.payload
         })
         builder.addCase(fetchRooms.pending, (state) => {
-            state.isLoading = true
+            if(!state.data) {
+                state.isLoading = true
+            }
+
             state.error = undefined
         })
         builder.addCase(fetchRooms.rejected, (state, action) => {

@@ -40,7 +40,7 @@ export const RoomSelect = memo(() => {
     }
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover open={open} onOpenChange={setOpen} modal>
             <PopoverTrigger asChild>
                 <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
                     {roomId ? rooms?.find((room) => room.id === roomId)?.number : 'Выберите кабинет...'}

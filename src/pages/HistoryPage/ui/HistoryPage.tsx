@@ -3,7 +3,7 @@ import { HistoryList } from 'entities/History'
 
 const HistoryPage = () => {
     return (
-        <Page title="История">
+        <Page title="Журнал">
             <HistoryList />
         </Page>
     )

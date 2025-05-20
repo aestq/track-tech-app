@@ -2,7 +2,7 @@ export enum RoutePaths {
     ENTRY = '/',
     EQUIPMENTS = '/equipments',
     ROOMS = '/rooms',
-    HISTORY = '/history',
+    HISTORY = '/logs',
     ADMIN = '/admin',
     NOT_FOUND = '*',
 }

@@ -1,3 +1,5 @@
+import { type Room } from 'entities/Room'
+
 export type EquipmentStatus = 'use' | 'discarded'
 
 export interface Equipment {
@@ -5,6 +7,6 @@ export interface Equipment {
     name: string
     stockNumber: string
     status: EquipmentStatus
-    room: number
+    room?: Room
     specifications: string
 }

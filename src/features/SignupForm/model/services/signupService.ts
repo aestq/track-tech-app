@@ -2,12 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { type ThunkConfig } from 'app/providers/Store'
 import { type SignUpFormSchema } from 'features/SignupForm/lib/schema'
-import { type User, userActions } from 'entities/User'
+import { refreshUser, type User, userActions } from 'entities/User'
 import { type UserData } from 'entities/User/model/types/UserSchema'
 import { LOCAL_STORAGE_TOKEN_KEY } from 'shared/consts/localStorage'
-import { getSignupFormLogin } from '../selectors/getSignupFormLogin'
-import { getSignupFormName } from '../selectors/getSignupFormName'
-import { getSignupFormPassword } from '../selectors/getSignupFormPassword'
 
 export const signupService = createAsyncThunk<User, SignUpFormSchema, ThunkConfig<string>>(
     'signupForm/signupService',
@@ -19,6 +16,8 @@ export const signupService = createAsyncThunk<User, SignUpFormSchema, ThunkConfi
 
             dispatch(userActions.setUserData(response.data.user))
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
+
+            dispatch(refreshUser())
 
             return response.data.user
         } catch (error) {

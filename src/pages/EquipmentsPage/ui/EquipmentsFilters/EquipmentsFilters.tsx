@@ -33,9 +33,12 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
     const [isOpen, setIsOpen] = useState(false)
     const [, setSearchParams] = useSearchParams()
 
-    const fetchData = useCallback(() => {
-        dispatch(fetchEquipments())
-    }, [dispatch])
+    const fetchData = useCallback(
+        (invaldate?: boolean) => {
+            dispatch(fetchEquipments({ invalidate: invaldate }))
+        },
+        [dispatch]
+    )
 
     useEffect(() => {
         setSearchParams({
@@ -90,7 +93,7 @@ export const EquipmentsFilters = (props: EquipmentsFiltersProps) => {
                             <EditEquipmentForm
                                 onSuccess={() => {
                                     setIsOpen(false)
-                                    fetchData()
+                                    fetchData(true)
                                 }}
                             />
                         </DialogContent>

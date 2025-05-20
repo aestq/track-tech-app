@@ -23,7 +23,7 @@ export default defineConfig(({ command }) => {
             },
         },
         define: {
-            __API__: JSON.stringify('http://localhost:5000'),
+            __API__: JSON.stringify(''),
             __IS_DEV__: JSON.stringify(command === 'serve'),
             __PROJECT__: JSON.stringify('frontend'),
         },

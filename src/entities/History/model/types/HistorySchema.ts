@@ -1,14 +1,15 @@
-import { type Equipment } from 'entities/Equipment'
 import { type User } from 'entities/User'
+
+interface HistoryUser extends User {
+    login: string
+}
 
 export interface History {
     id: number
-    from: string
-    to: string
+    data: string
     createdAt: string
-    time: string
-    user: Omit<User, 'roles'>
-    equipment: Omit<Equipment, 'specifications' | 'room' | 'status'>
+    updatedAt: string
+    user: Omit<HistoryUser, 'roles'>
 }
 
 export interface HistorySchema {

@@ -8,7 +8,7 @@ export const fetchStories = createAsyncThunk<History[], void, ThunkConfig<string
     async (_, thunkAPI) => {
         const { extra, rejectWithValue } = thunkAPI
         try {
-            const response = await extra.api.get<History[]>('/history')
+            const response = await extra.api.get<History[]>('/logs')
             return response.data
         } catch (error) {
             if (axios.isAxiosError(error)) {

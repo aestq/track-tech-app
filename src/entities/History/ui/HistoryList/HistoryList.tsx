@@ -10,6 +10,16 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+    TableFooter,
+    TableCaption,
+} from 'shared/ui/redesign/table'
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { Text } from 'shared/ui/Text/Text'
 import { HistoryItem } from '../HistoryItem/HistoryItem'
@@ -52,5 +62,26 @@ export const HistoryList = (props: HistoryListProps) => {
         return <Text text="Произошла ошибка при подгрузке истории" theme="error" />
     }
 
-    return <div className={classNames(cls.HistoryList, {}, [className])}>{stories?.map(render)}</div>
+    return (
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Данные</TableHead>
+                    <TableHead>Дата записи</TableHead>
+                    <TableHead>Пользователь</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {stories?.length ? (
+                    stories?.map(render)
+                ) : (
+                    <TableRow>
+                        <TableCell className="text-center" colSpan={5}>
+                            Нет данных
+                        </TableCell>
+                    </TableRow>
+                )}
+            </TableBody>
+        </Table>
+    )
 }

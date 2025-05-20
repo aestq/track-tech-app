@@ -5,7 +5,11 @@ import type { EditEquipmentSchema } from 'features/EditEquipment/lib/schema'
 import { type Equipment } from 'entities/Equipment'
 import { getEditEquipmentFormData } from '../selectors/getEditEquipmentFormData'
 
-export const updateEquipment = createAsyncThunk<void, EditEquipmentSchema, ThunkConfig<string>>(
+interface UpdateEquipmentArgs extends EditEquipmentSchema {
+    id: number
+}
+
+export const updateEquipment = createAsyncThunk<void, UpdateEquipmentArgs, ThunkConfig<string>>(
     'editEquipment/updateEquipment',
     async (formData, thunkAPI) => {
         const { extra, rejectWithValue } = thunkAPI

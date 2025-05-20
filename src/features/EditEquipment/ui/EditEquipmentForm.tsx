@@ -46,7 +46,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
         mode: 'onTouched',
         defaultValues: {
             name: data?.name ?? '',
-            roomId: data?.room ?? null,
+            roomId: data?.room?.id ?? null,
             specifications: data?.specifications ?? '',
             status: data?.status ?? 'use',
             stockNumber: data?.stockNumber ?? '',
@@ -61,7 +61,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
     }, [error])
 
     const onClickEdit = async (formData: EditEquipmentSchema) => {
-        const result = await dispatch(data ? updateEquipment(formData) : createEquipment(formData))
+        const result = await dispatch(data ? updateEquipment({ ...formData, id: data.id }) : createEquipment(formData))
 
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess?.()

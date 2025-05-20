@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { updateRoom } from 'features/AddRoom/model/services/updateRoom'
 import { createRoom } from '../services/createRoom'
 import { type AddRoomSchema } from '../types/AddRoomSchema'
 
@@ -25,6 +26,18 @@ export const addRoomSlice = createSlice({
             state.error = undefined
         })
         builder.addCase(createRoom.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+        builder.addCase(updateRoom.fulfilled, (state) => {
+            state.isLoading = false
+            state.number = ''
+        })
+        builder.addCase(updateRoom.pending, (state) => {
+            state.isLoading = true
+            state.error = undefined
+        })
+        builder.addCase(updateRoom.rejected, (state, action) => {
             state.isLoading = false
             state.error = action.payload
         })

@@ -16,7 +16,10 @@ const historySlice = createSlice({
             state.data = action.payload
         })
         builder.addCase(fetchStories.pending, (state) => {
-            state.isLoading = true
+            if (!state.data) {
+                state.isLoading = true
+            }
+
             state.error = undefined
         })
         builder.addCase(fetchStories.rejected, (state, action) => {

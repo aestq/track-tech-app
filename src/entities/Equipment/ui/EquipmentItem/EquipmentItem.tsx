@@ -1,8 +1,10 @@
 import { memo, useCallback, useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import { fetchEquipments } from 'pages/EquipmentsPage/model/services/fetchEquipments'
 import { EditEquipmentForm } from 'features/EditEquipment'
+import { getUserIsAdmin, getUserIsModerator } from 'entities/User'
 import { $api } from 'shared/api/api'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import {
@@ -33,6 +35,8 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
     const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenDelete, setIsOpenDelete] = useState(false)
+    const isModerator = useSelector(getUserIsModerator)
+    const isAdmin = useSelector(getUserIsAdmin)
 
     const onClickHandler = useCallback(
         (item: Equipment) => {
@@ -46,7 +50,7 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
     const onClickDelete = useCallback(async () => {
         try {
             await $api.delete<Equipment>(`/equipments/${item.id}`)
-            dispatch(fetchEquipments())
+            dispatch(fetchEquipments({ invalidate: true }))
             toast.success('Оборудование удалено')
         } catch {
             toast.error('Не удалось удалить оборудование')
@@ -67,31 +71,35 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
                     Посмотреть
                 </Button>
             </TableCell>
-            <TableCell>{item.room}</TableCell>
+            <TableCell>{item.room?.number ?? '-'}</TableCell>
             <TableCell>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                            <BsThreeDots />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]" sideOffset={4}>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                setIsOpen(true)
-                            }}
-                        >
-                            Редактировать
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                setIsOpenDelete(true)
-                            }}
-                        >
-                            Удалить
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                {(isModerator || isAdmin) && (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                                <BsThreeDots />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]" sideOffset={4}>
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    setIsOpen(true)
+                                }}
+                            >
+                                Редактировать
+                            </DropdownMenuItem>
+                            {isAdmin && (
+                                <DropdownMenuItem
+                                    onClick={() => {
+                                        setIsOpenDelete(true)
+                                    }}
+                                >
+                                    Удалить
+                                </DropdownMenuItem>
+                            )}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                )}
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogContent className="w-[500px]">
                         <DialogHeader>
@@ -102,7 +110,7 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
                         <EditEquipmentForm
                             onSuccess={() => {
                                 setIsOpen(false)
-                                dispatch(fetchEquipments())
+                                dispatch(fetchEquipments({ invalidate: true }))
                             }}
                             data={item}
                         />
@@ -112,7 +120,9 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
                     <AlertDialogContent className="w-[500px]">
                         <AlertDialogHeader>
                             <AlertDialogTitle>Удалить оборудование "{item.name}"?</AlertDialogTitle>
-                            <AlertDialogDescription></AlertDialogDescription>
+                            <AlertDialogDescription>
+                                Это действие нельзя будет отменить. Оборудование будет удалено навсегда.
+                            </AlertDialogDescription>
                         </AlertDialogHeader>
 
                         <AlertDialogFooter>

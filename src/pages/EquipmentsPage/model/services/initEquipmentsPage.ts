@@ -25,6 +25,6 @@ export const initEquipmentsPage = createAsyncThunk<void, URLSearchParams, ThunkC
             dispatch(equipmentsActions.setRoom(room as SortByRoom))
         }
 
-        dispatch(fetchEquipments())
+        dispatch(fetchEquipments({}))
     }
 )

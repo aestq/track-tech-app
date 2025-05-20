@@ -1,12 +1,13 @@
 import { memo, useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { type StateSchema } from 'app/providers/Store'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect'
 import { type ReducersList, useReducersLoader } from 'shared/lib/hooks/useReducersLoader'
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton'
 import { Text } from 'shared/ui/Text/Text'
-import { getRoomData } from '../../model/selectors/getRoomData'
+import { getRoomData, getRoomGroup } from '../../model/selectors/getRoomData'
 import { getRoomError } from '../../model/selectors/getRoomError'
 import { getRoomIsLoading } from '../../model/selectors/getRoomIsLoading'
 import { fetchRooms } from '../../model/services/fetchRooms'
@@ -17,6 +18,7 @@ import cls from './RoomsList.module.scss'
 
 interface RoomsListProps {
     className?: string
+    isGroup: boolean
 }
 
 const reducersList: ReducersList = {
@@ -25,8 +27,8 @@ const reducersList: ReducersList = {
 
 export const RoomsList = memo((props: RoomsListProps) => {
     useReducersLoader({ reducersList })
-    const { className } = props
-    const items = useSelector(getRoomData)
+    const { className, isGroup } = props
+    const items = useSelector((state) => (isGroup ? getRoomGroup(state as StateSchema) : getRoomData(state as StateSchema)))
     const isLoading = useSelector(getRoomIsLoading)
     const error = useSelector(getRoomError)
     const dispatch = useAppDispatch()
@@ -35,7 +37,16 @@ export const RoomsList = memo((props: RoomsListProps) => {
         dispatch(fetchRooms())
     })
 
-    const render = useCallback((item: Room) => <RoomsItem item={item} key={item.id} />, [])
+    const render = useCallback((ent: [string, Room[]]) => {
+        return (
+            <div className={'flex flex-col gap-3'} key={ent[0]}>
+                <h1 className="font-semibold text-2xl ml-2">{ent[0]}</h1>
+                <div className="flex flex-wrap gap-5 items-center">
+                    {ent[1]?.map((item) => <RoomsItem item={item} key={item.id} />)}
+                </div>
+            </div>
+        )
+    }, [])
 
     if (error) {
         return <Text text="Произошла ошибка при подгрузке кабинетов" theme="error" />
@@ -52,9 +63,23 @@ export const RoomsList = memo((props: RoomsListProps) => {
         )
     }
 
-    if (!items?.length) {
+    if ((Array.isArray(items) && !items.length) || !Object.entries(items ?? [])?.length) {
         return <Text text="Кабинеты не найдены" />
     }
 
-    return <section className={classNames(cls.RoomsList, {}, [className])}>{items?.map(render)}</section>
+    if (Array.isArray(items)) {
+        return (
+            <section className={classNames(cls.RoomsList, {}, [className, 'flex items-center gap-5 flex-wrap flex-row mt-7'])}>
+                {items.map((item) => (
+                    <RoomsItem item={item} key={item.id} />
+                ))}
+            </section>
+        )
+    }
+
+    return (
+        <section className={classNames(cls.RoomsList, {}, [className, 'flex-col mt-6'])}>
+            {Object.entries(items ?? []).map(render)}
+        </section>
+    )
 })

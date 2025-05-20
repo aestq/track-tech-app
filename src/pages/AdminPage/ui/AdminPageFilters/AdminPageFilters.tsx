@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react'
+import { ChangeEvent, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import { useDebounce } from 'shared/lib/hooks/useDebounce'
-import { Input } from 'shared/ui/Input/Input'
+import { Input } from 'shared/ui/redesign/input'
 import { getAdminSearch } from '../../model/selectors/getAdminSearch'
 import { fetchUsers } from '../../model/services/fetchUsers'
 import { adminActions } from '../../model/slice/adminSlice'
@@ -25,8 +25,8 @@ export const AdminPageFilters = (props: AdminPageFiltersProps) => {
     const debouncedFetchData = useDebounce(fetchData, 500)
 
     const onChangeSearch = useCallback(
-        (value: string) => {
-            dispatch(adminActions.setSearch(value))
+        (event: ChangeEvent<HTMLInputElement>) => {
+            dispatch(adminActions.setSearch(event.target.value))
             debouncedFetchData()
         },
         [dispatch, debouncedFetchData]

@@ -1,6 +1,6 @@
 export interface Room {
     id: number
-    number: string
+    number: number
 }
 
 export interface RoomSchema {

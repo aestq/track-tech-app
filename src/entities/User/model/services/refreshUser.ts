@@ -13,10 +13,9 @@ export const refreshUser = createAsyncThunk<User, void, ThunkConfig<string>>('us
     }
 
     try {
-        const response = await extra.api.get<UserData>('/auth/refresh')
-        dispatch(userActions.setUserData(response.data.user))
-        localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
-        return response.data.user
+        const response = await extra.api.get<User>('/users/my')
+        dispatch(userActions.setUserData(response.data))
+        return response.data
     } catch (error) {
         if (axios.isAxiosError(error)) {
             return rejectWithValue(error.response?.data?.message)

@@ -30,9 +30,12 @@ const equipmentsSlice = createSlice({
             state.data = action.payload
             state.isLoading = false
         })
-        builder.addCase(fetchEquipments.pending, (state) => {
+        builder.addCase(fetchEquipments.pending, (state, action) => {
             state.error = undefined
-            state.isLoading = true
+
+            if (!action.meta.arg.invalidate) {
+                state.isLoading = true
+            }
         })
         builder.addCase(fetchEquipments.rejected, (state, action) => {
             state.error = action.payload

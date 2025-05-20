@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'sonner'
 import { changeRole } from 'pages/AdminPage/model/services/changeRole'
 import { UserList, type UserRoles } from 'entities/User'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
@@ -20,8 +21,14 @@ export const AdminPageUserList = (props: AdminPageUserListProps) => {
     const dispatch = useAppDispatch()
 
     const onChangeRole = useCallback(
-        (value: UserRoles, userId: number) => {
-            dispatch(changeRole({ value, userId }))
+        async (value: UserRoles, userId: number) => {
+            const result = await dispatch(changeRole({ value, userId }))
+
+            if (result.meta.requestStatus === 'fulfilled') {
+                toast.success('Роль изменена')
+            } else {
+                toast.error('Не удалось изменить роль')
+            }
         },
         [dispatch]
     )
