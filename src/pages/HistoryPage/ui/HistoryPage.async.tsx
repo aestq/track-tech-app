@@ -1,3 +1,3 @@
-import { lazy } from 'react'
+import HistoryPage from 'pages/HistoryPage/ui/HistoryPage'
 
-export const HistoryPageAsync = lazy(async () => await import('./HistoryPage'))
+export const HistoryPageAsync = HistoryPage

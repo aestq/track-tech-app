@@ -39,9 +39,9 @@ export const RoomsList = memo((props: RoomsListProps) => {
 
     const render = useCallback((ent: [string, Room[]]) => {
         return (
-            <div className={'flex flex-col gap-3'} key={ent[0]}>
-                <h1 className="font-semibold text-2xl ml-2">{ent[0]}</h1>
-                <div className="flex flex-wrap gap-5 items-center">
+            <div key={ent[0]}>
+                <h1 className="font-semibold text-2xl ml-2 mb-3">{ent[0]}</h1>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,137px))] gap-5 ">
                     {ent[1]?.map((item) => <RoomsItem item={item} key={item.id} />)}
                 </div>
             </div>
@@ -54,7 +54,15 @@ export const RoomsList = memo((props: RoomsListProps) => {
 
     if (isLoading) {
         return (
-            <div className={cls.RoomsList}>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-10 mt-7">
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
+                <Skeleton width={120} height={120} />
                 <Skeleton width={120} height={120} />
                 <Skeleton width={120} height={120} />
                 <Skeleton width={120} height={120} />
@@ -64,21 +72,26 @@ export const RoomsList = memo((props: RoomsListProps) => {
     }
 
     if ((Array.isArray(items) && !items.length) || !Object.entries(items ?? [])?.length) {
-        return <Text text="Кабинеты не найдены" />
+        return <Text text="Кабинеты не найдены" className="mt-7" />
     }
 
     if (Array.isArray(items)) {
         return (
-            <section className={classNames(cls.RoomsList, {}, [className, 'flex items-center gap-5 flex-wrap flex-row mt-7'])}>
+            <section
+                className={classNames(cls.RoomsList, {}, [
+                    className,
+                    ' mt-7 grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))]',
+                ])}
+            >
                 {items.map((item) => (
-                    <RoomsItem item={item} key={item.id} />
+                    <RoomsItem className="justify-self-center self-center" item={item} key={item.id} />
                 ))}
             </section>
         )
     }
 
     return (
-        <section className={classNames(cls.RoomsList, {}, [className, 'flex-col mt-6'])}>
+        <section className={classNames(cls.RoomsList, {}, [className, 'flex flex-col mt-6'])}>
             {Object.entries(items ?? []).map(render)}
         </section>
     )

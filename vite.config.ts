@@ -23,7 +23,7 @@ export default defineConfig(({ command }) => {
             },
         },
         define: {
-            __API__: JSON.stringify(process.env.URL),
+            __API__: JSON.stringify('https://track-tech-backend.onrender.com'),
             __IS_DEV__: JSON.stringify(command === 'serve'),
             __PROJECT__: JSON.stringify('frontend'),
         },

@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -12,6 +12,7 @@ import { Logo } from 'shared/ui/Logo/Logo'
 import { Avatar, AvatarFallback } from 'shared/ui/redesign/avatar'
 import { Button } from 'shared/ui/redesign/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'shared/ui/redesign/dropdown-menu'
+import { Spinner } from 'shared/ui/Spinner/Spinner'
 import { getSidebarItems } from '../../model/getSidebarItems'
 import { SidebarItem } from '../SidebarItem/SidebarItem'
 
@@ -27,6 +28,7 @@ export const Sidebar = (props: SidebarProps) => {
     const userData = useSelector(getUserData)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const [isLoading, setIsLoading] = useState(false)
 
     const render = useCallback(
         (item: Item) => <SidebarItem text={item.text} Icon={item.icon} path={item.path} key={item.path} />,
@@ -34,7 +36,10 @@ export const Sidebar = (props: SidebarProps) => {
     )
 
     const onClickLogout = useCallback(async () => {
-        const result = await dispatch(logoutUser())
+        setIsLoading(true)
+        const result = await dispatch(logoutUser()).finally(() => {
+            setIsLoading(false)
+        })
         if (result.meta.requestStatus === 'fulfilled') {
             navigate(RoutePaths.ENTRY)
         }
@@ -53,7 +58,7 @@ export const Sidebar = (props: SidebarProps) => {
                             </Avatar>
                             {userData?.name}
                         </span>
-                        <AiOutlineDown className={cls.arrow} />
+                        {isLoading ? <Spinner size="s" /> : <AiOutlineDown className={cls.arrow} />}
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)]" sideOffset={4}>

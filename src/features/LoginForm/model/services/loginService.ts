@@ -16,7 +16,7 @@ export const loginService = createAsyncThunk<string, LoginFormSchema, ThunkConfi
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
             localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, response.data.refreshToken)
 
-            dispatch(refreshUser())
+            await dispatch(refreshUser())
 
             return response.data.accessToken
         } catch (error) {

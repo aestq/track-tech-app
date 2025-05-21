@@ -1,3 +1,3 @@
-import { lazy } from 'react'
+import AdminPage from 'pages/AdminPage/ui/AdminPage/AdminPage'
 
-export const AdminPageAsync = lazy(async () => await import('./AdminPage'))
+export const AdminPageAsync = AdminPage

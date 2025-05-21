@@ -1,3 +1,3 @@
-import { lazy } from 'react'
+import EquipmentsPage from 'pages/EquipmentsPage/ui/EquipmentsPage/EquipmentsPage'
 
-export const EquipmentsPageAsync = lazy(async () => await import('./EquipmentsPage'))
+export const EquipmentsPageAsync = EquipmentsPage

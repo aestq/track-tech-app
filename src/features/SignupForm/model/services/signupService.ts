@@ -18,7 +18,7 @@ export const signupService = createAsyncThunk<UserData, SignUpFormSchema, ThunkC
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
             localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, response.data.refreshToken)
 
-            dispatch(refreshUser())
+            await dispatch(refreshUser())
 
             return response.data
         } catch (error) {

@@ -1,3 +1,3 @@
-import { lazy } from 'react'
+import EntryPage from 'pages/EntryPage/ui/EntryPage'
 
-export const EntryPageAsync = lazy(async () => await import('./EntryPage'))
+export const EntryPageAsync = EntryPage
