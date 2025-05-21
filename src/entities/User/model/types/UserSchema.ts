@@ -11,8 +11,8 @@ export interface User {
 }
 
 export interface UserData {
-    user: User
     accessToken: string
+    refreshToken: string
 }
 
 export interface UserSchema {

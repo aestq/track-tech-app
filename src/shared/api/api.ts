@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { type UserData } from 'entities/User'
-import { LOCAL_STORAGE_TOKEN_KEY } from 'shared/consts/localStorage'
+import { LOCAL_STORAGE_REFRESH_TOKEN_KEY, LOCAL_STORAGE_TOKEN_KEY } from 'shared/consts/localStorage'
 
 export const $api = axios.create({
     baseURL: __API__ + '/api',
@@ -58,8 +58,13 @@ $api.interceptors.response.use(
             isRefreshing = true
 
             try {
-                const response = await axios.get<UserData>(__API__ + '/api/auth/refresh', { withCredentials: true })
+                const response = await axios.post<UserData>(
+                    __API__ + '/api/auth/refresh',
+                    { refreshToken: localStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY) ?? '' },
+                    { withCredentials: true }
+                )
                 localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, response.data.accessToken)
+                localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, response.data.refreshToken)
                 clearQueue(null, response.data.accessToken)
                 return await $api(originalRequest)
             } catch (e) {

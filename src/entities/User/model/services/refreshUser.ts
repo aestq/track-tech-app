@@ -3,7 +3,7 @@ import axios from 'axios'
 import { type ThunkConfig } from 'app/providers/Store'
 import { LOCAL_STORAGE_TOKEN_KEY } from 'shared/consts/localStorage'
 import { userActions } from '../slice/userSlice'
-import { type User, type UserData } from '../types/UserSchema'
+import { type User } from '../types/UserSchema'
 
 export const refreshUser = createAsyncThunk<User, void, ThunkConfig<string>>('user/refreshUser', async (_, thunkAPI) => {
     const { dispatch, extra, rejectWithValue } = thunkAPI
