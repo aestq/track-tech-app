@@ -6,6 +6,7 @@ import { fetchEquipments } from 'pages/EquipmentsPage/model/services/fetchEquipm
 import { EditEquipmentForm } from 'features/EditEquipment'
 import { getUserIsAdmin, getUserIsModerator } from 'entities/User'
 import { $api } from 'shared/api/api'
+import { classNames } from 'shared/lib/classNames/classNames'
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch'
 import {
     AlertDialog,
@@ -62,7 +63,15 @@ export const EquipmentItem = memo((props: EquipmentItemProps) => {
     }
 
     return (
-        <TableRow className={className}>
+        <TableRow
+            className={classNames(
+                '',
+                {
+                    'opacity-65': item.status === 'discarded',
+                },
+                [className]
+            )}
+        >
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.stockNumber}</TableCell>
             <TableCell>{EquipmentStatusText[item?.status ?? 'use']}</TableCell>
