@@ -81,7 +81,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
                         <FormItem>
                             <FormLabel>Наименование</FormLabel>
                             <FormControl>
-                                <Input className="w-full" placeholder="Введите наименование" readOnly={!isAdmin} {...field} />
+                                <Input className="w-full" placeholder="Введите наименование" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -94,7 +94,7 @@ export const EditEquipmentForm = (props: EditEquipmentFormProps) => {
                         <FormItem>
                             <FormLabel>Номер</FormLabel>
                             <FormControl>
-                                <Input className="w-full" placeholder="Введите номер" readOnly={!isAdmin} {...field} />
+                                <Input className="w-full" placeholder="Введите номер" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
