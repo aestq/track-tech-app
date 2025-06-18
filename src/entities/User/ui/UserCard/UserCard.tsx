@@ -35,7 +35,7 @@ export const UserCard = memo((props: UserCardProps) => {
             >
                 <div className={cls.user}>
                     <p children={`id: ${user.id}`} className="text-sm" />
-                    <p children={user.name} className="text-sm" />
+                    <p children={`${user.login} (${user.name})`} className="text-sm" />
                 </div>
 
                 <Select defaultValue={selected} onValueChange={onChangeHandler} disabled={userData?.id === user.id}>
